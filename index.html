@@ -635,7 +635,7 @@
   </main>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbwTylQ4fc3RhznYgcsHb3LuZtpBg0cvjgqaMzW81Q6U2867rAOzmjT5Qd49JS5SG2d75Q/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbzLBu1CbKPaQME-QhMEE3tMBVYdAo9sUsC5-fDpNncfHMp1-yotr6_lBigFBQu4GSZuIQ/exec";
 
     let ticketStock = 0;
     let currentMemberId = "-";
@@ -796,14 +796,14 @@ if (statusText === "PENEBAK HANDAL") {
         ticketStock -= 1;
 
         const ticketNumber = String(historyData.length + 1).padStart(3, "0");
-
-        historyData.unshift({
-          match: match,
-          prediction: prediction,
-          date: new Date().toLocaleDateString("id-ID"),
-          ticketCode: "TKT-" + ticketNumber,
-          status: "MENUNGGU"
-        });
+historyData.unshift({
+  match: match,
+  prediction: prediction,
+  date: new Date().toLocaleDateString("id-ID"),
+  ticketCode: result.ticketCode || "-",
+  status: "MENUNGGU",
+  point: 0
+});
 
         document.getElementById("predictionInput").value = "";
         renderDashboard();
