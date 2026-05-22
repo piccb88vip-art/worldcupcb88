@@ -532,13 +532,13 @@
 </head>
 <body>
   <main class="app">
-    <!-- HALAMAN 1: LOGIN / CEK TIKET -->
+    <!-- HALAMAN 1: LOGIN / CEK TICKET -->
     <section class="page active" id="loginPage">
       <div class="hero center">
         <div class="login-logo" aria-label="CLICKBET88 Logo"></div>
         <div class="badge">WORLD CUP 2026 EVENT</div>
-        <h1>Cek Tiket Prediksi Kamu</h1>
-        <p>Masukkan User ID dan kode event untuk melihat stok tiket serta history pilihan pertandingan.</p>
+        <h1>Cek Ticket Prediksi Kamu</h1>
+        <p>Masukkan User ID dan kode event untuk melihat stok ticket serta history pilihan pertandingan.</p>
       </div>
 
       <div class="section">
@@ -552,7 +552,7 @@
           <input id="loginId" type="text" placeholder="Contoh: CBVIP001" />
         </div>
 
-        <button class="btn" onclick="loginMember()">Cek Tiket Saya</button>
+        <button class="btn" onclick="loginMember()">Cek Ticket Saya</button>
 
       </div>
 
@@ -561,9 +561,9 @@
           <h2>Informasi Event</h2>
         </div>
         <div class="rules">
-          <div class="rule-item">🎟️ Tiket digunakan untuk memilih pertandingan dan prediksi skor.</div>
-          <div class="rule-item">📊 Halaman ini menampilkan stok tiket dan history pilihan member.</div>
-          <div class="rule-item">🔐 Data nantinya bisa diambil otomatis dari Google Sheet.</div>
+          <div class="rule-item">🎟️ Ticket Digunakan Untuk Memilih Pertandingan & Prediksi Skor.</div>
+          <div class="rule-item">📊 Halaman Ini Menampilkan Stok Ticket & History Pilihan BOSKU.</div>
+          <div class="rule-item">🔐 Data Akan Menampilkan Di LEADERBOARD.</div>
         </div>
       </div>
     </section>
@@ -573,8 +573,8 @@
       <section class="hero">
         <div class="brand-logo" aria-label="CLICKBET88 Logo"></div>
         <div class="badge">🏆 MEMBER DASHBOARD</div>
-        <h1>Dashboard Tiket Prediksi</h1>
-        <p>Cek stok tiket kamu dan lihat history pertandingan yang sudah dipilih.</p>
+        <h1>Dashboard Ticket Prediksi</h1>
+        <p>Cek stok ticket kamu dan lihat history pertandingan yang sudah dipilih.</p>
 
         <div class="member-card">
           <div class="member-box">
@@ -582,17 +582,17 @@
             <div class="member-id" id="memberId">-</div>
           </div>
           <div class="ticket-box">
-            <div class="label">STOK TIKET</div>
+            <div class="label">STOK TICKET</div>
             <div class="ticket-count" id="ticketStock">3</div>
-            <div class="ticket-text">Tiket tersedia</div>
+            <div class="ticket-text">Ticket tersedia</div>
           </div>
         </div>
       </section>
 
       <section class="section">
         <div class="section-title">
-          <h2>Pilih Tiket Match</h2>
-          <span class="small-note">1 tiket / pilihan</span>
+          <h2>Pilih Ticket Match</h2>
+          <span class="small-note">1 ticket / pilihan</span>
         </div>
 
         <div class="form-group">
@@ -610,7 +610,7 @@
           <input id="predictionInput" type="text" placeholder="Contoh: 2 - 1" />
         </div>
 
-        <button class="btn" onclick="useTicket()">Gunakan Tiket</button>
+        <button class="btn" onclick="useTicket()">Gunakan Ticket</button>
         <button class="btn leaderboard-btn" onclick="openLeaderboard()">🏆 LEADERBOARD</button>
 
         <button class="btn secondary" onclick="backToLogin()">Kembali ke Halaman Login</button>
@@ -618,11 +618,11 @@
 
       <section class="section">
         <div class="section-title">
-          <h2>History Pemilihan Tiket</h2>
+          <h2>History Pemilihan Ticket</h2>
           <span class="small-note" id="historyCount">0 data</span>
         </div>
 
-        <div class="empty" id="emptyState">Belum ada history pemilihan tiket.</div>
+        <div class="empty" id="emptyState">Belum ada history pemilihan ticket.</div>
         <div class="history-list" id="historyList"></div>
       </section>
     </section>
@@ -638,14 +638,14 @@
       <div class="success-modal">
         <div class="success-icon">✓</div>
         <h3>Prediksi Berhasil!</h3>
-        <p id="successMessage">Tiket kamu berhasil digunakan.</p>
+        <p id="successMessage">Ticket kamu berhasil digunakan.</p>
         <button class="btn close-toast" onclick="closeSuccessToast()">Oke, Mengerti</button>
       </div>
     </div>
   </main>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbwD3gWZLv4qIv3YSH4QTnbS3Bl6qwncv5nybQjrSJChD1ifJBeEwTbmmsI-81gcFAK_DA/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbxLktRmSes6vghtUbuUv9pzEZ7dJ7U8OJbV8xXGZ5qYjPv1FSnQN8nAThQYhugJBatSnA/exec";
 
      let ticketStock = 0;
   let currentMemberId = "-";
@@ -686,7 +686,7 @@
       }
 
       currentMemberId = loginId;
-      ticketStock = Number(result.sisaTiket || 0);
+      ticketStock = Number(result.sisaTicket || 0);
       historyData = result.history || [];
 
       document.getElementById("memberId").textContent = currentMemberId;
@@ -697,7 +697,7 @@
       alert("Gagal mengecek data member. Silakan coba lagi.");
     } finally {
       loginButton.disabled = false;
-      loginButton.textContent = "Cek Tiket Saya";
+      loginButton.textContent = "Cek Ticket Saya";
     }
   }
 
@@ -739,7 +739,7 @@
           <div class="history-info">
             <div class="info-box">Prediksi <b>${item.prediction}</b></div>
             <div class="info-box">Tanggal <b>${item.date}</b></div>
-            <div class="info-box">Kode Tiket <b>${item.ticketCode}</b></div>
+            <div class="info-box">Kode Ticket <b>${item.ticketCode}</b></div>
             <div class="info-box">Member <b>${currentMemberId}</b></div>
           </div>
         </div>
@@ -755,7 +755,7 @@
     const submitButton = event.target;
 
     if (ticketStock <= 0) {
-      alert("Stok tiket kamu sudah habis.");
+      alert("Stok ticket kamu sudah habis.");
       return;
     }
 
@@ -805,12 +805,12 @@
       alert("Gagal terhubung ke server. Silakan coba lagi.");
     } finally {
       submitButton.disabled = false;
-      submitButton.textContent = "Gunakan Tiket";
+      submitButton.textContent = "Gunakan Ticket";
     }
   }
 
   function showSuccessToast(match, prediction, stockLeft) {
-    const message = `Prediksi kamu untuk <b>${match}</b><br>Skor: <b>${prediction}</b><br>Sisa tiket: <b>${stockLeft}</b>`;
+    const message = `Prediksi kamu untuk <b>${match}</b><br>Skor: <b>${prediction}</b><br>Sisa ticket: <b>${stockLeft}</b>`;
     document.getElementById("successMessage").innerHTML = message;
     document.getElementById("successToast").classList.add("show");
 
