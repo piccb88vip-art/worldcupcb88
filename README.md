@@ -1,247 +1,608 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CLICKBET88 - World Cup Event 2026</title>
-<style>
-:root{--bg:#030612;--card:#081124;--card2:#0d1933;--line:rgba(255,255,255,.10);--gold:#d9b46c;--gold2:#8d682b;--green:#2ee58f;--red:#ff5263;--text:#fff;--muted:#97a6cf;--blue:#476dff}
-*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial,Helvetica,sans-serif}
-body{min-height:100vh;color:var(--text);background:radial-gradient(circle at 50% -10%,rgba(71,109,255,.36),transparent 32%),radial-gradient(circle at 8% 12%,rgba(217,180,108,.14),transparent 20%),linear-gradient(180deg,#050a19,#02040c 76%);overflow-x:hidden}
-.wrap{width:min(1100px,94%);margin:auto;padding:16px 0 36px}
-.header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;margin-bottom:14px;background:rgba(8,17,36,.72);border:1px solid var(--line);border-radius:20px;backdrop-filter:blur(10px)}
-.logo{font-size:clamp(28px,4vw,44px);font-weight:1000;color:#ec1515;-webkit-text-stroke:1.4px #ffd66c;text-shadow:0 3px 0 #681100,0 0 17px rgba(255,214,108,.35);letter-spacing:-2px;line-height:1}
-.header-badge{font-size:11px;font-weight:900;color:#f8d98e;border:1px solid rgba(217,180,108,.42);background:rgba(217,180,108,.10);padding:9px 12px;border-radius:999px;white-space:nowrap}
-.screen{display:none;animation:fade .25s ease}.screen.active{display:block}@keyframes fade{from{opacity:.2;transform:translateY(8px)}to{opacity:1;transform:none}}
-.panel{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);box-shadow:0 20px 70px rgba(0,0,0,.50);border-radius:26px}
-.login-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:16px;align-items:stretch}.hero{padding:26px;position:relative;overflow:hidden}.hero:after{content:"2026";position:absolute;right:-18px;bottom:-30px;font-size:120px;font-weight:1000;color:rgba(255,255,255,.035)}
-.tag{display:inline-flex;background:#0b1d50;border:1px solid rgba(71,109,255,.60);color:#bfccff;border-radius:999px;padding:8px 12px;font-size:11px;font-weight:1000;margin-bottom:14px}
-h1{font-size:clamp(34px,5.3vw,62px);line-height:.92;text-transform:uppercase;letter-spacing:-2px;background:linear-gradient(180deg,#fff,#f3d28d 60%,#b98734);-webkit-background-clip:text;color:transparent}
-.hero p,.login-card p{margin-top:13px;color:var(--muted);font-size:14px;line-height:1.55}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:22px;position:relative;z-index:1}
-.step{background:#071126;border:1px solid var(--line);border-radius:16px;padding:13px 10px}.step b{display:block;color:var(--gold);font-size:17px;margin-bottom:5px}.step small{color:#b8c3e5;font-size:11px;font-weight:800}
-.login-card{padding:22px}.title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.title h2{font-size:21px;color:var(--gold);text-transform:uppercase;line-height:1.1}
-.pill{font-size:10px;font-weight:1000;padding:7px 10px;border-radius:999px;background:#102562;color:#b9c6ff;white-space:nowrap}.field{margin-bottom:12px}.field label{display:block;color:#d5ddff;font-size:12px;font-weight:950;margin-bottom:7px}
-.field input{width:100%;height:52px;background:#050916;border:1px solid #2b407a;border-radius:16px;color:#fff;font-size:15px;padding:0 14px;outline:none;text-transform:uppercase}
-.checkbox{display:flex;gap:9px;color:#d4dcff;font-size:12px;line-height:1.45;margin:10px 0 13px}.btn{width:100%;height:52px;border:0;border-radius:17px;font-weight:1000;font-size:14px;cursor:pointer;transition:.18s}.btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.48;cursor:not-allowed;transform:none}
-.btn-gold,.btn-submit{background:linear-gradient(90deg,var(--gold),var(--gold2));color:#050711}.note{margin-top:12px;background:#071126;border:1px dashed rgba(71,109,255,.50);border-radius:15px;padding:12px;color:var(--muted);font-size:12px;line-height:1.45}
-.app-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:16px}.statusbar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}.status{background:#071126;border:1px solid var(--line);border-radius:17px;padding:13px}.status span{display:block;color:var(--muted);font-size:10px;font-weight:1000;text-transform:uppercase;margin-bottom:6px}.status b{font-size:17px}.gold b{color:var(--gold)}.green b{color:var(--green)}.blue b{color:#aec0ff}
-.card{padding:18px}.match-list{display:grid;gap:12px}.match-card{background:linear-gradient(180deg,#0a1734,#061022);border:1px solid var(--line);border-radius:20px;padding:14px}.match-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.match-head b{color:#fff;font-size:13px}.match-head span{color:var(--gold);font-size:12px;font-weight:1000}
-.teams{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}.team{display:flex;align-items:center;justify-content:center;gap:8px;min-height:68px;background:#060d1d;border:1px solid var(--line);border-radius:17px;text-align:center;padding:10px}.flag{font-size:28px;line-height:1}.team-name{font-size:15px;font-weight:1000}.vs{color:var(--gold);font-weight:1000;font-size:14px}
-.score-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.score-row input{height:50px;background:#050916;border:1px solid #2b407a;border-radius:15px;color:#fff;font-size:24px;font-weight:1000;text-align:center;outline:none}
-.submit-area{display:grid;grid-template-columns:1fr 180px;gap:10px;margin-top:14px;align-items:center}.submit-area .note{margin:0}
-.board-list{display:grid;gap:8px}.board-row{display:grid;grid-template-columns:54px 1fr 72px;gap:8px;align-items:center;background:#071126;border:1px solid var(--line);border-radius:15px;padding:11px}.board-row:first-child{background:linear-gradient(90deg,rgba(217,180,108,.23),rgba(7,17,38,.95));border-color:rgba(217,180,108,.44)}.rank{color:var(--gold);font-weight:1000;font-size:13px}.member{font-weight:1000;font-size:13px;letter-spacing:.2px}.point{text-align:right;color:var(--gold);font-weight:1000}
-.back{width:auto;height:auto;background:transparent;border:1px solid var(--line);color:#d4dcff;border-radius:14px;padding:10px 12px;font-weight:950;cursor:pointer}.toast{position:fixed;right:16px;top:16px;z-index:99;display:grid;gap:8px}.toast-msg{min-width:260px;max-width:340px;padding:13px 14px;border-radius:15px;background:#071126;border:1px solid var(--line);box-shadow:0 18px 60px rgba(0,0,0,.55);font-weight:900}.toast-msg small{display:block;color:var(--muted);font-weight:600;margin-top:5px}.success{border-color:rgba(46,229,143,.60)}.error{border-color:rgba(255,82,99,.70)}.info{border-color:rgba(217,180,108,.55)}
-@media(max-width:900px){.wrap{width:min(450px,94%);padding-top:10px}.header{border-radius:17px}.header-badge{font-size:10px;padding:8px 9px}.login-grid,.app-grid{grid-template-columns:1fr}.hero,.login-card,.card{padding:17px}.steps{grid-template-columns:repeat(2,1fr)}.statusbar{grid-template-columns:1fr 1fr}.teams{gap:7px}.team{min-height:62px;padding:8px;gap:6px}.flag{font-size:24px}.team-name{font-size:13px}.submit-area{grid-template-columns:1fr}.toast{left:12px;right:12px}.toast-msg{min-width:0;max-width:none}}
-@media(max-width:360px){.statusbar{grid-template-columns:1fr}.teams{grid-template-columns:1fr}.vs{text-align:center}.board-row{grid-template-columns:44px 1fr 58px}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World Cup Ticket Event</title>
+  <style>
+    :root {
+      --logo-url: url('https://clickbet88sedekahrejeki.xyz/storage/webpersonalize/d54f5304-03b3-49f7-b283-e6fe0c595ca7.gif');
+      --mobile-bg: url('http://plcl.me/images/Essxn.jpg');
+      --desktop-bg: url('http://plcl.me/images/CLQHg.jpg');
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(2, 6, 23, 0.35), rgba(2, 6, 23, 0.75)),
+        var(--mobile-bg) center top / cover no-repeat fixed;
+      color: #ffffff;
+      padding: 18px;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        background:
+          linear-gradient(rgba(2, 6, 23, 0.28), rgba(2, 6, 23, 0.72)),
+          var(--desktop-bg) center top / cover no-repeat fixed;
+      }
+    }
+
+    .app {
+      width: 100%;
+      max-width: 430px;
+      margin: 0 auto;
+      padding-top: 8px;
+    }
+
+    @media (min-width: 768px) {
+      .app {
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: 8%;
+        padding-top: 28px;
+      }
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      padding: 24px 18px;
+      background: linear-gradient(145deg, rgba(4, 18, 78, 0.86), rgba(3, 10, 38, 0.92));
+      border: 1px solid rgba(255, 215, 106, 0.28);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45), inset 0 0 24px rgba(255, 215, 106, 0.05);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      right: -80px;
+      top: -80px;
+      border-radius: 50%;
+      background: rgba(255, 196, 51, 0.24);
+      filter: blur(2px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      margin-top: 14px;
+      font-size: 28px;
+      line-height: 1.05;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      margin-top: 10px;
+      color: #dbeafe;
+      font-size: 13px;
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(2, 8, 32, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .section-title h2 {
+      font-size: 16px;
+    }
+
+    .small-note {
+      font-size: 11px;
+      color: #93c5fd;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: #c7d2fe;
+      font-weight: 700;
+    }
+
+    input,
+    select {
+      width: 100%;
+      height: 46px;
+      border: none;
+      outline: none;
+      border-radius: 14px;
+      padding: 0 13px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    option {
+      color: #111827;
+    }
+
+    .btn {
+      width: 100%;
+      height: 48px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ffd76a, #f59e0b);
+      color: #111827;
+      font-size: 14px;
+      font-weight: 900;
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.35);
+    }
+
+    .btn.secondary {
+      margin-top: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      box-shadow: none;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .login-logo {
+      width: 165px;
+      height: 82px;
+      display: block;
+      margin: 0 auto 16px;
+      border-radius: 0;
+      background: var(--logo-url) center / contain no-repeat;
+      box-shadow: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-logo {
+      width: 150px;
+      height: 70px;
+      margin-bottom: 12px;
+      background: var(--logo-url) center / contain no-repeat;
+      position: relative;
+      z-index: 1;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .member-card {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 112px;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .member-box,
+    .ticket-box {
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(10px);
+    }
+
+    .label {
+      font-size: 11px;
+      color: #bfdbfe;
+      margin-bottom: 7px;
+    }
+
+    .member-id {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .ticket-count {
+      font-size: 34px;
+      font-weight: 900;
+      color: #ffd76a;
+      line-height: 1;
+    }
+
+    .ticket-text {
+      margin-top: 4px;
+      font-size: 12px;
+      color: #e0f2fe;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .history-card {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 17px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .ticket-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(255, 215, 106, 0.95), rgba(245, 158, 11, 0.95));
+      color: #111827;
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .history-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .match-name {
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    .status {
+      flex: 0 0 auto;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .status.used {
+      background: rgba(34, 197, 94, 0.18);
+      color: #86efac;
+      border: 1px solid rgba(34, 197, 94, 0.35);
+    }
+
+    .status.pending {
+      background: rgba(251, 191, 36, 0.18);
+      color: #fde68a;
+      border: 1px solid rgba(251, 191, 36, 0.35);
+    }
+
+    .history-info {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      font-size: 11px;
+      color: #cbd5e1;
+    }
+
+    .info-box {
+      padding: 8px;
+      border-radius: 11px;
+      background: rgba(0, 0, 0, 0.17);
+    }
+
+    .info-box b {
+      display: block;
+      margin-top: 3px;
+      color: #ffffff;
+      font-size: 12px;
+    }
+
+    .empty {
+      display: none;
+      padding: 18px;
+      text-align: center;
+      color: #bfdbfe;
+      font-size: 13px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .rules {
+      margin-top: 12px;
+      display: grid;
+      gap: 8px;
+      font-size: 12px;
+      color: #dbeafe;
+      line-height: 1.45;
+    }
+
+    .rule-item {
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    @media (max-width: 360px) {
+      .member-card {
+        grid-template-columns: 1fr;
+      }
+
+      .history-info {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="toast" id="toast"></div>
-<div class="wrap">
-<header class="header"><div class="logo">CLICKBET88</div><div class="header-badge">WC 2026 • SCORE PREDICTION</div></header>
-
-<section id="pageLogin" class="screen active">
-  <div class="login-grid">
-    <div class="hero panel">
-      <div class="tag">⚽ BIG EVENT FIFA WORLD CUP 2026</div>
-      <h1>Score Prediction Event</h1>
-      <p>Masukkan ID member dan kode event. Setelah berhasil, member bisa memilih score untuk semua match yang tersedia di hari tersebut.</p>
-      <div class="steps"><div class="step"><b>01</b><small>Input ID</small></div><div class="step"><b>02</b><small>Input Kode</small></div><div class="step"><b>03</b><small>Pilih Score</small></div><div class="step"><b>04</b><small>Submit</small></div></div>
-    </div>
-    <div class="login-card panel">
-      <div class="title"><h2>Masuk Event</h2><div class="pill">1 KODE = 1 TIKET</div></div>
-      <p>Kode event didapatkan melalui admin setelah first deposit harian.</p>
-      <div class="field"><label>ID MEMBER</label><input id="memberId" type="text" placeholder="Contoh: AMX8888302"></div>
-      <div class="field"><label>KODE EVENT</label><input id="eventCode" type="text" placeholder="Contoh: CB887727"></div>
-      <label class="checkbox"><input id="agreeTnc" type="checkbox"> Saya sudah membaca dan memahami syarat event.</label>
-      <button id="loginBtn" class="btn btn-gold">MASUK KE EVENT</button>
-      <div class="note">Data login akan dicek langsung dari sheet <b>STOCK KODE</b>.</div>
-    </div>
-  </div>
-</section>
-
-<section id="pageEvent" class="screen">
-  <div class="statusbar">
-    <div class="status green"><span>Status</span><b id="statusText">Aktif</b></div>
-    <div class="status gold"><span>Tiket</span><b id="ticketText">1</b></div>
-    <div class="status blue"><span>Match Hari Ini</span><b id="matchCount">0</b></div>
-    <div class="status"><span>ID Member</span><b id="memberText">-</b></div>
-  </div>
-  <div class="app-grid">
-    <div class="card panel">
-      <div class="title"><h2>Match Hari Ini</h2><div class="pill" id="todayLabel">World Cup 2026</div></div>
-      <div id="matchList" class="match-list"></div>
-      <div class="submit-area">
-        <div class="note" id="submitNote">Isi semua score match yang tampil. Setelah submit, tiket dianggap sudah digunakan.</div>
-        <button id="submitBtn" class="btn btn-submit">SUBMIT TEBAKAN</button>
+  <main class="app">
+    <!-- HALAMAN 1: LOGIN / CEK TIKET -->
+    <section class="page active" id="loginPage">
+      <div class="hero center">
+        <div class="login-logo" aria-label="CLICKBET88 Logo"></div>
+        <div class="badge">WORLD CUP 2026 EVENT</div>
+        <h1>Cek Tiket Prediksi Kamu</h1>
+        <p>Masukkan User ID dan kode event untuk melihat stok tiket serta history pilihan pertandingan.</p>
       </div>
-      <button id="backBtn" class="back" style="margin-top:12px">← Kembali ke Login</button>
-    </div>
 
-    <div>
-      <div class="card panel">
-        <div class="title"><h2>Leaderboard</h2><div class="pill">RANK • ID • POINT</div></div>
-        <div id="leaderboard" class="board-list"></div>
+      <div class="section">
+        <div class="section-title">
+          <h2>Login Member</h2>
+          <span class="small-note">Demo</span>
+        </div>
+
+        <div class="form-group">
+          <label for="loginId">User ID</label>
+          <input id="loginId" type="text" placeholder="Contoh: CBVIP001" />
+        </div>
+
+        <div class="form-group">
+          <label for="eventCode">Kode Event</label>
+          <input id="eventCode" type="text" placeholder="Contoh: WC2026" />
+        </div>
+
+        <button class="btn" onclick="loginMember()">Cek Tiket Saya</button>
       </div>
-      <div class="card panel" style="margin-top:14px">
-        <div class="title"><h2>T&C Singkat</h2></div>
-        <div class="note">Event berlaku untuk member aktif CLICKBET88. Kode event diberikan berdasarkan first deposit harian. Setiap kode hanya berlaku untuk 1 submit prediksi. Maksimal 5 kode per hari / ID. Keputusan CLICKBET88 bersifat final.</div>
+
+      <div class="section">
+        <div class="section-title">
+          <h2>Informasi Event</h2>
+        </div>
+        <div class="rules">
+          <div class="rule-item">🎟️ Tiket digunakan untuk memilih pertandingan dan prediksi skor.</div>
+          <div class="rule-item">📊 Halaman ini menampilkan stok tiket dan history pilihan member.</div>
+          <div class="rule-item">🔐 Data nantinya bisa diambil otomatis dari Google Sheet.</div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-</div>
+    </section>
 
-<script>
-const API_URL = "PASTE_WEB_APP_URL_DI_SINI";
+    <!-- HALAMAN 2: DASHBOARD MEMBER -->
+    <section class="page" id="dashboardPage">
+      <section class="hero">
+        <div class="brand-logo" aria-label="CLICKBET88 Logo"></div>
+        <div class="badge">🏆 MEMBER DASHBOARD</div>
+        <h1>Dashboard Tiket Prediksi</h1>
+        <p>Cek stok tiket kamu dan lihat history pertandingan yang sudah dipilih.</p>
 
-const COUNTRY_FLAGS = {
-  "Mexico":"🇲🇽","South Africa":"🇿🇦","South Korea":"🇰🇷","Czechia":"🇨🇿",
-  "Spain":"🇪🇸","England":"🏴","Brazil":"🇧🇷","Japan":"🇯🇵","Argentina":"🇦🇷",
-  "France":"🇫🇷","Germany":"🇩🇪","Portugal":"🇵🇹","Italy":"🇮🇹","USA":"🇺🇸","Netherlands":"🇳🇱"
-};
+        <div class="member-card">
+          <div class="member-box">
+            <div class="label">MEMBER ID</div>
+            <div class="member-id" id="memberId">-</div>
+          </div>
+          <div class="ticket-box">
+            <div class="label">STOK TIKET</div>
+            <div class="ticket-count" id="ticketStock">3</div>
+            <div class="ticket-text">Tiket tersedia</div>
+          </div>
+        </div>
+      </section>
 
-let currentMember=null;
-let currentCode=null;
-let currentMatches=[];
+      <section class="section">
+        <div class="section-title">
+          <h2>Pilih Tiket Match</h2>
+          <span class="small-note">1 tiket / pilihan</span>
+        </div>
 
-function flag(name){return COUNTRY_FLAGS[name] || "🏳️";}
-function showPage(id){document.querySelectorAll(".screen").forEach(el=>el.classList.remove("active"));document.getElementById(id).classList.add("active");window.scrollTo({top:0,behavior:"smooth"});}
-function toast(type,title,detail=""){const box=document.getElementById("toast");const el=document.createElement("div");el.className="toast-msg "+type;el.innerHTML=title+(detail?`<small>${detail}</small>`:"");box.appendChild(el);setTimeout(()=>el.remove(),3500);}
-async function api(params){const url=API_URL+"?"+new URLSearchParams(params).toString();const res=await fetch(url);return await res.json();}
+        <div class="form-group">
+          <label for="matchSelect">Pilih Pertandingan</label>
+          <select id="matchSelect">
+            <option value="Argentina vs Brazil">Argentina vs Brazil</option>
+            <option value="France vs Germany">France vs Germany</option>
+            <option value="Spain vs England">Spain vs England</option>
+            <option value="Portugal vs Netherlands">Portugal vs Netherlands</option>
+          </select>
+        </div>
 
-async function login(){
-  const id=document.getElementById("memberId").value.trim().toUpperCase();
-  const code=document.getElementById("eventCode").value.trim().toUpperCase();
-  const agree=document.getElementById("agreeTnc").checked;
+        <div class="form-group">
+          <label for="predictionInput">Prediksi Skor</label>
+          <input id="predictionInput" type="text" placeholder="Contoh: 2 - 1" />
+        </div>
 
-  if(!id||!code){toast("error","Data belum lengkap","Isi ID member dan kode event dulu.");return;}
-  if(!agree){toast("error","T&C belum dicentang","Centang persetujuan dulu.");return;}
-  if(API_URL.includes("PASTE_WEB_APP_URL")){toast("error","API URL belum dipasang","Tempel Web App URL dari Apps Script dulu.");return;}
+        <button class="btn" onclick="useTicket()">Gunakan Tiket</button>
+        <button class="btn secondary" onclick="backToLogin()">Kembali ke Halaman Login</button>
+      </section>
 
-  const btn=document.getElementById("loginBtn");
-  btn.disabled=true;btn.innerText="MENGECEK...";
+      <section class="section">
+        <div class="section-title">
+          <h2>History Pemilihan Tiket</h2>
+          <span class="small-note" id="historyCount">0 data</span>
+        </div>
 
-  try{
-    const d=await api({action:"login",id_member:id,kode_event:code});
-    if(!d.status){toast("error","Login gagal",d.message||"Kode tidak valid.");return;}
+        <div class="empty" id="emptyState">Belum ada history pemilihan tiket.</div>
+        <div class="history-list" id="historyList"></div>
+      </section>
+    </section>
+  </main>
 
-    currentMember=id;currentCode=code;
-    document.getElementById("memberText").innerText=id;
-    document.getElementById("ticketText").innerText="1";
-    document.getElementById("statusText").innerText="Aktif";
+  <script>
+    let ticketStock = 3;
+    let currentMemberId = "-";
 
-    await loadMatches();
-    await loadLeaderboard();
+    let historyData = [
+      {
+        match: "Argentina vs Brazil",
+        prediction: "2 - 1",
+        date: "22 Mei 2026",
+        ticketCode: "TKT-001",
+        status: "Terpakai"
+      },
+      {
+        match: "France vs Germany",
+        prediction: "1 - 1",
+        date: "22 Mei 2026",
+        ticketCode: "TKT-002",
+        status: "Menunggu"
+      }
+    ];
 
-    toast("success","Berhasil masuk","Silakan isi prediksi score.");
-    showPage("pageEvent");
-  }catch(e){
-    toast("error","API gagal","Cek Web App URL / deployment Apps Script.");
-  }finally{
-    btn.disabled=false;btn.innerText="MASUK KE EVENT";
-  }
-}
-
-async function loadMatches(){
-  const d=await api({action:"matches"});
-  const box=document.getElementById("matchList");
-
-  if(!d.status||!d.data||!d.data.length){
-    currentMatches=[];
-    document.getElementById("matchCount").innerText="0";
-    box.innerHTML="<div class='note'>Belum ada match OPEN untuk hari ini.</div>";
-    return;
-  }
-
-  currentMatches=d.data;
-  document.getElementById("matchCount").innerText=currentMatches.length;
-  box.innerHTML=currentMatches.map(m=>`
-    <div class="match-card" data-match="${m.match_id}">
-      <div class="match-head"><b>WC World Cup 2026 • ${m.group_match}</b><span>${m.jam_kickoff}</span></div>
-      <div class="teams">
-        <div class="team"><div class="flag">${flag(m.team_home)}</div><div class="team-name">${m.team_home}</div></div>
-        <div class="vs">VS</div>
-        <div class="team"><div class="flag">${flag(m.team_away)}</div><div class="team-name">${m.team_away}</div></div>
-      </div>
-      <div class="score-row">
-        <input type="number" min="0" inputmode="numeric" placeholder="0" id="home_${m.match_id}">
-        <input type="number" min="0" inputmode="numeric" placeholder="0" id="away_${m.match_id}">
-      </div>
-    </div>
-  `).join("");
-}
-
-async function loadLeaderboard(){
-  const box=document.getElementById("leaderboard");
-  try{
-    const d=await api({action:"leaderboard"});
-    if(!d.status||!d.data||!d.data.length){
-      box.innerHTML="<div class='note'>Leaderboard belum tersedia.</div>";
-      return;
-    }
-    box.innerHTML=d.data.slice(0,50).map(row=>`
-      <div class="board-row">
-        <div class="rank">#${row.rank}</div>
-        <div class="member">${row.id_member}</div>
-        <div class="point">${row.point}</div>
-      </div>
-    `).join("");
-  }catch(e){
-    box.innerHTML="<div class='note'>Leaderboard gagal dimuat.</div>";
-  }
-}
-
-async function submitPrediction(){
-  if(!currentMember||!currentCode){toast("error","Belum login","Masuk event dulu.");showPage("pageLogin");return;}
-  if(!currentMatches.length){toast("error","Tidak ada match","Belum ada match OPEN hari ini.");return;}
-
-  const predictions=[];
-  for(const m of currentMatches){
-    const home=document.getElementById(`home_${m.match_id}`).value;
-    const away=document.getElementById(`away_${m.match_id}`).value;
-    if(home===""||away===""){toast("error","Score belum lengkap",`Isi score untuk ${m.team_home} vs ${m.team_away}.`);return;}
-    predictions.push({
-      match_id:m.match_id,
-      team_home:m.team_home,
-      team_away:m.team_away,
-      prediksi_home:Number(home),
-      prediksi_away:Number(away)
-    });
-  }
-
-  const btn=document.getElementById("submitBtn");
-  btn.disabled=true;btn.innerText="MENYIMPAN...";
-
-  try{
-    const d=await api({
-      action:"submit",
-      id_member:currentMember,
-      kode_event:currentCode,
-      predictions:JSON.stringify(predictions)
-    });
-
-    if(!d.status){
-      btn.disabled=false;
-      toast("error","Submit gagal",d.message||"Kode sudah digunakan.");
-      return;
+    function showPage(pageId) {
+      document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+      window.scrollTo(0, 0);
     }
 
-    document.getElementById("ticketText").innerText="0";
-    document.getElementById("submitNote").innerText="Prediksi berhasil disimpan. Tiket sudah digunakan.";
-    toast("success","Prediksi berhasil","Data sudah masuk ke sheet PREDIKSI MEMBER.");
-    await loadLeaderboard();
-  }catch(e){
-    btn.disabled=false;
-    toast("error","Submit gagal","Cek koneksi Apps Script.");
-  }finally{
-    btn.innerText="SUBMIT TEBAKAN";
-  }
-}
+    function loginMember() {
+      const loginId = document.getElementById("loginId").value.trim();
+      const eventCode = document.getElementById("eventCode").value.trim();
 
-document.getElementById("loginBtn").addEventListener("click",login);
-document.getElementById("submitBtn").addEventListener("click",submitPrediction);
-document.getElementById("backBtn").addEventListener("click",()=>showPage("pageLogin"));
-</script>
+      if (!loginId) {
+        alert("Isi User ID terlebih dahulu.");
+        return;
+      }
+
+      if (!eventCode) {
+        alert("Isi kode event terlebih dahulu.");
+        return;
+      }
+
+      currentMemberId = loginId.toUpperCase();
+      document.getElementById("memberId").textContent = currentMemberId;
+      renderDashboard();
+      showPage("dashboardPage");
+    }
+
+    function backToLogin() {
+      showPage("loginPage");
+    }
+
+    function renderDashboard() {
+      document.getElementById("ticketStock").textContent = ticketStock;
+      document.getElementById("historyCount").textContent = historyData.length + " data";
+
+      const list = document.getElementById("historyList");
+      const empty = document.getElementById("emptyState");
+      list.innerHTML = "";
+
+      if (historyData.length === 0) {
+        empty.style.display = "block";
+        return;
+      }
+
+      empty.style.display = "none";
+
+      historyData.forEach((item, index) => {
+        const isPending = item.status.toLowerCase() === "menunggu";
+        const card = document.createElement("div");
+        card.className = "history-card";
+        card.innerHTML = `
+          <div class="ticket-icon">${index + 1}</div>
+          <div>
+            <div class="history-top">
+              <div class="match-name">${item.match}</div>
+              <div class="status ${isPending ? "pending" : "used"}">${item.status}</div>
+            </div>
+            <div class="history-info">
+              <div class="info-box">Prediksi <b>${item.prediction}</b></div>
+              <div class="info-box">Tanggal <b>${item.date}</b></div>
+              <div class="info-box">Kode Tiket <b>${item.ticketCode}</b></div>
+              <div class="info-box">Member <b>${currentMemberId}</b></div>
+            </div>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    function useTicket() {
+      const match = document.getElementById("matchSelect").value;
+      const prediction = document.getElementById("predictionInput").value.trim();
+
+      if (ticketStock <= 0) {
+        alert("Stok tiket kamu sudah habis.");
+        return;
+      }
+
+      if (!prediction) {
+        alert("Isi prediksi skor terlebih dahulu.");
+        return;
+      }
+
+      ticketStock -= 1;
+
+      const ticketNumber = String(historyData.length + 1).padStart(3, "0");
+      historyData.unshift({
+        match: match,
+        prediction: prediction,
+        date: "22 Mei 2026",
+        ticketCode: "TKT-" + ticketNumber,
+        status: "Menunggu"
+      });
+
+      document.getElementById("predictionInput").value = "";
+      renderDashboard();
+    }
+  </script>
 </body>
 </html>
