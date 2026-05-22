@@ -4,12 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>World Cup Ticket Event</title>
+
   <style>
     :root {
       --logo-url: url('https://clickbet88sedekahrejeki.xyz/storage/webpersonalize/d54f5304-03b3-49f7-b283-e6fe0c595ca7.gif');
       --mobile-bg: url('http://plcl.me/images/Essxn.jpg');
       --desktop-bg: url('http://plcl.me/images/CLQHg.jpg');
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -31,6 +33,9 @@
         background:
           linear-gradient(rgba(2, 6, 23, 0.28), rgba(2, 6, 23, 0.72)),
           var(--desktop-bg) center top / cover no-repeat fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
 
@@ -44,9 +49,8 @@
     @media (min-width: 768px) {
       .app {
         max-width: 520px;
-        margin-left: auto;
-        margin-right: 8%;
-        padding-top: 28px;
+        margin: 0 auto;
+        padding-top: 0;
       }
     }
 
@@ -208,69 +212,42 @@
       transform: scale(0.98);
     }
 
-    .help-btn {
-      margin-top: 10px;
-      width: 100%;
-      height: 48px;
+    .floating-help {
+      position: fixed;
+      right: 16px;
+      bottom: 18px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      border-radius: 15px;
+      gap: 8px;
+      padding: 11px 15px;
+      border-radius: 999px;
       text-decoration: none;
-      font-size: 14px;
-      font-weight: 900;
       color: #ffffff;
       background: linear-gradient(135deg, #0ea5e9, #2563eb);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
-      transition: 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 0 22px rgba(37, 99, 235, 0.65), 0 12px 30px rgba(0, 0, 0, 0.45);
+      z-index: 9998;
+      animation: floatPulse 1.8s ease-in-out infinite;
+      font-size: 12px;
+      font-weight: 900;
     }
 
-    .help-btn:hover {
-      transform: translateY(-2px);
+    .floating-help .chat-icon {
+      font-size: 22px;
+      line-height: 1;
     }
 
-.floating-help {
-  position: fixed;
-  right: 16px;
-  bottom: 18px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 11px 15px;
-  border-radius: 999px;
-  text-decoration: none;
-  color: #ffffff;
-  background: linear-gradient(135deg, #0ea5e9, #2563eb);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: 0 0 22px rgba(37, 99, 235, 0.65), 0 12px 30px rgba(0, 0, 0, 0.45);
-  z-index: 9998;
-  animation: floatPulse 1.8s ease-in-out infinite;
-  font-size: 12px;
-  font-weight: 900;
-}
+    .floating-help .chat-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
 
-.floating-help .chat-icon {
-  font-size: 22px;
-  line-height: 1;
-}
-
-.floating-help .chat-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-}
-
-.floating-help .chat-text small {
-  font-size: 10px;
-  color: #dbeafe;
-  font-weight: 700;
-}
-
-@keyframes floatPulse {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-4px) scale(1.04); }
-}
+    .floating-help .chat-text small {
+      font-size: 10px;
+      color: #dbeafe;
+      font-weight: 700;
+    }
 
     @keyframes floatPulse {
       0%, 100% { transform: translateY(0) scale(1); }
@@ -282,9 +259,7 @@
       height: 82px;
       display: block;
       margin: 0 auto 16px;
-      border-radius: 0;
       background: var(--logo-url) center / contain no-repeat;
-      box-shadow: none;
       position: relative;
       z-index: 1;
     }
@@ -479,7 +454,6 @@
       background: linear-gradient(145deg, rgba(4, 18, 78, 0.96), rgba(3, 10, 38, 0.98));
       border: 1px solid rgba(255, 215, 106, 0.45);
       box-shadow: 0 0 35px rgba(250, 204, 21, 0.28), 0 18px 50px rgba(0, 0, 0, 0.55);
-      transform: scale(0.96);
       animation: popUp 0.25s ease forwards;
     }
 
@@ -530,45 +504,41 @@
     }
   </style>
 </head>
+
 <body>
   <main class="app">
-    <!-- HALAMAN 1: LOGIN / CEK TICKET -->
     <section class="page active" id="loginPage">
       <div class="hero center">
         <div class="login-logo" aria-label="CLICKBET88 Logo"></div>
         <div class="badge">WORLD CUP 2026 EVENT</div>
-        <h1>Cek Ticket Prediksi Kamu</h1>
-        <p>Masukkan User ID dan kode event untuk melihat stok ticket serta history pilihan pertandingan.</p>
+        <p>LOGIN & TEBAK TIM JAGOANMU BOSKUUU!</p>
       </div>
 
       <div class="section">
         <div class="section-title">
-          <h2>Login Member</h2>
-          
+          <h2>LOGIN</h2>
         </div>
 
         <div class="form-group">
-          <label for="loginId">User ID</label>
-          <input id="loginId" type="text" placeholder="Contoh: CBVIP001" />
+          <input id="loginId" type="text" placeholder="USER ID" />
         </div>
 
         <button class="btn" onclick="loginMember()">Cek Ticket Saya</button>
-
       </div>
 
       <div class="section">
         <div class="section-title">
           <h2>Informasi Event</h2>
         </div>
+
         <div class="rules">
-          <div class="rule-item">🎟️ Ticket Digunakan Untuk Memilih Pertandingan & Prediksi Skor.</div>
-          <div class="rule-item">📊 Halaman Ini Menampilkan Stok Ticket & History Pilihan BOSKU.</div>
-          <div class="rule-item">🔐 Data Akan Menampilkan Di LEADERBOARD.</div>
+          <div class="rule-item">🎟️ TICKET DIGUNAKAN UNTUK MEMILIH PERTANDINGAN & PREDIKSI SKOR.</div>
+          <div class="rule-item">📊 HALAMAN INI MENAMPILKAN STOK TICKET & HISTORY PILIHAN BOSKU.</div>
+          <div class="rule-item">🔐 KESELURUHAN POINT KEMENANGAN AKAN DI TAMPILKAN DI LEADERBOARD.</div>
         </div>
       </div>
     </section>
 
-    <!-- HALAMAN 2: DASHBOARD MEMBER -->
     <section class="page" id="dashboardPage">
       <section class="hero">
         <div class="brand-logo" aria-label="CLICKBET88 Logo"></div>
@@ -581,9 +551,10 @@
             <div class="label">MEMBER ID</div>
             <div class="member-id" id="memberId">-</div>
           </div>
+
           <div class="ticket-box">
             <div class="label">STOK TICKET</div>
-            <div class="ticket-count" id="ticketStock">3</div>
+            <div class="ticket-count" id="ticketStock">0</div>
             <div class="ticket-text">Ticket tersedia</div>
           </div>
         </div>
@@ -612,7 +583,6 @@
 
         <button class="btn" onclick="useTicket()">Gunakan Ticket</button>
         <button class="btn leaderboard-btn" onclick="openLeaderboard()">🏆 LEADERBOARD</button>
-
         <button class="btn secondary" onclick="backToLogin()">Kembali ke Halaman Login</button>
       </section>
 
@@ -626,13 +596,14 @@
         <div class="history-list" id="historyList"></div>
       </section>
     </section>
-<a href="https://click-lynk.com/LIVECHAT_CLICKBET88" target="_blank" class="floating-help">
-  <span class="chat-icon">💬</span>
-  <span class="chat-text">
-    Hubungi Admin
-    <small>Online 24 Jam</small>
-  </span>
-</a>
+
+    <a href="https://click-lynk.com/LIVECHAT_CLICKBET88" target="_blank" class="floating-help">
+      <span class="chat-icon">💬</span>
+      <span class="chat-text">
+        Hubungi Admin
+        <small>Online 24 Jam</small>
+      </span>
+    </a>
 
     <div class="toast-overlay" id="successToast">
       <div class="success-modal">
@@ -647,181 +618,182 @@
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxLktRmSes6vghtUbuUv9pzEZ7dJ7U8OJbV8xXGZ5qYjPv1FSnQN8nAThQYhugJBatSnA/exec";
 
-     let ticketStock = 0;
-  let currentMemberId = "-";
-  let historyData = [];
+    let ticketStock = 0;
+    let currentMemberId = "-";
+    let historyData = [];
 
-  function showPage(pageId) {
-    document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
-    document.getElementById(pageId).classList.add("active");
-    window.scrollTo(0, 0);
-  }
-
-  async function loginMember() {
-    const loginId = document.getElementById("loginId").value.trim().toUpperCase();
-    const loginButton = event.target;
-
-    if (!loginId) {
-      alert("Isi User ID terlebih dahulu.");
-      return;
+    function showPage(pageId) {
+      document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+      window.scrollTo(0, 0);
     }
 
-    loginButton.disabled = true;
-    loginButton.textContent = "Mengecek...";
+    async function loginMember() {
+      const loginId = document.getElementById("loginId").value.trim().toUpperCase();
+      const loginButton = event.target;
 
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        body: JSON.stringify({
-          action: "login",
-          userId: loginId
-        })
-      });
-
-      const result = await response.json();
-
-      if (!result.success) {
-        alert(result.message || "User ID tidak valid / belum terdaftar.");
+      if (!loginId) {
+        alert("Isi User ID terlebih dahulu.");
         return;
       }
 
-      currentMemberId = loginId;
-      ticketStock = Number(result.sisaTicket || 0);
-      historyData = result.history || [];
+      loginButton.disabled = true;
+      loginButton.textContent = "Mengecek...";
 
-      document.getElementById("memberId").textContent = currentMemberId;
-      renderDashboard();
-      showPage("dashboardPage");
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          body: JSON.stringify({
+            action: "login",
+            userId: loginId
+          })
+        });
 
-    } catch (error) {
-      alert("Gagal mengecek data member. Silakan coba lagi.");
-    } finally {
-      loginButton.disabled = false;
-      loginButton.textContent = "Cek Ticket Saya";
-    }
-  }
+        const result = await response.json();
 
-  function backToLogin() {
-    showPage("loginPage");
-  }
+        if (!result.success) {
+          alert(result.message || "User ID tidak valid / belum terdaftar.");
+          return;
+        }
 
-  function openLeaderboard() {
-    window.open("https://example.com/leaderboard", "_blank");
-  }
+        currentMemberId = loginId;
+        ticketStock = Number(result.sisaTiket || result.sisaTicket || 0);
+        historyData = result.history || [];
 
-  function renderDashboard() {
-    document.getElementById("ticketStock").textContent = ticketStock;
-    document.getElementById("historyCount").textContent = historyData.length + " data";
+        document.getElementById("memberId").textContent = currentMemberId;
+        renderDashboard();
+        showPage("dashboardPage");
 
-    const list = document.getElementById("historyList");
-    const empty = document.getElementById("emptyState");
-    list.innerHTML = "";
-
-    if (historyData.length === 0) {
-      empty.style.display = "block";
-      return;
+      } catch (error) {
+        alert("Gagal mengecek data member. Silakan coba lagi.");
+      } finally {
+        loginButton.disabled = false;
+        loginButton.textContent = "Cek Ticket Saya";
+      }
     }
 
-    empty.style.display = "none";
-
-    historyData.forEach((item, index) => {
-      const isPending = String(item.status).toLowerCase() === "menunggu";
-      const card = document.createElement("div");
-      card.className = "history-card";
-
-      card.innerHTML = `
-        <div class="ticket-icon">${index + 1}</div>
-        <div>
-          <div class="history-top">
-            <div class="match-name">${item.match}</div>
-            <div class="status ${isPending ? "pending" : "used"}">${item.status}</div>
-          </div>
-          <div class="history-info">
-            <div class="info-box">Prediksi <b>${item.prediction}</b></div>
-            <div class="info-box">Tanggal <b>${item.date}</b></div>
-            <div class="info-box">Kode Ticket <b>${item.ticketCode}</b></div>
-            <div class="info-box">Member <b>${currentMemberId}</b></div>
-          </div>
-        </div>
-      `;
-
-      list.appendChild(card);
-    });
-  }
-
-  async function useTicket() {
-    const match = document.getElementById("matchSelect").value;
-    const prediction = document.getElementById("predictionInput").value.trim();
-    const submitButton = event.target;
-
-    if (ticketStock <= 0) {
-      alert("Stok ticket kamu sudah habis.");
-      return;
+    function backToLogin() {
+      showPage("loginPage");
     }
 
-    if (!prediction) {
-      alert("Isi prediksi skor terlebih dahulu.");
-      return;
+    function openLeaderboard() {
+      window.open("https://example.com/leaderboard", "_blank");
     }
 
-    submitButton.disabled = true;
-    submitButton.textContent = "Menyimpan...";
+    function renderDashboard() {
+      document.getElementById("ticketStock").textContent = ticketStock;
+      document.getElementById("historyCount").textContent = historyData.length + " data";
 
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        body: JSON.stringify({
-          action: "submitPrediction",
-          userId: currentMemberId,
-          matchId: match,
-          prediction: prediction
-        })
-      });
+      const list = document.getElementById("historyList");
+      const empty = document.getElementById("emptyState");
 
-      const result = await response.json();
+      list.innerHTML = "";
 
-      if (!result.success) {
-        alert("Gagal menyimpan prediksi: " + (result.message || "Silakan coba lagi."));
+      if (historyData.length === 0) {
+        empty.style.display = "block";
         return;
       }
 
-      ticketStock -= 1;
+      empty.style.display = "none";
 
-      const ticketNumber = String(historyData.length + 1).padStart(3, "0");
+      historyData.forEach((item, index) => {
+        const isPending = String(item.status).toLowerCase() === "menunggu";
+        const card = document.createElement("div");
+        card.className = "history-card";
 
-      historyData.unshift({
-        match: match,
-        prediction: prediction,
-        date: new Date().toLocaleDateString("id-ID"),
-        ticketCode: "TKT-" + ticketNumber,
-        status: "MENUNGGU"
+        card.innerHTML = `
+          <div class="ticket-icon">${index + 1}</div>
+          <div>
+            <div class="history-top">
+              <div class="match-name">${item.match}</div>
+              <div class="status ${isPending ? "pending" : "used"}">${item.status}</div>
+            </div>
+            <div class="history-info">
+              <div class="info-box">Prediksi <b>${item.prediction}</b></div>
+              <div class="info-box">Tanggal <b>${item.date}</b></div>
+              <div class="info-box">Kode Ticket <b>${item.ticketCode}</b></div>
+              <div class="info-box">Member <b>${currentMemberId}</b></div>
+            </div>
+          </div>
+        `;
+
+        list.appendChild(card);
       });
-
-      document.getElementById("predictionInput").value = "";
-      renderDashboard();
-      showSuccessToast(match, prediction, ticketStock);
-
-    } catch (error) {
-      alert("Gagal terhubung ke server. Silakan coba lagi.");
-    } finally {
-      submitButton.disabled = false;
-      submitButton.textContent = "Gunakan Ticket";
     }
-  }
 
-  function showSuccessToast(match, prediction, stockLeft) {
-    const message = `Prediksi kamu untuk <b>${match}</b><br>Skor: <b>${prediction}</b><br>Sisa ticket: <b>${stockLeft}</b>`;
-    document.getElementById("successMessage").innerHTML = message;
-    document.getElementById("successToast").classList.add("show");
+    async function useTicket() {
+      const match = document.getElementById("matchSelect").value;
+      const prediction = document.getElementById("predictionInput").value.trim();
+      const submitButton = event.target;
 
-    setTimeout(() => {
-      closeSuccessToast();
-    }, 3000);
-  }
+      if (ticketStock <= 0) {
+        alert("Stok ticket kamu sudah habis.");
+        return;
+      }
 
-  function closeSuccessToast() {
-    document.getElementById("successToast").classList.remove("show");
-  }
-</script>
+      if (!prediction) {
+        alert("Isi prediksi skor terlebih dahulu.");
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Menyimpan...";
+
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          body: JSON.stringify({
+            action: "submitPrediction",
+            userId: currentMemberId,
+            matchId: match,
+            prediction: prediction
+          })
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+          alert("Gagal menyimpan prediksi: " + (result.message || "Silakan coba lagi."));
+          return;
+        }
+
+        ticketStock -= 1;
+
+        const ticketNumber = String(historyData.length + 1).padStart(3, "0");
+
+        historyData.unshift({
+          match: match,
+          prediction: prediction,
+          date: new Date().toLocaleDateString("id-ID"),
+          ticketCode: "TKT-" + ticketNumber,
+          status: "MENUNGGU"
+        });
+
+        document.getElementById("predictionInput").value = "";
+        renderDashboard();
+        showSuccessToast(match, prediction, ticketStock);
+
+      } catch (error) {
+        alert("Gagal terhubung ke server. Silakan coba lagi.");
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Gunakan Ticket";
+      }
+    }
+
+    function showSuccessToast(match, prediction, stockLeft) {
+      const message = `Prediksi kamu untuk <b>${match}</b><br>Skor: <b>${prediction}</b><br>Sisa ticket: <b>${stockLeft}</b>`;
+      document.getElementById("successMessage").innerHTML = message;
+      document.getElementById("successToast").classList.add("show");
+
+      setTimeout(() => {
+        closeSuccessToast();
+      }, 3000);
+    }
+
+    function closeSuccessToast() {
+      document.getElementById("successToast").classList.remove("show");
+    }
+  </script>
 </body>
 </html>
