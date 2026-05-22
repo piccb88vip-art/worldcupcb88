@@ -571,6 +571,8 @@
   </main>
 
   <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbyBk64BoDn_S36SVMgzjbNtOniKOqBUJwNjLgOtRKfV05MF3XNP5FAPfoLrPr7TRf8NYw/exec";
+
     let ticketStock = 3;
     let currentMemberId = "-";
 
@@ -664,7 +666,7 @@
       });
     }
 
-    function useTicket() {
+    async function useTicket() {
       const match = document.getElementById("matchSelect").value;
       const prediction = document.getElementById("predictionInput").value.trim();
 
@@ -678,7 +680,36 @@
         return;
       }
 
-      ticketStock -= 1;
+      const submitButton = event.target;
+      submitButton.disabled = true;
+      submitButton.textContent = "Menyimpan...";
+
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          body: JSON.stringify({
+            userId: currentMemberId,
+            matchId: match,
+            prediction: prediction
+          })
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+          alert("Gagal menyimpan prediksi: " + (result.message || "Silakan coba lagi."));
+          return;
+        }
+
+        ticketStock -= 1;
+
+      } catch (error) {
+        alert("Gagal terhubung ke server. Silakan coba lagi.");
+        return;
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Gunakan Tiket";
+      }
 
       const ticketNumber = String(historyData.length + 1).padStart(3, "0");
       historyData.unshift({
@@ -711,4 +742,3 @@
   </script>
 </body>
 </html>
- 
