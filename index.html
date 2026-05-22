@@ -208,6 +208,52 @@
       transform: scale(0.98);
     }
 
+    .help-btn {
+      margin-top: 10px;
+      width: 100%;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 15px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 900;
+      color: #ffffff;
+      background: linear-gradient(135deg, #0ea5e9, #2563eb);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+      transition: 0.2s ease;
+    }
+
+    .help-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .floating-help {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      text-decoration: none;
+      font-size: 25px;
+      background: linear-gradient(135deg, #0ea5e9, #2563eb);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: 0 0 22px rgba(37, 99, 235, 0.55), 0 12px 30px rgba(0, 0, 0, 0.45);
+      z-index: 9998;
+      animation: floatPulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes floatPulse {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-4px) scale(1.04); }
+    }
+
     .login-logo {
       width: 165px;
       height: 82px;
@@ -450,27 +496,7 @@
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
-   .help-btn{
-  margin-top:10px;
-  width:100%;
-  height:48px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:15px;
-  text-decoration:none;
-  font-size:14px;
-  font-weight:900;
-  color:#ffffff;
-  background:linear-gradient(135deg,#0ea5e9,#2563eb);
-  border:1px solid rgba(255,255,255,0.15);
-  box-shadow:0 10px 25px rgba(37,99,235,.35);
-  transition:.2s ease;
-}
-
-.help-btn:hover{
-  transform:translateY(-2px);
-} {
+    @media (max-width: 360px) {
       .member-card {
         grid-template-columns: 1fr;
       }
@@ -503,12 +529,11 @@
           <input id="loginId" type="text" placeholder="Contoh: CBVIP001" />
         </div>
 
-        <div class="form-group">
-          <label for="eventCode">Kode Event</label>
-          <input id="eventCode" type="text" placeholder="Contoh: WC2026" />
-        </div>
-
         <button class="btn" onclick="loginMember()">Cek Tiket Saya</button>
+
+        <a href="https://click-lynk.com/LIVECHAT_CLICKBET88" target="_blank" class="help-btn">
+          💬 Butuh Bantuan? Hubungi Admin
+        </a>
       </div>
 
       <div class="section">
@@ -565,23 +590,14 @@
           <input id="predictionInput" type="text" placeholder="Contoh: 2 - 1" />
         </div>
 
-<button class="btn" onclick="useTicket()">
-  Gunakan Tiket
-</button>
+        <button class="btn" onclick="useTicket()">Gunakan Tiket</button>
+        <button class="btn leaderboard-btn" onclick="openLeaderboard()">🏆 LEADERBOARD</button>
 
-<button class="btn leaderboard-btn" onclick="openLeaderboard()">
-  🏆 LEADERBOARD
-</button>
+        <a href="https://click-lynk.com/LIVECHAT_CLICKBET88" target="_blank" class="help-btn">
+          💬 Butuh Bantuan? Hubungi Admin
+        </a>
 
-<a href="https://click-lynk.com/LIVECHAT_CLICKBET88"
-   target="_blank"
-   class="help-btn">
-   💬 Butuh Bantuan? Hubungi Admin
-</a>
-
-<button class="btn secondary" onclick="backToLogin()">
-  Kembali ke Halaman Login
-</button>
+        <button class="btn secondary" onclick="backToLogin()">Kembali ke Halaman Login</button>
       </section>
 
       <section class="section">
@@ -594,7 +610,11 @@
         <div class="history-list" id="historyList"></div>
       </section>
     </section>
-      <div class="toast-overlay" id="successToast">
+      <a href="https://click-lynk.com/LIVECHAT_CLICKBET88" target="_blank" class="floating-help">
+      💬
+    </a>
+
+    <div class="toast-overlay" id="successToast">
       <div class="success-modal">
         <div class="success-icon">✓</div>
         <h3>Prediksi Berhasil!</h3>
@@ -633,24 +653,48 @@
       window.scrollTo(0, 0);
     }
 
-    function loginMember() {
-      const loginId = document.getElementById("loginId").value.trim();
-      const eventCode = document.getElementById("eventCode").value.trim();
+    async function loginMember() {
+      const loginId = document.getElementById("loginId").value.trim().toUpperCase();
+      const loginButton = event.target;
 
       if (!loginId) {
         alert("Isi User ID terlebih dahulu.");
         return;
       }
 
-      if (!eventCode) {
-        alert("Isi kode event terlebih dahulu.");
-        return;
-      }
+      loginButton.disabled = true;
+      loginButton.textContent = "Mengecek...";
 
-      currentMemberId = loginId.toUpperCase();
-      document.getElementById("memberId").textContent = currentMemberId;
-      renderDashboard();
-      showPage("dashboardPage");
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          body: JSON.stringify({
+            action: "login",
+            userId: loginId
+          })
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+          alert(result.message || "User ID tidak valid / belum terdaftar.");
+          return;
+        }
+
+        currentMemberId = loginId;
+        ticketStock = Number(result.sisaTiket || 0);
+        historyData = result.history || [];
+
+        document.getElementById("memberId").textContent = currentMemberId;
+        renderDashboard();
+        showPage("dashboardPage");
+
+      } catch (error) {
+        alert("Gagal mengecek data member. Silakan coba lagi.");
+      } finally {
+        loginButton.disabled = false;
+        loginButton.textContent = "Cek Tiket Saya";
+      }
     }
 
     function backToLogin() {
@@ -722,6 +766,7 @@
         const response = await fetch(API_URL, {
           method: "POST",
           body: JSON.stringify({
+            action: "submitPrediction",
             userId: currentMemberId,
             matchId: match,
             prediction: prediction
