@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World Cup Ticket Event</title>
+  <style>
+    :root {
+      --logo-url: url('https://clickbet88sedekahrejeki.xyz/storage/webpersonalize/d54f5304-03b3-49f7-b283-e6fe0c595ca7.gif');
+      --mobile-bg: url('http://plcl.me/images/Essxn.jpg');
+      --desktop-bg: url('http://plcl.me/images/CLQHg.jpg');
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(2, 6, 23, 0.35), rgba(2, 6, 23, 0.75)),
+        var(--mobile-bg) center top / cover no-repeat fixed;
+      color: #ffffff;
+      padding: 18px;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        background:
+          linear-gradient(rgba(2, 6, 23, 0.28), rgba(2, 6, 23, 0.72)),
+          var(--desktop-bg) center top / cover no-repeat fixed;
+      }
+    }
+
+    .app {
+      width: 100%;
+      max-width: 430px;
+      margin: 0 auto;
+      padding-top: 8px;
+    }
+
+    @media (min-width: 768px) {
+      .app {
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: 8%;
+        padding-top: 28px;
+      }
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      padding: 24px 18px;
+      background: linear-gradient(145deg, rgba(4, 18, 78, 0.86), rgba(3, 10, 38, 0.92));
+      border: 1px solid rgba(255, 215, 106, 0.28);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45), inset 0 0 24px rgba(255, 215, 106, 0.05);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      right: -80px;
+      top: -80px;
+      border-radius: 50%;
+      background: rgba(255, 196, 51, 0.24);
+      filter: blur(2px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      margin-top: 14px;
+      font-size: 28px;
+      line-height: 1.05;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      margin-top: 10px;
+      color: #dbeafe;
+      font-size: 13px;
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(2, 8, 32, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .section-title h2 {
+      font-size: 16px;
+    }
+
+    .small-note {
+      font-size: 11px;
+      color: #93c5fd;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: #c7d2fe;
+      font-weight: 700;
+    }
+
+    input,
+    select {
+      width: 100%;
+      height: 46px;
+      border: none;
+      outline: none;
+      border-radius: 14px;
+      padding: 0 13px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    option {
+      color: #111827;
+    }
+
+    .btn {
+      width: 100%;
+      height: 48px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ffd76a, #f59e0b);
+      color: #111827;
+      font-size: 14px;
+      font-weight: 900;
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.35);
+    }
+
+    .btn.secondary {
+      margin-top: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      box-shadow: none;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .login-logo {
+      width: 165px;
+      height: 82px;
+      display: block;
+      margin: 0 auto 16px;
+      border-radius: 0;
+      background: var(--logo-url) center / contain no-repeat;
+      box-shadow: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-logo {
+      width: 150px;
+      height: 70px;
+      margin-bottom: 12px;
+      background: var(--logo-url) center / contain no-repeat;
+      position: relative;
+      z-index: 1;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .member-card {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 112px;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .member-box,
+    .ticket-box {
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(10px);
+    }
+
+    .label {
+      font-size: 11px;
+      color: #bfdbfe;
+      margin-bottom: 7px;
+    }
+
+    .member-id {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .ticket-count {
+      font-size: 34px;
+      font-weight: 900;
+      color: #ffd76a;
+      line-height: 1;
+    }
+
+    .ticket-text {
+      margin-top: 4px;
+      font-size: 12px;
+      color: #e0f2fe;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .history-card {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 17px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .ticket-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(255, 215, 106, 0.95), rgba(245, 158, 11, 0.95));
+      color: #111827;
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .history-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .match-name {
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    .status {
+      flex: 0 0 auto;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .status.used {
+      background: rgba(34, 197, 94, 0.18);
+      color: #86efac;
+      border: 1px solid rgba(34, 197, 94, 0.35);
+    }
+
+    .status.pending {
+      background: rgba(251, 191, 36, 0.18);
+      color: #fde68a;
+      border: 1px solid rgba(251, 191, 36, 0.35);
+    }
+
+    .history-info {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      font-size: 11px;
+      color: #cbd5e1;
+    }
+
+    .info-box {
+      padding: 8px;
+      border-radius: 11px;
+      background: rgba(0, 0, 0, 0.17);
+    }
+
+    .info-box b {
+      display: block;
+      margin-top: 3px;
+      color: #ffffff;
+      font-size: 12px;
+    }
+
+    .empty {
+      display: none;
+      padding: 18px;
+      text-align: center;
+      color: #bfdbfe;
+      font-size: 13px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .rules {
+      margin-top: 12px;
+      display: grid;
+      gap: 8px;
+      font-size: 12px;
+      color: #dbeafe;
+      line-height: 1.45;
+    }
+
+    .rule-item {
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    @media (max-width: 360px) {
+      .member-card {
+        grid-template-columns: 1fr;
+      }
+
+      .history-info {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <!-- HALAMAN 1: LOGIN / CEK TIKET -->
+    <section class="page active" id="loginPage">
+      <div class="hero center">
+        <div class="login-logo" aria-label="CLICKBET88 Logo"></div>
+        <div class="badge">WORLD CUP 2026 EVENT</div>
+        <h1>Cek Tiket Prediksi Kamu</h1>
+        <p>Masukkan User ID dan kode event untuk melihat stok tiket serta history pilihan pertandingan.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <h2>Login Member</h2>
+          <span class="small-note">Demo</span>
+        </div>
+
+        <div class="form-group">
+          <label for="loginId">User ID</label>
+          <input id="loginId" type="text" placeholder="Contoh: CBVIP001" />
+        </div>
+
+        <div class="form-group">
+          <label for="eventCode">Kode Event</label>
+          <input id="eventCode" type="text" placeholder="Contoh: WC2026" />
+        </div>
+
+        <button class="btn" onclick="loginMember()">Cek Tiket Saya</button>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <h2>Informasi Event</h2>
+        </div>
+        <div class="rules">
+          <div class="rule-item">🎟️ Tiket digunakan untuk memilih pertandingan dan prediksi skor.</div>
+          <div class="rule-item">📊 Halaman ini menampilkan stok tiket dan history pilihan member.</div>
+          <div class="rule-item">🔐 Data nantinya bisa diambil otomatis dari Google Sheet.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HALAMAN 2: DASHBOARD MEMBER -->
+    <section class="page" id="dashboardPage">
+      <section class="hero">
+        <div class="brand-logo" aria-label="CLICKBET88 Logo"></div>
+        <div class="badge">🏆 MEMBER DASHBOARD</div>
+        <h1>Dashboard Tiket Prediksi</h1>
+        <p>Cek stok tiket kamu dan lihat history pertandingan yang sudah dipilih.</p>
+
+        <div class="member-card">
+          <div class="member-box">
+            <div class="label">MEMBER ID</div>
+            <div class="member-id" id="memberId">-</div>
+          </div>
+          <div class="ticket-box">
+            <div class="label">STOK TIKET</div>
+            <div class="ticket-count" id="ticketStock">3</div>
+            <div class="ticket-text">Tiket tersedia</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <h2>Pilih Tiket Match</h2>
+          <span class="small-note">1 tiket / pilihan</span>
+        </div>
+
+        <div class="form-group">
+          <label for="matchSelect">Pilih Pertandingan</label>
+          <select id="matchSelect">
+            <option value="Argentina vs Brazil">Argentina vs Brazil</option>
+            <option value="France vs Germany">France vs Germany</option>
+            <option value="Spain vs England">Spain vs England</option>
+            <option value="Portugal vs Netherlands">Portugal vs Netherlands</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="predictionInput">Prediksi Skor</label>
+          <input id="predictionInput" type="text" placeholder="Contoh: 2 - 1" />
+        </div>
+
+        <button class="btn" onclick="useTicket()">Gunakan Tiket</button>
+        <button class="btn secondary" onclick="backToLogin()">Kembali ke Halaman Login</button>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <h2>History Pemilihan Tiket</h2>
+          <span class="small-note" id="historyCount">0 data</span>
+        </div>
+
+        <div class="empty" id="emptyState">Belum ada history pemilihan tiket.</div>
+        <div class="history-list" id="historyList"></div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    let ticketStock = 3;
+    let currentMemberId = "-";
+
+    let historyData = [
+      {
+        match: "Argentina vs Brazil",
+        prediction: "2 - 1",
+        date: "22 Mei 2026",
+        ticketCode: "TKT-001",
+        status: "Terpakai"
+      },
+      {
+        match: "France vs Germany",
+        prediction: "1 - 1",
+        date: "22 Mei 2026",
+        ticketCode: "TKT-002",
+        status: "Menunggu"
+      }
+    ];
+
+    function showPage(pageId) {
+      document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+      window.scrollTo(0, 0);
+    }
+
+    function loginMember() {
+      const loginId = document.getElementById("loginId").value.trim();
+      const eventCode = document.getElementById("eventCode").value.trim();
+
+      if (!loginId) {
+        alert("Isi User ID terlebih dahulu.");
+        return;
+      }
+
+      if (!eventCode) {
+        alert("Isi kode event terlebih dahulu.");
+        return;
+      }
+
+      currentMemberId = loginId.toUpperCase();
+      document.getElementById("memberId").textContent = currentMemberId;
+      renderDashboard();
+      showPage("dashboardPage");
+    }
+
+    function backToLogin() {
+      showPage("loginPage");
+    }
+
+    function renderDashboard() {
+      document.getElementById("ticketStock").textContent = ticketStock;
+      document.getElementById("historyCount").textContent = historyData.length + " data";
+
+      const list = document.getElementById("historyList");
+      const empty = document.getElementById("emptyState");
+      list.innerHTML = "";
+
+      if (historyData.length === 0) {
+        empty.style.display = "block";
+        return;
+      }
+
+      empty.style.display = "none";
+
+      historyData.forEach((item, index) => {
+        const isPending = item.status.toLowerCase() === "menunggu";
+        const card = document.createElement("div");
+        card.className = "history-card";
+        card.innerHTML = `
+          <div class="ticket-icon">${index + 1}</div>
+          <div>
+            <div class="history-top">
+              <div class="match-name">${item.match}</div>
+              <div class="status ${isPending ? "pending" : "used"}">${item.status}</div>
+            </div>
+            <div class="history-info">
+              <div class="info-box">Prediksi <b>${item.prediction}</b></div>
+              <div class="info-box">Tanggal <b>${item.date}</b></div>
+              <div class="info-box">Kode Tiket <b>${item.ticketCode}</b></div>
+              <div class="info-box">Member <b>${currentMemberId}</b></div>
+            </div>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    function useTicket() {
+      const match = document.getElementById("matchSelect").value;
+      const prediction = document.getElementById("predictionInput").value.trim();
+
+      if (ticketStock <= 0) {
+        alert("Stok tiket kamu sudah habis.");
+        return;
+      }
+
+      if (!prediction) {
+        alert("Isi prediksi skor terlebih dahulu.");
+        return;
+      }
+
+      ticketStock -= 1;
+
+      const ticketNumber = String(historyData.length + 1).padStart(3, "0");
+      historyData.unshift({
+        match: match,
+        prediction: prediction,
+        date: "22 Mei 2026",
+        ticketCode: "TKT-" + ticketNumber,
+        status: "Menunggu"
+      });
+
+      document.getElementById("predictionInput").value = "";
+      renderDashboard();
+    }
+  </script>
+</body>
+</html>
