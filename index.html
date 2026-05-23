@@ -728,291 +728,350 @@
   </main>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbyq9DqgVyWanM3vSO62icPbvUXzk__4izTiTI4r40da72zffBpKeVFmWK9PO8BZVpSxhg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwC8IbxipZNptWjeUQzr2bXg94XkQefF-lzXWVJlnPF4Vkmkk7brBZLv0do-lBzx_8MWw/exec";
 
-    const matches = [
-      {
-        id: "Argentina vs Brazil",
-        stage: "BIG MATCH",
-        home: "Argentina",
-        away: "Brazil",
-        homeFlag: "https://flagcdn.com/w80/ar.png",
-        awayFlag: "https://flagcdn.com/w80/br.png",
-        date: "23 Mei 2026",
-        time: "22:00 WIB"
-      },
-      {
-        id: "France vs Germany",
-        stage: "BIG MATCH",
-        home: "France",
-        away: "Germany",
-        homeFlag: "https://flagcdn.com/w80/fr.png",
-        awayFlag: "https://flagcdn.com/w80/de.png",
-        date: "24 Mei 2026",
-        time: "01:00 WIB"
-      },
-      {
-        id: "Spain vs England",
-        stage: "BIG MATCH",
-        home: "Spain",
-        away: "England",
-        homeFlag: "https://flagcdn.com/w80/es.png",
-        awayFlag: "https://flagcdn.com/w80/gb-eng.png",
-        date: "24 Mei 2026",
-        time: "03:00 WIB"
-      },
-      {
-        id: "Portugal vs Netherlands",
-        stage: "BIG MATCH",
-        home: "Portugal",
-        away: "Netherlands",
-        homeFlag: "https://flagcdn.com/w80/pt.png",
-        awayFlag: "https://flagcdn.com/w80/nl.png",
-        date: "25 Mei 2026",
-        time: "02:00 WIB"
-      }
-    ];
+let matches = [];
+let selectedMatch = "";
+let ticketStock = 0;
+let currentMemberId = "-";
+let historyData = [];
 
-    let selectedMatch = matches[0].id;
-    let ticketStock = 0;
-    let currentMemberId = "-";
-    let historyData = [];
+async function loadMatches() {
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      body: JSON.stringify({ action: "getMatches" })
+    });
 
-    function renderMatchCards() {
-      const grid = document.getElementById("matchGrid");
-      grid.innerHTML = "";
+    const result = await response.json();
 
-      matches.forEach((match) => {
-        const card = document.createElement("div");
-        card.className = "match-card" + (selectedMatch === match.id ? " active" : "");
-        card.onclick = function () {
-          selectedMatch = match.id;
-          renderMatchCards();
-        };
-
-        card.innerHTML = `
-          <div class="match-stage">
-            <span>🔥 ${match.stage}</span>
-            <span>🎟️ 1 Ticket</span>
-          </div>
-
-          <div class="match-teams">
-            <div class="team-box">
-              <img src="${match.homeFlag}" alt="${match.home}">
-              <p>${match.home}</p>
-            </div>
-
-            <div class="vs">VS</div>
-
-            <div class="team-box">
-              <img src="${match.awayFlag}" alt="${match.away}">
-              <p>${match.away}</p>
-            </div>
-          </div>
-
-          <div class="match-time">📅 ${match.date} • 🕒 ${match.time}</div>
-        `;
-
-        grid.appendChild(card);
-      });
+    if (!result.success) {
+      alert("Gagal mengambil data match.");
+      return;
     }
 
-    function showPage(pageId) {
-      document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
-      document.getElementById(pageId).classList.add("active");
-      window.scrollTo(0, 0);
-    }
+    matches = result.matches || [];
 
-    async function loginMember() {
-      const loginId = document.getElementById("loginId").value.trim().toUpperCase();
-      const loginButton = event.target;
-
-      if (!loginId) {
-        alert("Isi User ID terlebih dahulu.");
-        return;
-      }
-
-      loginButton.disabled = true;
-      loginButton.textContent = "Mengecek...";
-
-      try {
-        const response = await fetch(API_URL, {
-          method: "POST",
-          body: JSON.stringify({
-            action: "login",
-            userId: loginId
-          })
-        });
-
-        const result = await response.json();
-
-        if (!result.success) {
-          alert(result.message || "User ID tidak valid / belum terdaftar.");
-          return;
-        }
-
-        currentMemberId = loginId;
-        ticketStock = Number(result.sisaTiket || result.sisaTicket || 0);
-        historyData = result.history || [];
-
-        document.getElementById("memberId").textContent = currentMemberId;
-        renderDashboard();
-        renderMatchCards();
-        showPage("dashboardPage");
-
-      } catch (error) {
-        alert("Gagal mengecek data member. Silakan coba lagi.");
-      } finally {
-        loginButton.disabled = false;
-        loginButton.textContent = "Cek Ticket Saya";
-      }
-    }
-
-    function backToLogin() {
-      showPage("loginPage");
-    }
-
-    function openLeaderboard() {
-      alert("Leaderboard segera hadir.");
-    }
-
-    function renderDashboard() {
-      document.getElementById("ticketStock").textContent = ticketStock;
-      document.getElementById("historyCount").textContent = historyData.length + " data";
-
-      const list = document.getElementById("historyList");
-      const empty = document.getElementById("emptyState");
-
-      list.innerHTML = "";
-
-      if (historyData.length === 0) {
-        empty.style.display = "block";
-        return;
-      }
-
-      empty.style.display = "none";
-
-      historyData.forEach((item, index) => {
-        const statusText = String(item.status || "MENUNGGU").toUpperCase();
-        const point = Number(item.point || 0);
-
-        let statusClass = "pending";
-
-        if (statusText === "KALAH") {
-          statusClass = "lost";
-        }
-
-        if (statusText === "MENANG") {
-          statusClass = "win";
-        }
-
-        if (statusText === "PENEBAK HANDAL") {
-          statusClass = "handal";
-        }
-
-        const card = document.createElement("div");
-        card.className = "history-card";
-
-        card.innerHTML = `
-          <div class="ticket-icon">${index + 1}</div>
-          <div>
-            <div class="history-top">
-              <div class="match-name">${item.match || "-"}</div>
-              <div class="status ${statusClass}">${statusText}</div>
-            </div>
-
-            <div class="history-info">
-              <div class="info-box">Prediksi <b>${item.prediction || "-"}</b></div>
-              <div class="info-box">Tanggal <b>${item.date || "-"}</b></div>
-              <div class="info-box">Kode Ticket <b>${item.ticketCode || "-"}</b></div>
-              <div class="info-box">Point <b>${point}</b></div>
-            </div>
-          </div>
-        `;
-
-        list.appendChild(card);
-      });
-    }
-
-    async function useTicket() {
-      const scoreHome = document.getElementById("scoreHome").value.trim();
-      const scoreAway = document.getElementById("scoreAway").value.trim();
-      const submitButton = event.target;
-
-      if (ticketStock <= 0) {
-        alert("Stok ticket kamu sudah habis.");
-        return;
-      }
-
-      if (scoreHome === "" || scoreAway === "") {
-        alert("Isi prediksi skor terlebih dahulu.");
-        return;
-      }
-
-      const prediction = scoreHome + "-" + scoreAway;
-      const match = selectedMatch;
-
-      submitButton.disabled = true;
-      submitButton.textContent = "Menyimpan...";
-
-      try {
-        const response = await fetch(API_URL, {
-          method: "POST",
-          body: JSON.stringify({
-            action: "submitPrediction",
-            userId: currentMemberId,
-            matchId: match,
-            prediction: prediction
-          })
-        });
-
-        const result = await response.json();
-
-        if (!result.success) {
-          alert("Gagal menyimpan prediksi: " + (result.message || "Silakan coba lagi."));
-          return;
-        }
-
-        ticketStock -= 1;
-
-        historyData.unshift({
-          match: match,
-          prediction: prediction,
-          date: new Date().toLocaleDateString("id-ID"),
-          ticketCode: result.ticketCode || "-",
-          status: "MENUNGGU",
-          point: 0
-        });
-
-        document.getElementById("scoreHome").value = "";
-        document.getElementById("scoreAway").value = "";
-
-        renderDashboard();
-        showSuccessToast(match, prediction, ticketStock);
-
-      } catch (error) {
-        alert("Gagal terhubung ke server. Silakan coba lagi.");
-      } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = "Gunakan Ticket";
-      }
-    }
-
-    function showSuccessToast(match, prediction, stockLeft) {
-      const message = `Prediksi kamu untuk <b>${match}</b><br>Skor: <b>${prediction}</b><br>Sisa ticket: <b>${stockLeft}</b>`;
-      document.getElementById("successMessage").innerHTML = message;
-      document.getElementById("successToast").classList.add("show");
-
-      setTimeout(() => {
-        closeSuccessToast();
-      }, 3000);
-    }
-
-    function closeSuccessToast() {
-      document.getElementById("successToast").classList.remove("show");
+    if (matches.length > 0) {
+      selectedMatch = matches[0].matchId;
     }
 
     renderMatchCards();
-  </script>
+
+  } catch (err) {
+    alert("Gagal terhubung ke server match.");
+  }
+}
+
+function getFlag(team) {
+  const flags = {
+    "Mexico": "https://flagcdn.com/w80/mx.png",
+    "South Africa": "https://flagcdn.com/w80/za.png",
+    "Korea Republic": "https://flagcdn.com/w80/kr.png",
+    "Czechia": "https://flagcdn.com/w80/cz.png",
+    "Canada": "https://flagcdn.com/w80/ca.png",
+    "Bosnia and Herzegovina": "https://flagcdn.com/w80/ba.png",
+    "Qatar": "https://flagcdn.com/w80/qa.png",
+    "Switzerland": "https://flagcdn.com/w80/ch.png",
+    "United States": "https://flagcdn.com/w80/us.png",
+    "Paraguay": "https://flagcdn.com/w80/py.png",
+    "Brazil": "https://flagcdn.com/w80/br.png",
+    "Morocco": "https://flagcdn.com/w80/ma.png",
+    "Haiti": "https://flagcdn.com/w80/ht.png",
+    "Scotland": "https://flagcdn.com/w80/gb-sct.png",
+    "Australia": "https://flagcdn.com/w80/au.png",
+    "Turkiye": "https://flagcdn.com/w80/tr.png",
+    "Germany": "https://flagcdn.com/w80/de.png",
+    "Curacao": "https://flagcdn.com/w80/cw.png",
+    "Netherlands": "https://flagcdn.com/w80/nl.png",
+    "Japan": "https://flagcdn.com/w80/jp.png",
+    "Ivory Coast": "https://flagcdn.com/w80/ci.png",
+    "Ecuador": "https://flagcdn.com/w80/ec.png",
+    "Sweden": "https://flagcdn.com/w80/se.png",
+    "Tunisia": "https://flagcdn.com/w80/tn.png",
+    "Spain": "https://flagcdn.com/w80/es.png",
+    "Cape Verde": "https://flagcdn.com/w80/cv.png",
+    "Belgium": "https://flagcdn.com/w80/be.png",
+    "Egypt": "https://flagcdn.com/w80/eg.png",
+    "Saudi Arabia": "https://flagcdn.com/w80/sa.png",
+    "Uruguay": "https://flagcdn.com/w80/uy.png",
+    "Iran": "https://flagcdn.com/w80/ir.png",
+    "New Zealand": "https://flagcdn.com/w80/nz.png",
+    "France": "https://flagcdn.com/w80/fr.png",
+    "Senegal": "https://flagcdn.com/w80/sn.png",
+    "Iraq": "https://flagcdn.com/w80/iq.png",
+    "Norway": "https://flagcdn.com/w80/no.png",
+    "Argentina": "https://flagcdn.com/w80/ar.png",
+    "Algeria": "https://flagcdn.com/w80/dz.png",
+    "Austria": "https://flagcdn.com/w80/at.png",
+    "Jordan": "https://flagcdn.com/w80/jo.png",
+    "Portugal": "https://flagcdn.com/w80/pt.png",
+    "DR Congo": "https://flagcdn.com/w80/cd.png",
+    "England": "https://flagcdn.com/w80/gb-eng.png",
+    "Croatia": "https://flagcdn.com/w80/hr.png",
+    "Ghana": "https://flagcdn.com/w80/gh.png",
+    "Panama": "https://flagcdn.com/w80/pa.png",
+    "Uzbekistan": "https://flagcdn.com/w80/uz.png",
+    "Colombia": "https://flagcdn.com/w80/co.png"
+  };
+
+  return flags[team] || "https://cdn.it-cg.group/mysterybox/uploads/6880d21e8b056.Logo%20Icon.png";
+}
+
+function renderMatchCards() {
+  const grid = document.getElementById("matchGrid");
+  grid.innerHTML = "";
+
+  if (matches.length === 0) {
+    grid.innerHTML = `<div class="empty" style="display:block;">Belum ada jadwal match tersedia.</div>`;
+    return;
+  }
+
+  matches.forEach((match) => {
+    const isClosed = String(match.status || "OPEN").toUpperCase() === "CLOSED";
+
+    const card = document.createElement("div");
+    card.className = "match-card" + (selectedMatch === match.matchId ? " active" : "");
+
+    card.onclick = function () {
+      if (isClosed) return;
+      selectedMatch = match.matchId;
+      renderMatchCards();
+    };
+
+    card.innerHTML = `
+      <div class="match-stage">
+        <span>🔥 ${match.group || "MATCH"}</span>
+        <span>${isClosed ? "🔒 CLOSED" : "🎟️ 1 Ticket"}</span>
+      </div>
+
+      <div class="match-teams">
+        <div class="team-box">
+          <img src="${getFlag(match.teamA)}" alt="${match.teamA}">
+          <p>${match.teamA}</p>
+        </div>
+
+        <div class="vs">VS</div>
+
+        <div class="team-box">
+          <img src="${getFlag(match.teamB)}" alt="${match.teamB}">
+          <p>${match.teamB}</p>
+        </div>
+      </div>
+
+      <div class="match-time">📅 ${match.tanggal} • 🕒 ${match.jam} WIB</div>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+function showPage(pageId) {
+  document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+  document.getElementById(pageId).classList.add("active");
+  window.scrollTo(0, 0);
+}
+
+async function loginMember() {
+  const loginId = document.getElementById("loginId").value.trim().toUpperCase();
+  const loginButton = event.target;
+
+  if (!loginId) {
+    alert("Isi User ID terlebih dahulu.");
+    return;
+  }
+
+  loginButton.disabled = true;
+  loginButton.textContent = "Mengecek...";
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "login",
+        userId: loginId
+      })
+    });
+
+    const result = await response.json();
+
+    if (!result.success) {
+      alert(result.message || "User ID tidak valid / belum terdaftar.");
+      return;
+    }
+
+    currentMemberId = loginId;
+    ticketStock = Number(result.sisaTiket || result.sisaTicket || 0);
+    historyData = result.history || [];
+
+    document.getElementById("memberId").textContent = currentMemberId;
+
+    renderDashboard();
+    renderMatchCards();
+    showPage("dashboardPage");
+
+  } catch (error) {
+    alert("Gagal mengecek data member. Silakan coba lagi.");
+  } finally {
+    loginButton.disabled = false;
+    loginButton.textContent = "Cek Ticket Saya";
+  }
+}
+
+function backToLogin() {
+  showPage("loginPage");
+}
+
+function openLeaderboard() {
+  alert("Leaderboard segera hadir.");
+}
+
+function renderDashboard() {
+  document.getElementById("ticketStock").textContent = ticketStock;
+  document.getElementById("historyCount").textContent = historyData.length + " data";
+
+  const list = document.getElementById("historyList");
+  const empty = document.getElementById("emptyState");
+
+  list.innerHTML = "";
+
+  if (historyData.length === 0) {
+    empty.style.display = "block";
+    return;
+  }
+
+  empty.style.display = "none";
+
+  historyData.forEach((item, index) => {
+    const statusText = String(item.status || "MENUNGGU").toUpperCase();
+    const point = Number(item.point || 0);
+
+    let statusClass = "pending";
+
+    if (statusText === "KALAH") statusClass = "lost";
+    if (statusText === "MENANG") statusClass = "win";
+    if (statusText === "PENEBAK HANDAL") statusClass = "handal";
+
+    const card = document.createElement("div");
+    card.className = "history-card";
+
+    card.innerHTML = `
+      <div class="ticket-icon">${index + 1}</div>
+      <div>
+        <div class="history-top">
+          <div class="match-name">${item.match || "-"}</div>
+          <div class="status ${statusClass}">${statusText}</div>
+        </div>
+
+        <div class="history-info">
+          <div class="info-box">Prediksi <b>${item.prediction || "-"}</b></div>
+          <div class="info-box">Tanggal <b>${item.date || "-"}</b></div>
+          <div class="info-box">Kode Ticket <b>${item.ticketCode || "-"}</b></div>
+          <div class="info-box">Point <b>${point}</b></div>
+        </div>
+      </div>
+    `;
+
+    list.appendChild(card);
+  });
+}
+
+async function useTicket() {
+  const scoreHome = document.getElementById("scoreHome").value.trim();
+  const scoreAway = document.getElementById("scoreAway").value.trim();
+  const submitButton = event.target;
+
+  if (ticketStock <= 0) {
+    alert("Stok ticket kamu sudah habis.");
+    return;
+  }
+
+  if (!selectedMatch) {
+    alert("Pilih match terlebih dahulu.");
+    return;
+  }
+
+  if (scoreHome === "" || scoreAway === "") {
+    alert("Isi prediksi skor terlebih dahulu.");
+    return;
+  }
+
+  const selected = matches.find(m => m.matchId === selectedMatch);
+
+  if (!selected) {
+    alert("Match tidak ditemukan.");
+    return;
+  }
+
+  if (String(selected.status || "OPEN").toUpperCase() === "CLOSED") {
+    alert("Match ini sudah ditutup.");
+    return;
+  }
+
+  const prediction = scoreHome + "-" + scoreAway;
+  const match = selected.teamA + " vs " + selected.teamB;
+
+  submitButton.disabled = true;
+  submitButton.textContent = "Menyimpan...";
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "submitPrediction",
+        userId: currentMemberId,
+        matchId: match,
+        prediction: prediction
+      })
+    });
+
+    const result = await response.json();
+
+    if (!result.success) {
+      alert("Gagal menyimpan prediksi: " + (result.message || "Silakan coba lagi."));
+      return;
+    }
+
+    ticketStock -= 1;
+
+    historyData.unshift({
+      match: match,
+      prediction: prediction,
+      date: new Date().toLocaleDateString("id-ID"),
+      ticketCode: result.ticketCode || "-",
+      status: "MENUNGGU",
+      point: 0
+    });
+
+    document.getElementById("scoreHome").value = "";
+    document.getElementById("scoreAway").value = "";
+
+    renderDashboard();
+    showSuccessToast(match, prediction, ticketStock);
+
+  } catch (error) {
+    alert("Gagal terhubung ke server. Silakan coba lagi.");
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "Gunakan Ticket";
+  }
+}
+
+function showSuccessToast(match, prediction, stockLeft) {
+  const message = `Prediksi kamu untuk <b>${match}</b><br>Skor: <b>${prediction}</b><br>Sisa ticket: <b>${stockLeft}</b>`;
+  document.getElementById("successMessage").innerHTML = message;
+  document.getElementById("successToast").classList.add("show");
+
+  setTimeout(() => {
+    closeSuccessToast();
+  }, 3000);
+}
+
+function closeSuccessToast() {
+  document.getElementById("successToast").classList.remove("show");
+}
+
+loadMatches();
+</script>
 </body>
 </html>
