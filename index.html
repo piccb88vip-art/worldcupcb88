@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -15,6 +16,10 @@
       --logo-url: url('https://clickbet88sedekahrejeki.xyz/storage/webpersonalize/d54f5304-03b3-49f7-b283-e6fe0c595ca7.gif');
       --mobile-bg: url('http://plcl.me/images/Essxn.jpg');
       --desktop-bg: url('http://plcl.me/images/CLQHg.jpg');
+      --banner-bg: url('http://plcl.me/images/RVYyJ.jpg');
+      --gold: #ffd76a;
+      --gold2: #f59e0b;
+      --blue: #0ea5e9;
     }
 
     * {
@@ -44,16 +49,16 @@
       }
     }
 
-.app {
-  width: 100%;
-  max-width: 400px;
+    .app {
+      width: 100%;
+      max-width: 400px;
       margin: 0 auto;
       padding-top: 8px;
     }
 
-@media (min-width: 768px) {
-  .app {
-    max-width: 460px;
+    @media (min-width: 768px) {
+      .app {
+        max-width: 460px;
         margin: 0 auto;
         padding-top: 0;
       }
@@ -73,22 +78,48 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-.hero {
-  position: relative;
-  overflow: hidden;
-  border-radius: 28px;
-  padding: 26px 22px;
-  background:
-    linear-gradient(rgba(2, 6, 23, 0.55), rgba(2, 6, 23, 0.82)),
-    url('http://plcl.me/images/RVYyJ.jpg') center center / cover no-repeat;
-  border: 1px solid rgba(255, 215, 106, 0.22);
-  box-shadow:
-    0 20px 55px rgba(0, 0, 0, 0.48),
-    inset 0 0 35px rgba(255, 215, 106, 0.04);
-  backdrop-filter: blur(10px);
-}
+    .login-wrap {
+      padding: 10px;
+      border-radius: 34px;
+      background: rgba(2, 8, 32, 0.52);
+      border: 1px solid rgba(255, 215, 106, 0.32);
+      box-shadow:
+        0 20px 55px rgba(0,0,0,0.48),
+        inset 0 0 24px rgba(255,215,106,0.04);
+      backdrop-filter: blur(10px);
+    }
 
+    .login-wrap .hero {
+      margin-bottom: 12px;
+      min-height: 290px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
+    .login-wrap .section {
+      margin-top: 0;
+      border-radius: 24px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      padding: 26px 22px;
+      background:
+        linear-gradient(rgba(2, 6, 23, 0.52), rgba(2, 6, 23, 0.82)),
+        var(--banner-bg) center center / cover no-repeat;
+      border: 1px solid rgba(255, 215, 106, 0.22);
+      box-shadow:
+        0 20px 55px rgba(0, 0, 0, 0.48),
+        inset 0 0 35px rgba(255, 215, 106, 0.04);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero.compact {
+      padding: 22px 18px;
+    }
 
     .badge {
       display: inline-flex;
@@ -99,25 +130,25 @@
       background: rgba(255, 255, 255, 0.12);
       border: 1px solid rgba(255, 255, 255, 0.16);
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.3px;
       position: relative;
       z-index: 1;
     }
 
-.hero h1 {
-  margin-top: 14px;
-  font-size: 42px;
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: -1px;
-  color: #ffffff;
-  text-shadow:
-    0 0 15px rgba(255,255,255,0.12),
-    0 0 35px rgba(255,215,106,0.18);
-  position: relative;
-  z-index: 1;
-}
+    .hero h1 {
+      margin-top: 14px;
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #ffffff;
+      text-shadow:
+        0 0 15px rgba(255,255,255,0.12),
+        0 0 35px rgba(255,215,106,0.18);
+      position: relative;
+      z-index: 1;
+    }
 
     .hero p {
       margin-top: 10px;
@@ -135,6 +166,7 @@
       background: rgba(2, 8, 32, 0.72);
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(8px);
     }
 
     .section-title {
@@ -142,6 +174,7 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 12px;
+      gap: 10px;
     }
 
     .section-title h2 {
@@ -151,6 +184,7 @@
     .small-note {
       font-size: 11px;
       color: #93c5fd;
+      flex: 0 0 auto;
     }
 
     .form-group {
@@ -176,7 +210,7 @@
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.14);
       color: #ffffff;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     option {
@@ -204,6 +238,14 @@
       border: 1px solid rgba(255, 255, 255, 0.16);
     }
 
+    .btn.danger {
+      margin-top: 10px;
+      background: rgba(239, 68, 68, 0.14);
+      color: #fecaca;
+      box-shadow: none;
+      border: 1px solid rgba(239, 68, 68, 0.32);
+    }
+
     .btn.leaderboard-btn {
       margin-top: 10px;
       background: linear-gradient(135deg, #fff3a3, #facc15 45%, #b77900);
@@ -215,6 +257,24 @@
 
     .btn:active {
       transform: scale(0.98);
+    }
+
+
+    .dashboard-actions {
+      margin-top: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .match-wrapper,
+    .history-wrapper {
+      display: none;
+      margin-top: 14px;
+    }
+
+    .match-wrapper.open,
+    .history-wrapper.open {
+      display: block;
     }
 
     .floating-help {
@@ -267,44 +327,45 @@
       background: var(--logo-url) center / contain no-repeat;
       position: relative;
       z-index: 1;
+      filter: drop-shadow(0 0 10px rgba(255,215,106,0.35));
     }
 
-.brand-logo {
-  width: 170px;
-  height: 78px;
-  margin: 0 auto 14px;
-  background: var(--logo-url) center / contain no-repeat;
-  position: relative;
-  z-index: 1;
-  filter:
-    drop-shadow(0 0 10px rgba(255,215,106,0.35))
-    drop-shadow(0 0 22px rgba(255,215,106,0.18));
-}
+    .brand-logo {
+      width: 150px;
+      height: 68px;
+      margin: 0 auto 12px;
+      background: var(--logo-url) center / contain no-repeat;
+      position: relative;
+      z-index: 1;
+      filter:
+        drop-shadow(0 0 10px rgba(255,215,106,0.35))
+        drop-shadow(0 0 22px rgba(255,215,106,0.18));
+    }
 
     .center {
       text-align: center;
     }
 
-.member-card {
-  margin-top: 18px;
-  display: grid;
-  grid-template-columns: 1fr 110px;
-  gap: 10px;
-  position: relative;
-  z-index: 1;
-}
+    .member-card {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr 108px;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
 
-.member-box,
-.ticket-box {
-  border-radius: 20px;
-  padding: 14px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
-  backdrop-filter: blur(12px);
-  box-shadow:
-    inset 0 0 18px rgba(255,255,255,0.03),
-    0 0 18px rgba(255,215,106,0.05);
-}
+    .member-box,
+    .ticket-box {
+      border-radius: 20px;
+      padding: 14px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(12px);
+      box-shadow:
+        inset 0 0 18px rgba(255,255,255,0.03),
+        0 0 18px rgba(255,215,106,0.05);
+    }
 
     .label {
       font-size: 11px;
@@ -314,11 +375,11 @@
 
     .member-id {
       font-size: 18px;
-      font-weight: 800;
+      font-weight: 900;
     }
 
     .ticket-count {
-      font-size: 34px;
+      font-size: 28px;
       font-weight: 900;
       color: #ffd76a;
       line-height: 1;
@@ -328,6 +389,32 @@
       margin-top: 4px;
       font-size: 12px;
       color: #e0f2fe;
+    }
+
+    .date-group {
+      margin-bottom: 12px;
+    }
+
+    .date-toggle {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 215, 106, 0.35);
+      background: rgba(255, 215, 106, 0.1);
+      color: #ffd76a;
+      font-weight: 900;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .date-match-list {
+      display: none;
+      margin-top: 10px;
+      gap: 10px;
+    }
+
+    .date-match-list.open {
+      display: grid;
     }
 
     .match-grid {
@@ -342,12 +429,27 @@
       border: 1px solid rgba(255, 215, 106, 0.28);
       cursor: pointer;
       transition: 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .match-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), transparent 45%);
+      pointer-events: none;
     }
 
     .match-card.active {
       border-color: rgba(255, 215, 106, 0.9);
       box-shadow: 0 0 20px rgba(250, 204, 21, 0.28);
       background: rgba(255, 215, 106, 0.1);
+    }
+
+    .match-card.closed {
+      opacity: 0.55;
+      cursor: not-allowed;
     }
 
     .match-card:hover {
@@ -358,10 +460,26 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       font-size: 11px;
       color: #fde68a;
       font-weight: 900;
+      position: relative;
+      z-index: 1;
+    }
+
+    .match-time {
+      margin: 0 0 12px;
+      display: inline-block;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(14, 165, 233, 0.14);
+      border: 1px solid rgba(14, 165, 233, 0.28);
+      color: #bfdbfe;
+      font-size: 11px;
+      font-weight: 900;
+      position: relative;
+      z-index: 1;
     }
 
     .match-teams {
@@ -370,13 +488,15 @@
       gap: 10px;
       align-items: center;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     .team-box img {
-      width: 42px;
-      height: 28px;
+      width: 46px;
+      height: 31px;
       object-fit: cover;
-      border-radius: 6px;
+      border-radius: 7px;
       box-shadow: 0 0 12px rgba(255, 255, 255, 0.18);
     }
 
@@ -393,16 +513,35 @@
       font-weight: 900;
     }
 
-    .match-time {
-      margin-top: 12px;
-      display: inline-block;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: rgba(14, 165, 233, 0.14);
-      border: 1px solid rgba(14, 165, 233, 0.28);
-      color: #bfdbfe;
-      font-size: 11px;
-      font-weight: 800;
+    .prediction-teams {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 14px;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .prediction-team img {
+      width: 72px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(255,255,255,0.2);
+    }
+
+    .prediction-team p {
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .prediction-vs {
+      color: #ffd76a;
+      font-size: 26px;
+      font-weight: 900;
     }
 
     .score-predict {
@@ -414,11 +553,11 @@
     }
 
     .score-predict input {
-      height: 52px;
+      height: 56px;
       text-align: center;
-      font-size: 23px;
+      font-size: 25px;
       font-weight: 900;
-      border-radius: 14px;
+      border-radius: 16px;
       background: rgba(0, 0, 0, 0.38);
       color: #ffd76a;
       border: 1px solid rgba(255, 215, 106, 0.55);
@@ -427,6 +566,14 @@
     .score-predict span {
       color: #ffd76a;
       font-weight: 900;
+    }
+
+    .history-wrapper {
+      display: none;
+    }
+
+    .history-wrapper.open {
+      display: block;
     }
 
     .history-list {
@@ -625,68 +772,30 @@
         grid-template-columns: 1fr;
       }
     }
-
-.date-group {
-  margin-bottom: 12px;
-}
-
-.date-toggle {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 215, 106, 0.35);
-  background: rgba(255, 215, 106, 0.1);
-  color: #ffd76a;
-  font-weight: 900;
-  cursor: pointer;
-  text-align: left;
-}
-
-.date-match-list {
-  display: none;
-  margin-top: 10px;
-  gap: 10px;
-}
-
-.date-match-list.open {
-  display: grid;
-}
-
-.match-card.closed {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-.history-wrapper {
-  display: none;
-}
-
-.history-wrapper.open {
-  display: block;
-}
-    
   </style>
 </head>
 
 <body>
   <main class="app">
     <section class="page active" id="loginPage">
-      <div class="hero center">
-        <div class="login-logo" aria-label="CLICKBET88 Logo"></div>
-        <div class="badge">WORLD CUP 2026 EVENT</div>
-        <p>LOGIN & TEBAK TIM JAGOANMU BOSKUUU!</p>
-      </div>
-
-      <div class="section">
-        <div class="section-title">
-          <h2>LOGIN</h2>
+      <div class="login-wrap">
+        <div class="hero center compact">
+          <div class="login-logo" aria-label="CLICKBET88 Logo"></div>
+          <div class="badge">WORLD CUP 2026 EVENT</div>
+          <p>LOGIN & TEBAK TIM JAGOANMU BOSKUUU!</p>
         </div>
 
-        <div class="form-group">
-          <input id="loginId" type="text" placeholder="USER ID" />
-        </div>
+        <div class="section">
+          <div class="section-title">
+            <h2>LOGIN</h2>
+          </div>
 
-        <button class="btn" onclick="loginMember()">Cek Ticket Saya</button>
+          <div class="form-group">
+            <input id="loginId" type="text" placeholder="USER ID" />
+          </div>
+
+          <button class="btn" onclick="loginMember(event)">Cek Ticket Saya</button>
+        </div>
       </div>
 
       <div class="section">
@@ -703,20 +812,20 @@
     </section>
 
     <section class="page" id="dashboardPage">
-      <section class="hero">
+      <section class="hero compact">
         <div class="brand-logo" aria-label="CLICKBET88 Logo"></div>
-        <div class="badge">🏆 MEMBER DASHBOARD</div>
-        <h1>Dashboard Ticket Prediksi</h1>
-        <p>Cek stok ticket kamu dan lihat history pertandingan yang sudah dipilih.</p>
+        <div class="badge">🏆 FIFA WORLD CUP 2026</div>
+        <h1>BIG PREDICTION EVENT</h1>
+        <p>Total hadiah milyaran rupiah menanti para top predictor terbaik.</p>
 
         <div class="member-card">
           <div class="member-box">
-            <div class="label">MEMBER ID</div>
+            <div class="label">ID MEMBER</div>
             <div class="member-id" id="memberId">-</div>
           </div>
 
           <div class="ticket-box">
-            <div class="label">STOK TICKET</div>
+            <div class="label">TOTAL TICKET</div>
             <div class="ticket-count" id="ticketStock">0</div>
             <div class="ticket-text">Ticket tersedia</div>
           </div>
@@ -724,14 +833,45 @@
       </section>
 
       <section class="section">
-        <div class="section-title">
-          <h2>Pilih Match</h2>
-          <span class="small-note">1 ticket / pilihan</span>
+        <div class="dashboard-actions">
+          <button class="btn leaderboard-btn" onclick="openLeaderboard()">🏆 LEADERBOARD PEMENANG</button>
+
+          <button class="btn secondary" onclick="toggleHistory()" id="historyToggleBtn">Lihat History</button>
+
+          <button class="btn secondary" onclick="refreshData()">🔄 Refresh</button>
+
+          <button class="btn secondary" onclick="toggleMatchSection()" id="matchToggleBtn">Pilih Match</button>
+
+          <button class="btn danger" onclick="logoutMember()">Logout</button>
         </div>
 
-        <div class="match-grid" id="matchGrid"></div>
+        <div class="history-wrapper" id="historyWrapper">
+          <div class="section-title" style="margin-top:14px;">
+            <h2>History Pemilihan Ticket</h2>
+            <span class="small-note" id="historyCount">0 data</span>
+          </div>
 
-        <div class="form-group" style="margin-top:14px;">
+          <div class="empty" id="emptyState">Belum ada history pemilihan ticket.</div>
+          <div class="history-list" id="historyList"></div>
+        </div>
+
+        <div class="match-wrapper" id="matchWrapper">
+          <div class="section-title" style="margin-top:14px;">
+            <h2>Pilih Match</h2>
+            <span class="small-note">Klik match untuk prediksi</span>
+          </div>
+
+          <div class="match-grid" id="matchGrid"></div>
+        </div>
+      </section>
+    </section>
+
+    <section class="page" id="predictionPage">
+      <section class="hero compact">
+        <div class="badge">🔥 MATCH PREDICTION</div>
+        <div id="predictionMatchContent"></div>
+
+        <div class="form-group" style="margin-top:18px; position:relative; z-index:1;">
           <label>Prediksi Skor</label>
           <div class="score-predict">
             <input id="scoreHome" type="number" min="0" max="20" placeholder="0">
@@ -740,27 +880,9 @@
           </div>
         </div>
 
-        <button class="btn" onclick="useTicket()">Gunakan Ticket</button>
-        <button class="btn leaderboard-btn" onclick="openLeaderboard()">🏆 LEADERBOARD</button>
-        <button class="btn secondary" onclick="refreshData()">🔄 Refresh Data</button>
-        <button class="btn secondary" onclick="backToLogin()">Kembali ke Halaman Login</button>
+        <button class="btn" onclick="useTicket(event)">Gunakan Ticket</button>
+        <button class="btn secondary" onclick="backToDashboard()">Kembali</button>
       </section>
-
-<section class="section">
-  <button class="btn secondary" onclick="toggleHistory()" id="historyToggleBtn">
-    Lihat History
-  </button>
-
-  <div class="history-wrapper" id="historyWrapper">
-    <div class="section-title" style="margin-top:14px;">
-      <h2>History Pemilihan Ticket</h2>
-      <span class="small-note" id="historyCount">0 data</span>
-    </div>
-
-    <div class="empty" id="emptyState">Belum ada history pemilihan ticket.</div>
-    <div class="history-list" id="historyList"></div>
-  </div>
-</section>
     </section>
 
     <a href="https://click-lynk.com/LIVECHAT_CLICKBET88" target="_blank" class="floating-help">
@@ -781,477 +903,499 @@
     </div>
   </main>
 
- <script>
-const API_URL = "https://script.google.com/macros/s/AKfycbyMD0mP5X9TS9XBq4qRsOkNkRODmq3-shJ0L0e6kAoIrYMJJ8Oc33ID7LiW4FZ-0TSENg/exec";
-const LOCK_MINUTES_BEFORE_KICKOFF = 15;
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbyMD0mP5X9TS9XBq4qRsOkNkRODmq3-shJ0L0e6kAoIrYMJJ8Oc33ID7LiW4FZ-0TSENg/exec";
+    const LOCK_MINUTES_BEFORE_KICKOFF = 15;
 
-let matches = [];
-let selectedMatch = "";
-let ticketStock = 0;
-let currentMemberId = "-";
-let historyData = [];
-let openDates = {};
-let historyOpen = false;
+    let matches = [];
+    let selectedMatch = "";
+    let ticketStock = 0;
+    let currentMemberId = "-";
+    let historyData = [];
+    let openDates = {};
+    let historyOpen = false;
+    let matchOpen = false;
 
-async function postApi(payload) {
-  const response = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify(payload)
-  });
-
-  return await response.json();
-}
-
-async function loadMatches() {
-  try {
-    const result = await postApi({ action: "getMatches" });
-
-    if (!result.success) {
-      alert("Gagal mengambil data match: " + (result.message || "Silakan coba lagi."));
-      return;
+    async function postApi(payload) {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
+      return await response.json();
     }
 
-    matches = result.matches || [];
+    async function loadMatches() {
+      try {
+        const result = await postApi({ action: "getMatches" });
 
-    if (matches.length > 0) {
-      const stillExists = matches.some(m => m.matchId === selectedMatch);
-      const firstOpen = matches.find(m => !isMatchLocked(m));
+        if (!result.success) {
+          alert("Gagal mengambil data match: " + (result.message || "Silakan coba lagi."));
+          return;
+        }
 
-      if (!selectedMatch || !stillExists || isSelectedLocked()) {
-        selectedMatch = firstOpen ? firstOpen.matchId : matches[0].matchId;
-      }
-    } else {
-      selectedMatch = "";
-    }
+        matches = result.matches || [];
 
-    renderMatchCards();
-  } catch (err) {
-    alert("Gagal terhubung ke server match.");
-  }
-}
+        if (matches.length > 0) {
+          const stillExists = matches.some(m => m.matchId === selectedMatch);
+          const firstOpen = matches.find(m => !isMatchLocked(m));
 
-function getFlag(team) {
-  const flags = {
-    "Mexico": "https://flagcdn.com/w80/mx.png",
-    "South Africa": "https://flagcdn.com/w80/za.png",
-    "Korea Republic": "https://flagcdn.com/w80/kr.png",
-    "Czechia": "https://flagcdn.com/w80/cz.png",
-    "Canada": "https://flagcdn.com/w80/ca.png",
-    "Bosnia and Herzegovina": "https://flagcdn.com/w80/ba.png",
-    "Qatar": "https://flagcdn.com/w80/qa.png",
-    "Switzerland": "https://flagcdn.com/w80/ch.png",
-    "United States": "https://flagcdn.com/w80/us.png",
-    "Paraguay": "https://flagcdn.com/w80/py.png",
-    "Brazil": "https://flagcdn.com/w80/br.png",
-    "Morocco": "https://flagcdn.com/w80/ma.png",
-    "Haiti": "https://flagcdn.com/w80/ht.png",
-    "Scotland": "https://flagcdn.com/w80/gb-sct.png",
-    "Australia": "https://flagcdn.com/w80/au.png",
-    "Turkiye": "https://flagcdn.com/w80/tr.png",
-    "Germany": "https://flagcdn.com/w80/de.png",
-    "Curacao": "https://flagcdn.com/w80/cw.png",
-    "Netherlands": "https://flagcdn.com/w80/nl.png",
-    "Japan": "https://flagcdn.com/w80/jp.png",
-    "Ivory Coast": "https://flagcdn.com/w80/ci.png",
-    "Ecuador": "https://flagcdn.com/w80/ec.png",
-    "Sweden": "https://flagcdn.com/w80/se.png",
-    "Tunisia": "https://flagcdn.com/w80/tn.png",
-    "Spain": "https://flagcdn.com/w80/es.png",
-    "Cape Verde": "https://flagcdn.com/w80/cv.png",
-    "Belgium": "https://flagcdn.com/w80/be.png",
-    "Egypt": "https://flagcdn.com/w80/eg.png",
-    "Saudi Arabia": "https://flagcdn.com/w80/sa.png",
-    "Uruguay": "https://flagcdn.com/w80/uy.png",
-    "Iran": "https://flagcdn.com/w80/ir.png",
-    "New Zealand": "https://flagcdn.com/w80/nz.png",
-    "France": "https://flagcdn.com/w80/fr.png",
-    "Senegal": "https://flagcdn.com/w80/sn.png",
-    "Iraq": "https://flagcdn.com/w80/iq.png",
-    "Norway": "https://flagcdn.com/w80/no.png",
-    "Argentina": "https://flagcdn.com/w80/ar.png",
-    "Algeria": "https://flagcdn.com/w80/dz.png",
-    "Austria": "https://flagcdn.com/w80/at.png",
-    "Jordan": "https://flagcdn.com/w80/jo.png",
-    "Portugal": "https://flagcdn.com/w80/pt.png",
-    "DR Congo": "https://flagcdn.com/w80/cd.png",
-    "England": "https://flagcdn.com/w80/gb-eng.png",
-    "Croatia": "https://flagcdn.com/w80/hr.png",
-    "Ghana": "https://flagcdn.com/w80/gh.png",
-    "Panama": "https://flagcdn.com/w80/pa.png",
-    "Uzbekistan": "https://flagcdn.com/w80/uz.png",
-    "Colombia": "https://flagcdn.com/w80/co.png"
-  };
+          if (!selectedMatch || !stillExists || isSelectedLocked()) {
+            selectedMatch = firstOpen ? firstOpen.matchId : matches[0].matchId;
+          }
+        } else {
+          selectedMatch = "";
+        }
 
-  return flags[team] || "https://cdn.it-cg.group/mysterybox/uploads/6880d21e8b056.Logo%20Icon.png";
-}
-
-function parseMatchDateTime(match) {
-  const tanggal = String(match.tanggal || "").trim();
-  const jam = String(match.jam || "00:00").trim();
-
-  const timeParts = jam.match(/(\d{1,2}):(\d{2})/);
-  const hour = timeParts ? Number(timeParts[1]) : 0;
-  const minute = timeParts ? Number(timeParts[2]) : 0;
-
-  const monthMap = {
-    jan: 0, january: 0,
-    feb: 1, february: 1,
-    mar: 2, march: 2,
-    apr: 3, april: 3,
-    may: 4,
-    jun: 5, june: 5,
-    jul: 6, july: 6,
-    aug: 7, august: 7,
-    sep: 8, sept: 8, september: 8,
-    oct: 9, october: 9,
-    nov: 10, november: 10,
-    dec: 11, december: 11
-  };
-
-  let m = tanggal.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/);
-  if (m) {
-    return new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]), hour, minute, 0);
-  }
-
-  m = tanggal.replace(/-/g, " ").match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
-  if (m) {
-    const month = monthMap[m[2].toLowerCase()];
-    if (month !== undefined) {
-      return new Date(Number(m[3]), month, Number(m[1]), hour, minute, 0);
-    }
-  }
-
-  return new Date(`${tanggal} ${jam}`);
-}
-
-function isMatchLocked(match) {
-  const statusClosed = String(match.status || "OPEN").toUpperCase() === "CLOSED";
-  const kickoff = parseMatchDateTime(match);
-
-  if (isNaN(kickoff.getTime())) return statusClosed;
-
-  const now = new Date();
-  const diffMinutes = (kickoff - now) / 60000;
-
-  return statusClosed || diffMinutes <= LOCK_MINUTES_BEFORE_KICKOFF;
-}
-
-function isSelectedLocked() {
-  const selected = matches.find(m => m.matchId === selectedMatch);
-  return selected ? isMatchLocked(selected) : false;
-}
-
-function toggleDateGroup(dateKey) {
-  openDates[dateKey] = !openDates[dateKey];
-  renderMatchCards();
-}
-
-function renderMatchCards() {
-  const grid = document.getElementById("matchGrid");
-  grid.innerHTML = "";
-
-  if (matches.length === 0) {
-    grid.innerHTML = `<div class="empty" style="display:block;">Belum ada jadwal match tersedia.</div>`;
-    return;
-  }
-
-  const grouped = {};
-
-  matches.forEach(match => {
-    const dateKey = match.tanggal || "Tanggal Belum Ada";
-    if (!grouped[dateKey]) grouped[dateKey] = [];
-    grouped[dateKey].push(match);
-  });
-
-  Object.keys(grouped).forEach((dateKey, index) => {
-    if (openDates[dateKey] === undefined) {
-      openDates[dateKey] = index === 0;
-    }
-
-    const group = document.createElement("div");
-    group.className = "date-group";
-
-    const toggleBtn = document.createElement("button");
-    toggleBtn.className = "date-toggle";
-    toggleBtn.textContent = `${openDates[dateKey] ? "▼" : "▶"} ${dateKey}`;
-    toggleBtn.onclick = function () {
-      toggleDateGroup(dateKey);
-    };
-
-    const list = document.createElement("div");
-    list.className = openDates[dateKey] ? "date-match-list open" : "date-match-list";
-
-    group.appendChild(toggleBtn);
-    group.appendChild(list);
-    grid.appendChild(group);
-
-    grouped[dateKey].forEach(match => {
-      const isLocked = isMatchLocked(match);
-
-      const card = document.createElement("div");
-      card.className =
-        "match-card" +
-        (selectedMatch === match.matchId ? " active" : "") +
-        (isLocked ? " closed" : "");
-
-      card.onclick = function () {
-        if (isLocked) return;
-        selectedMatch = match.matchId;
         renderMatchCards();
+      } catch (err) {
+        alert("Gagal terhubung ke server match.");
+      }
+    }
+
+    function getFlag(team) {
+      const flags = {
+        "Mexico": "https://flagcdn.com/w80/mx.png",
+        "South Africa": "https://flagcdn.com/w80/za.png",
+        "Korea Republic": "https://flagcdn.com/w80/kr.png",
+        "Czechia": "https://flagcdn.com/w80/cz.png",
+        "Canada": "https://flagcdn.com/w80/ca.png",
+        "Bosnia and Herzegovina": "https://flagcdn.com/w80/ba.png",
+        "Qatar": "https://flagcdn.com/w80/qa.png",
+        "Switzerland": "https://flagcdn.com/w80/ch.png",
+        "United States": "https://flagcdn.com/w80/us.png",
+        "Paraguay": "https://flagcdn.com/w80/py.png",
+        "Brazil": "https://flagcdn.com/w80/br.png",
+        "Morocco": "https://flagcdn.com/w80/ma.png",
+        "Haiti": "https://flagcdn.com/w80/ht.png",
+        "Scotland": "https://flagcdn.com/w80/gb-sct.png",
+        "Australia": "https://flagcdn.com/w80/au.png",
+        "Turkiye": "https://flagcdn.com/w80/tr.png",
+        "Germany": "https://flagcdn.com/w80/de.png",
+        "Curacao": "https://flagcdn.com/w80/cw.png",
+        "Netherlands": "https://flagcdn.com/w80/nl.png",
+        "Japan": "https://flagcdn.com/w80/jp.png",
+        "Ivory Coast": "https://flagcdn.com/w80/ci.png",
+        "Ecuador": "https://flagcdn.com/w80/ec.png",
+        "Sweden": "https://flagcdn.com/w80/se.png",
+        "Tunisia": "https://flagcdn.com/w80/tn.png",
+        "Spain": "https://flagcdn.com/w80/es.png",
+        "Cape Verde": "https://flagcdn.com/w80/cv.png",
+        "Belgium": "https://flagcdn.com/w80/be.png",
+        "Egypt": "https://flagcdn.com/w80/eg.png",
+        "Saudi Arabia": "https://flagcdn.com/w80/sa.png",
+        "Uruguay": "https://flagcdn.com/w80/uy.png",
+        "Iran": "https://flagcdn.com/w80/ir.png",
+        "New Zealand": "https://flagcdn.com/w80/nz.png",
+        "France": "https://flagcdn.com/w80/fr.png",
+        "Senegal": "https://flagcdn.com/w80/sn.png",
+        "Iraq": "https://flagcdn.com/w80/iq.png",
+        "Norway": "https://flagcdn.com/w80/no.png",
+        "Argentina": "https://flagcdn.com/w80/ar.png",
+        "Algeria": "https://flagcdn.com/w80/dz.png",
+        "Austria": "https://flagcdn.com/w80/at.png",
+        "Jordan": "https://flagcdn.com/w80/jo.png",
+        "Portugal": "https://flagcdn.com/w80/pt.png",
+        "DR Congo": "https://flagcdn.com/w80/cd.png",
+        "England": "https://flagcdn.com/w80/gb-eng.png",
+        "Croatia": "https://flagcdn.com/w80/hr.png",
+        "Ghana": "https://flagcdn.com/w80/gh.png",
+        "Panama": "https://flagcdn.com/w80/pa.png",
+        "Uzbekistan": "https://flagcdn.com/w80/uz.png",
+        "Colombia": "https://flagcdn.com/w80/co.png"
       };
 
-      card.innerHTML = `
-        <div class="match-stage">
-          <span>🔥 ${match.group || "MATCH"}</span>
-          <span>${isLocked ? "🔒 LOCKED" : "🎟️ 1 Ticket"}</span>
-        </div>
+      return flags[team] || "https://cdn.it-cg.group/mysterybox/uploads/6880d21e8b056.Logo%20Icon.png";
+    }
 
-        <div class="match-teams">
-          <div class="team-box">
+    function parseMatchDateTime(match) {
+      const tanggal = String(match.tanggal || "").trim();
+      const jam = String(match.jam || "00:00").trim();
+
+      const timeParts = jam.match(/(\d{1,2}):(\d{2})/);
+      const hour = timeParts ? Number(timeParts[1]) : 0;
+      const minute = timeParts ? Number(timeParts[2]) : 0;
+
+      const monthMap = {
+        jan: 0, january: 0,
+        feb: 1, february: 1,
+        mar: 2, march: 2,
+        apr: 3, april: 3,
+        may: 4,
+        jun: 5, june: 5,
+        jul: 6, july: 6,
+        aug: 7, august: 7,
+        sep: 8, sept: 8, september: 8,
+        oct: 9, october: 9,
+        nov: 10, november: 10,
+        dec: 11, december: 11
+      };
+
+      let m = tanggal.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/);
+      if (m) return new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]), hour, minute, 0);
+
+      m = tanggal.replace(/-/g, " ").match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
+      if (m) {
+        const month = monthMap[m[2].toLowerCase()];
+        if (month !== undefined) return new Date(Number(m[3]), month, Number(m[1]), hour, minute, 0);
+      }
+
+      return new Date(`${tanggal} ${jam}`);
+    }
+
+    function isMatchLocked(match) {
+      const statusClosed = String(match.status || "OPEN").toUpperCase() === "CLOSED";
+      const kickoff = parseMatchDateTime(match);
+      if (isNaN(kickoff.getTime())) return statusClosed;
+      const now = new Date();
+      const diffMinutes = (kickoff - now) / 60000;
+      return statusClosed || diffMinutes <= LOCK_MINUTES_BEFORE_KICKOFF;
+    }
+
+    function isSelectedLocked() {
+      const selected = matches.find(m => m.matchId === selectedMatch);
+      return selected ? isMatchLocked(selected) : false;
+    }
+
+    function toggleDateGroup(dateKey) {
+      openDates[dateKey] = !openDates[dateKey];
+      renderMatchCards();
+    }
+
+    function renderMatchCards() {
+      const grid = document.getElementById("matchGrid");
+      grid.innerHTML = "";
+
+      if (matches.length === 0) {
+        grid.innerHTML = `<div class="empty" style="display:block;">Belum ada jadwal match tersedia.</div>`;
+        return;
+      }
+
+      const grouped = {};
+      matches.forEach(match => {
+        const dateKey = match.tanggal || "Tanggal Belum Ada";
+        if (!grouped[dateKey]) grouped[dateKey] = [];
+        grouped[dateKey].push(match);
+      });
+
+      Object.keys(grouped).forEach((dateKey, index) => {
+        if (openDates[dateKey] === undefined) openDates[dateKey] = index === 0;
+
+        const group = document.createElement("div");
+        group.className = "date-group";
+
+        const toggleBtn = document.createElement("button");
+        toggleBtn.className = "date-toggle";
+        toggleBtn.textContent = `${openDates[dateKey] ? "▼" : "▶"} ${dateKey}`;
+        toggleBtn.onclick = function () { toggleDateGroup(dateKey); };
+
+        const list = document.createElement("div");
+        list.className = openDates[dateKey] ? "date-match-list open" : "date-match-list";
+
+        group.appendChild(toggleBtn);
+        group.appendChild(list);
+        grid.appendChild(group);
+
+        grouped[dateKey].forEach(match => {
+          const isLocked = isMatchLocked(match);
+
+          const card = document.createElement("div");
+          card.className = "match-card" +
+            (selectedMatch === match.matchId ? " active" : "") +
+            (isLocked ? " closed" : "");
+
+          card.onclick = function () {
+            if (isLocked) return;
+            selectedMatch = match.matchId;
+            openPredictionPage(match);
+          };
+
+          card.innerHTML = `
+            <div class="match-stage">
+              <span>🔥 ${match.group || "MATCH"}</span>
+              <span>${isLocked ? "🔒 LOCKED" : "🎟️ 1 Ticket"}</span>
+            </div>
+            <div class="match-time">📅 ${match.tanggal} • 🕒 ${match.jam} WIB</div>
+            <div class="match-teams">
+              <div class="team-box">
+                <img src="${getFlag(match.teamA)}" alt="${match.teamA}">
+                <p>${match.teamA}</p>
+              </div>
+              <div class="vs">VS</div>
+              <div class="team-box">
+                <img src="${getFlag(match.teamB)}" alt="${match.teamB}">
+                <p>${match.teamB}</p>
+              </div>
+            </div>
+          `;
+
+          list.appendChild(card);
+        });
+      });
+    }
+
+    function openPredictionPage(match) {
+      selectedMatch = match.matchId;
+      document.getElementById("scoreHome").value = "";
+      document.getElementById("scoreAway").value = "";
+
+      const container = document.getElementById("predictionMatchContent");
+      container.innerHTML = `
+        <div class="match-time">📅 ${match.tanggal} • 🕒 ${match.jam} WIB</div>
+        <div class="prediction-teams">
+          <div class="prediction-team">
             <img src="${getFlag(match.teamA)}" alt="${match.teamA}">
             <p>${match.teamA}</p>
           </div>
-
-          <div class="vs">VS</div>
-
-          <div class="team-box">
+          <div class="prediction-vs">VS</div>
+          <div class="prediction-team">
             <img src="${getFlag(match.teamB)}" alt="${match.teamB}">
             <p>${match.teamB}</p>
           </div>
         </div>
-
-        <div class="match-time">📅 ${match.tanggal} • 🕒 ${match.jam} WIB</div>
+        <p style="margin-top:14px;">${match.group || "MATCH"} • Gunakan 1 ticket untuk prediksi skor.</p>
       `;
 
-      list.appendChild(card);
-    });
-  });
-}
-
-function showPage(pageId) {
-  document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
-  document.getElementById(pageId).classList.add("active");
-  window.scrollTo(0, 0);
-}
-
-async function loginMember() {
-  const loginId = document.getElementById("loginId").value.trim().toUpperCase();
-  const loginButton = event.target;
-
-  if (!loginId) {
-    alert("Isi User ID terlebih dahulu.");
-    return;
-  }
-
-  loginButton.disabled = true;
-  loginButton.textContent = "Mengecek...";
-
-  try {
-    const result = await postApi({
-      action: "login",
-      userId: loginId
-    });
-
-    if (!result.success) {
-      alert(result.message || "User ID tidak valid / belum terdaftar.");
-      return;
+      showPage("predictionPage");
     }
 
-    currentMemberId = loginId;
-    ticketStock = Number(result.sisaTiket || result.sisaTicket || 0);
-    historyData = result.history || [];
-
-    document.getElementById("memberId").textContent = currentMemberId;
-
-    renderDashboard();
-    renderMatchCards();
-    showPage("dashboardPage");
-  } catch (error) {
-    alert("Gagal mengecek data member. Silakan coba lagi.");
-  } finally {
-    loginButton.disabled = false;
-    loginButton.textContent = "Cek Ticket Saya";
-  }
-}
-
-function toggleHistory() {
-  historyOpen = !historyOpen;
-  document.getElementById("historyWrapper").classList.toggle("open", historyOpen);
-  document.getElementById("historyToggleBtn").textContent = historyOpen ? "Tutup History" : "Lihat History";
-}
-
-async function refreshData() {
-  if (!currentMemberId || currentMemberId === "-") {
-    alert("Silakan login terlebih dahulu.");
-    return;
-  }
-
-  try {
-    await loadMatches();
-
-    const result = await postApi({
-      action: "login",
-      userId: currentMemberId
-    });
-
-    if (!result.success) {
-      alert(result.message || "Gagal refresh data.");
-      return;
+    function showPage(pageId) {
+      document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+      window.scrollTo(0, 0);
     }
 
-    ticketStock = Number(result.sisaTiket || result.sisaTicket || 0);
-    historyData = result.history || [];
+    async function loginMember(evt) {
+      const loginId = document.getElementById("loginId").value.trim().toUpperCase();
+      const loginButton = evt ? evt.target : null;
 
-    renderDashboard();
-    renderMatchCards();
-    alert("Data berhasil diperbarui.");
-  } catch (err) {
-    alert("Gagal refresh data.");
-  }
-}
+      if (!loginId) {
+        alert("Isi User ID terlebih dahulu.");
+        return;
+      }
 
-function backToLogin() {
-  showPage("loginPage");
-}
+      if (loginButton) {
+        loginButton.disabled = true;
+        loginButton.textContent = "Mengecek...";
+      }
 
-function openLeaderboard() {
-  alert("Leaderboard segera hadir.");
-}
+      try {
+        const result = await postApi({ action: "login", userId: loginId });
 
-function renderDashboard() {
-  document.getElementById("ticketStock").textContent = ticketStock;
-  document.getElementById("historyCount").textContent = historyData.length + " data";
+        if (!result.success) {
+          alert(result.message || "User ID tidak valid / belum terdaftar.");
+          return;
+        }
 
-  const list = document.getElementById("historyList");
-  const empty = document.getElementById("emptyState");
+        currentMemberId = loginId;
+        ticketStock = Number(result.sisaTiket || result.sisaTicket || 0);
+        historyData = result.history || [];
 
-  list.innerHTML = "";
-
-  if (historyData.length === 0) {
-    empty.style.display = "block";
-    return;
-  }
-
-  empty.style.display = "none";
-
-  historyData.forEach((item, index) => {
-    const statusText = String(item.status || "MENUNGGU").toUpperCase();
-    const point = Number(item.point || 0);
-
-    let statusClass = "pending";
-    if (statusText === "KALAH") statusClass = "lost";
-    if (statusText === "MENANG") statusClass = "win";
-    if (statusText === "PENEBAK HANDAL") statusClass = "handal";
-
-    const card = document.createElement("div");
-    card.className = "history-card";
-
-    card.innerHTML = `
-      <div class="ticket-icon">${index + 1}</div>
-      <div>
-        <div class="history-top">
-          <div class="match-name">${item.match || "-"}</div>
-          <div class="status ${statusClass}">${statusText}</div>
-        </div>
-
-        <div class="history-info">
-          <div class="info-box">Prediksi <b>${item.prediction || "-"}</b></div>
-          <div class="info-box">Tanggal <b>${item.date || "-"}</b></div>
-          <div class="info-box">Kode Ticket <b>${item.ticketCode || "-"}</b></div>
-          <div class="info-box">Point <b>${point}</b></div>
-        </div>
-      </div>
-    `;
-
-    list.appendChild(card);
-  });
-}
-
-async function useTicket() {
-  const scoreHome = document.getElementById("scoreHome").value.trim();
-  const scoreAway = document.getElementById("scoreAway").value.trim();
-  const submitButton = event.target;
-
-  if (ticketStock <= 0) {
-    alert("Stok ticket kamu sudah habis.");
-    return;
-  }
-
-  const selected = matches.find(m => m.matchId === selectedMatch);
-
-  if (!selected) {
-    alert("Pilih match terlebih dahulu.");
-    return;
-  }
-
-  if (isMatchLocked(selected)) {
-    alert("Prediksi untuk match ini sudah ditutup.");
-    return;
-  }
-
-  if (scoreHome === "" || scoreAway === "") {
-    alert("Isi prediksi skor terlebih dahulu.");
-    return;
-  }
-
-  const prediction = scoreHome + "-" + scoreAway;
-  const match = selected.teamA + " vs " + selected.teamB;
-
-  submitButton.disabled = true;
-  submitButton.textContent = "Menyimpan...";
-
-  try {
-    const result = await postApi({
-      action: "submitPrediction",
-      userId: currentMemberId,
-      matchId: match,
-      prediction: prediction
-    });
-
-    if (!result.success) {
-      alert("Gagal menyimpan prediksi: " + (result.message || "Silakan coba lagi."));
-      return;
+        document.getElementById("memberId").textContent = currentMemberId;
+        renderDashboard();
+        renderMatchCards();
+        showPage("dashboardPage");
+      } catch (error) {
+        alert("Gagal mengecek data member. Silakan coba lagi.");
+      } finally {
+        if (loginButton) {
+          loginButton.disabled = false;
+          loginButton.textContent = "Cek Ticket Saya";
+        }
+      }
     }
 
-    ticketStock -= 1;
+    function toggleHistory() {
+      historyOpen = !historyOpen;
+      document.getElementById("historyWrapper").classList.toggle("open", historyOpen);
+      document.getElementById("historyToggleBtn").textContent = historyOpen ? "Tutup History" : "Lihat History";
+    }
 
-    historyData.unshift({
-      match: match,
-      prediction: prediction,
-      date: new Date().toLocaleDateString("id-ID"),
-      ticketCode: result.ticketCode || "-",
-      status: "MENUNGGU",
-      point: 0
-    });
+    function toggleMatchSection() {
+      matchOpen = !matchOpen;
+      document.getElementById("matchWrapper").classList.toggle("open", matchOpen);
+      document.getElementById("matchToggleBtn").textContent = matchOpen ? "Tutup Match" : "Pilih Match";
+    }
 
-    document.getElementById("scoreHome").value = "";
-    document.getElementById("scoreAway").value = "";
+    async function refreshData() {
+      if (!currentMemberId || currentMemberId === "-") {
+        alert("Silakan login terlebih dahulu.");
+        return;
+      }
 
-    renderDashboard();
-    showSuccessToast(match, prediction, ticketStock);
-  } catch (error) {
-    alert("Gagal terhubung ke server. Silakan coba lagi.");
-  } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = "Gunakan Ticket";
-  }
-}
+      try {
+        await loadMatches();
+        const result = await postApi({ action: "login", userId: currentMemberId });
 
-function showSuccessToast(match, prediction, stockLeft) {
-  const message = `Prediksi kamu untuk <b>${match}</b><br>Skor: <b>${prediction}</b><br>Sisa ticket: <b>${stockLeft}</b>`;
-  document.getElementById("successMessage").innerHTML = message;
-  document.getElementById("successToast").classList.add("show");
+        if (!result.success) {
+          alert(result.message || "Gagal refresh data.");
+          return;
+        }
 
-  setTimeout(() => {
-    closeSuccessToast();
-  }, 3000);
-}
+        ticketStock = Number(result.sisaTiket || result.sisaTicket || 0);
+        historyData = result.history || [];
+        renderDashboard();
+        renderMatchCards();
+        alert("Data berhasil diperbarui.");
+      } catch (err) {
+        alert("Gagal refresh data.");
+      }
+    }
 
-function closeSuccessToast() {
-  document.getElementById("successToast").classList.remove("show");
-}
+    function backToDashboard() {
+      showPage("dashboardPage");
+    }
 
-loadMatches();
-</script>
+    function logoutMember() {
+      currentMemberId = "-";
+      ticketStock = 0;
+      historyData = [];
+      selectedMatch = "";
+      historyOpen = false;
+      matchOpen = false;
+      document.getElementById("loginId").value = "";
+      document.getElementById("memberId").textContent = "-";
+      document.getElementById("ticketStock").textContent = "0";
+      document.getElementById("historyWrapper").classList.remove("open");
+      document.getElementById("historyToggleBtn").textContent = "Lihat History";
+      document.getElementById("matchWrapper").classList.remove("open");
+      document.getElementById("matchToggleBtn").textContent = "Pilih Match";
+      showPage("loginPage");
+    }
+
+    function openLeaderboard() {
+      alert("Leaderboard segera hadir.");
+    }
+
+    function renderDashboard() {
+      document.getElementById("ticketStock").textContent = ticketStock;
+      document.getElementById("historyCount").textContent = historyData.length + " data";
+
+      const list = document.getElementById("historyList");
+      const empty = document.getElementById("emptyState");
+      list.innerHTML = "";
+
+      if (historyData.length === 0) {
+        empty.style.display = "block";
+        return;
+      }
+
+      empty.style.display = "none";
+
+      historyData.forEach((item, index) => {
+        const statusText = String(item.status || "MENUNGGU").toUpperCase();
+        const point = Number(item.point || 0);
+
+        let statusClass = "pending";
+        if (statusText === "KALAH") statusClass = "lost";
+        if (statusText === "MENANG") statusClass = "win";
+        if (statusText === "PENEBAK HANDAL") statusClass = "handal";
+
+        const card = document.createElement("div");
+        card.className = "history-card";
+        card.innerHTML = `
+          <div class="ticket-icon">${index + 1}</div>
+          <div>
+            <div class="history-top">
+              <div class="match-name">${item.match || "-"}</div>
+              <div class="status ${statusClass}">${statusText}</div>
+            </div>
+            <div class="history-info">
+              <div class="info-box">Prediksi <b>${item.prediction || "-"}</b></div>
+              <div class="info-box">Tanggal <b>${item.date || "-"}</b></div>
+              <div class="info-box">Kode Ticket <b>${item.ticketCode || "-"}</b></div>
+              <div class="info-box">Point <b>${point}</b></div>
+            </div>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    async function useTicket(evt) {
+      const scoreHome = document.getElementById("scoreHome").value.trim();
+      const scoreAway = document.getElementById("scoreAway").value.trim();
+      const submitButton = evt ? evt.target : null;
+
+      if (ticketStock <= 0) {
+        alert("Stok ticket kamu sudah habis.");
+        return;
+      }
+
+      const selected = matches.find(m => m.matchId === selectedMatch);
+      if (!selected) {
+        alert("Pilih match terlebih dahulu.");
+        return;
+      }
+
+      if (isMatchLocked(selected)) {
+        alert("Prediksi untuk match ini sudah ditutup.");
+        return;
+      }
+
+      if (scoreHome === "" || scoreAway === "") {
+        alert("Isi prediksi skor terlebih dahulu.");
+        return;
+      }
+
+      const prediction = scoreHome + "-" + scoreAway;
+      const match = selected.teamA + " vs " + selected.teamB;
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Menyimpan...";
+      }
+
+      try {
+        const result = await postApi({
+          action: "submitPrediction",
+          userId: currentMemberId,
+          matchId: match,
+          prediction: prediction
+        });
+
+        if (!result.success) {
+          alert("Gagal menyimpan prediksi: " + (result.message || "Silakan coba lagi."));
+          return;
+        }
+
+        ticketStock -= 1;
+        historyData.unshift({
+          match: match,
+          prediction: prediction,
+          date: new Date().toLocaleDateString("id-ID"),
+          ticketCode: result.ticketCode || "-",
+          status: "MENUNGGU",
+          point: 0
+        });
+
+        document.getElementById("scoreHome").value = "";
+        document.getElementById("scoreAway").value = "";
+        renderDashboard();
+        renderMatchCards();
+        showSuccessToast(match, prediction, ticketStock);
+        showPage("dashboardPage");
+      } catch (error) {
+        alert("Gagal terhubung ke server. Silakan coba lagi.");
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = "Gunakan Ticket";
+        }
+      }
+    }
+
+    function showSuccessToast(match, prediction, stockLeft) {
+      const message = `Prediksi kamu untuk <b>${match}</b><br>Skor: <b>${prediction}</b><br>Sisa ticket: <b>${stockLeft}</b>`;
+      document.getElementById("successMessage").innerHTML = message;
+      document.getElementById("successToast").classList.add("show");
+      setTimeout(() => closeSuccessToast(), 3000);
+    }
+
+    function closeSuccessToast() {
+      document.getElementById("successToast").classList.remove("show");
+    }
+
+    loadMatches();
+  </script>
 </body>
 </html>
