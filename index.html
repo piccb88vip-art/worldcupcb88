@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -618,6 +619,46 @@
         grid-template-columns: 1fr;
       }
     }
+
+.date-group {
+  margin-bottom: 12px;
+}
+
+.date-toggle {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 215, 106, 0.35);
+  background: rgba(255, 215, 106, 0.1);
+  color: #ffd76a;
+  font-weight: 900;
+  cursor: pointer;
+  text-align: left;
+}
+
+.date-match-list {
+  display: none;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.date-match-list.open {
+  display: grid;
+}
+
+.match-card.closed {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.history-wrapper {
+  display: none;
+}
+
+.history-wrapper.open {
+  display: block;
+}
+    
   </style>
 </head>
 
@@ -695,18 +736,25 @@
 
         <button class="btn" onclick="useTicket()">Gunakan Ticket</button>
         <button class="btn leaderboard-btn" onclick="openLeaderboard()">🏆 LEADERBOARD</button>
+        <button class="btn secondary" onclick="refreshData()">🔄 Refresh Data</button>
         <button class="btn secondary" onclick="backToLogin()">Kembali ke Halaman Login</button>
       </section>
 
-      <section class="section">
-        <div class="section-title">
-          <h2>History Pemilihan Ticket</h2>
-          <span class="small-note" id="historyCount">0 data</span>
-        </div>
+<section class="section">
+  <button class="btn secondary" onclick="toggleHistory()" id="historyToggleBtn">
+    Lihat History
+  </button>
 
-        <div class="empty" id="emptyState">Belum ada history pemilihan ticket.</div>
-        <div class="history-list" id="historyList"></div>
-      </section>
+  <div class="history-wrapper" id="historyWrapper">
+    <div class="section-title" style="margin-top:14px;">
+      <h2>History Pemilihan Ticket</h2>
+      <span class="small-note" id="historyCount">0 data</span>
+    </div>
+
+    <div class="empty" id="emptyState">Belum ada history pemilihan ticket.</div>
+    <div class="history-list" id="historyList"></div>
+  </div>
+</section>
     </section>
 
     <a href="https://click-lynk.com/LIVECHAT_CLICKBET88" target="_blank" class="floating-help">
@@ -727,37 +775,50 @@
     </div>
   </main>
 
-  <script>
+ <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbyMD0mP5X9TS9XBq4qRsOkNkRODmq3-shJ0L0e6kAoIrYMJJ8Oc33ID7LiW4FZ-0TSENg/exec";
+const LOCK_MINUTES_BEFORE_KICKOFF = 15;
 
 let matches = [];
 let selectedMatch = "";
 let ticketStock = 0;
 let currentMemberId = "-";
 let historyData = [];
+let openDates = {};
+let historyOpen = false;
+
+async function postApi(payload) {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify(payload)
+  });
+
+  return await response.json();
+}
 
 async function loadMatches() {
   try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      body: JSON.stringify({ action: "getMatches" })
-    });
-
-    const result = await response.json();
+    const result = await postApi({ action: "getMatches" });
 
     if (!result.success) {
-      alert("Gagal mengambil data match.");
+      alert("Gagal mengambil data match: " + (result.message || "Silakan coba lagi."));
       return;
     }
 
     matches = result.matches || [];
 
     if (matches.length > 0) {
-      selectedMatch = matches[0].matchId;
+      const stillExists = matches.some(m => m.matchId === selectedMatch);
+      const firstOpen = matches.find(m => !isMatchLocked(m));
+
+      if (!selectedMatch || !stillExists || isSelectedLocked()) {
+        selectedMatch = firstOpen ? firstOpen.matchId : matches[0].matchId;
+      }
+    } else {
+      selectedMatch = "";
     }
 
     renderMatchCards();
-
   } catch (err) {
     alert("Gagal terhubung ke server match.");
   }
@@ -818,6 +879,67 @@ function getFlag(team) {
   return flags[team] || "https://cdn.it-cg.group/mysterybox/uploads/6880d21e8b056.Logo%20Icon.png";
 }
 
+function parseMatchDateTime(match) {
+  const tanggal = String(match.tanggal || "").trim();
+  const jam = String(match.jam || "00:00").trim();
+
+  const timeParts = jam.match(/(\d{1,2}):(\d{2})/);
+  const hour = timeParts ? Number(timeParts[1]) : 0;
+  const minute = timeParts ? Number(timeParts[2]) : 0;
+
+  const monthMap = {
+    jan: 0, january: 0,
+    feb: 1, february: 1,
+    mar: 2, march: 2,
+    apr: 3, april: 3,
+    may: 4,
+    jun: 5, june: 5,
+    jul: 6, july: 6,
+    aug: 7, august: 7,
+    sep: 8, sept: 8, september: 8,
+    oct: 9, october: 9,
+    nov: 10, november: 10,
+    dec: 11, december: 11
+  };
+
+  let m = tanggal.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/);
+  if (m) {
+    return new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]), hour, minute, 0);
+  }
+
+  m = tanggal.replace(/-/g, " ").match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
+  if (m) {
+    const month = monthMap[m[2].toLowerCase()];
+    if (month !== undefined) {
+      return new Date(Number(m[3]), month, Number(m[1]), hour, minute, 0);
+    }
+  }
+
+  return new Date(`${tanggal} ${jam}`);
+}
+
+function isMatchLocked(match) {
+  const statusClosed = String(match.status || "OPEN").toUpperCase() === "CLOSED";
+  const kickoff = parseMatchDateTime(match);
+
+  if (isNaN(kickoff.getTime())) return statusClosed;
+
+  const now = new Date();
+  const diffMinutes = (kickoff - now) / 60000;
+
+  return statusClosed || diffMinutes <= LOCK_MINUTES_BEFORE_KICKOFF;
+}
+
+function isSelectedLocked() {
+  const selected = matches.find(m => m.matchId === selectedMatch);
+  return selected ? isMatchLocked(selected) : false;
+}
+
+function toggleDateGroup(dateKey) {
+  openDates[dateKey] = !openDates[dateKey];
+  renderMatchCards();
+}
+
 function renderMatchCards() {
   const grid = document.getElementById("matchGrid");
   grid.innerHTML = "";
@@ -827,42 +949,76 @@ function renderMatchCards() {
     return;
   }
 
-  matches.forEach((match) => {
-    const isClosed = String(match.status || "OPEN").toUpperCase() === "CLOSED";
+  const grouped = {};
 
-    const card = document.createElement("div");
-    card.className = "match-card" + (selectedMatch === match.matchId ? " active" : "");
+  matches.forEach(match => {
+    const dateKey = match.tanggal || "Tanggal Belum Ada";
+    if (!grouped[dateKey]) grouped[dateKey] = [];
+    grouped[dateKey].push(match);
+  });
 
-    card.onclick = function () {
-      if (isClosed) return;
-      selectedMatch = match.matchId;
-      renderMatchCards();
+  Object.keys(grouped).forEach((dateKey, index) => {
+    if (openDates[dateKey] === undefined) {
+      openDates[dateKey] = index === 0;
+    }
+
+    const group = document.createElement("div");
+    group.className = "date-group";
+
+    const toggleBtn = document.createElement("button");
+    toggleBtn.className = "date-toggle";
+    toggleBtn.textContent = `${openDates[dateKey] ? "▼" : "▶"} ${dateKey}`;
+    toggleBtn.onclick = function () {
+      toggleDateGroup(dateKey);
     };
 
-    card.innerHTML = `
-      <div class="match-stage">
-        <span>🔥 ${match.group || "MATCH"}</span>
-        <span>${isClosed ? "🔒 CLOSED" : "🎟️ 1 Ticket"}</span>
-      </div>
+    const list = document.createElement("div");
+    list.className = openDates[dateKey] ? "date-match-list open" : "date-match-list";
 
-      <div class="match-teams">
-        <div class="team-box">
-          <img src="${getFlag(match.teamA)}" alt="${match.teamA}">
-          <p>${match.teamA}</p>
+    group.appendChild(toggleBtn);
+    group.appendChild(list);
+    grid.appendChild(group);
+
+    grouped[dateKey].forEach(match => {
+      const isLocked = isMatchLocked(match);
+
+      const card = document.createElement("div");
+      card.className =
+        "match-card" +
+        (selectedMatch === match.matchId ? " active" : "") +
+        (isLocked ? " closed" : "");
+
+      card.onclick = function () {
+        if (isLocked) return;
+        selectedMatch = match.matchId;
+        renderMatchCards();
+      };
+
+      card.innerHTML = `
+        <div class="match-stage">
+          <span>🔥 ${match.group || "MATCH"}</span>
+          <span>${isLocked ? "🔒 LOCKED" : "🎟️ 1 Ticket"}</span>
         </div>
 
-        <div class="vs">VS</div>
+        <div class="match-teams">
+          <div class="team-box">
+            <img src="${getFlag(match.teamA)}" alt="${match.teamA}">
+            <p>${match.teamA}</p>
+          </div>
 
-        <div class="team-box">
-          <img src="${getFlag(match.teamB)}" alt="${match.teamB}">
-          <p>${match.teamB}</p>
+          <div class="vs">VS</div>
+
+          <div class="team-box">
+            <img src="${getFlag(match.teamB)}" alt="${match.teamB}">
+            <p>${match.teamB}</p>
+          </div>
         </div>
-      </div>
 
-      <div class="match-time">📅 ${match.tanggal} • 🕒 ${match.jam} WIB</div>
-    `;
+        <div class="match-time">📅 ${match.tanggal} • 🕒 ${match.jam} WIB</div>
+      `;
 
-    grid.appendChild(card);
+      list.appendChild(card);
+    });
   });
 }
 
@@ -885,15 +1041,10 @@ async function loginMember() {
   loginButton.textContent = "Mengecek...";
 
   try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      body: JSON.stringify({
-        action: "login",
-        userId: loginId
-      })
+    const result = await postApi({
+      action: "login",
+      userId: loginId
     });
-
-    const result = await response.json();
 
     if (!result.success) {
       alert(result.message || "User ID tidak valid / belum terdaftar.");
@@ -909,12 +1060,47 @@ async function loginMember() {
     renderDashboard();
     renderMatchCards();
     showPage("dashboardPage");
-
   } catch (error) {
     alert("Gagal mengecek data member. Silakan coba lagi.");
   } finally {
     loginButton.disabled = false;
     loginButton.textContent = "Cek Ticket Saya";
+  }
+}
+
+function toggleHistory() {
+  historyOpen = !historyOpen;
+  document.getElementById("historyWrapper").classList.toggle("open", historyOpen);
+  document.getElementById("historyToggleBtn").textContent = historyOpen ? "Tutup History" : "Lihat History";
+}
+
+async function refreshData() {
+  if (!currentMemberId || currentMemberId === "-") {
+    alert("Silakan login terlebih dahulu.");
+    return;
+  }
+
+  try {
+    await loadMatches();
+
+    const result = await postApi({
+      action: "login",
+      userId: currentMemberId
+    });
+
+    if (!result.success) {
+      alert(result.message || "Gagal refresh data.");
+      return;
+    }
+
+    ticketStock = Number(result.sisaTiket || result.sisaTicket || 0);
+    historyData = result.history || [];
+
+    renderDashboard();
+    renderMatchCards();
+    alert("Data berhasil diperbarui.");
+  } catch (err) {
+    alert("Gagal refresh data.");
   }
 }
 
@@ -947,7 +1133,6 @@ function renderDashboard() {
     const point = Number(item.point || 0);
 
     let statusClass = "pending";
-
     if (statusText === "KALAH") statusClass = "lost";
     if (statusText === "MENANG") statusClass = "win";
     if (statusText === "PENEBAK HANDAL") statusClass = "handal";
@@ -986,25 +1171,20 @@ async function useTicket() {
     return;
   }
 
-  if (!selectedMatch) {
+  const selected = matches.find(m => m.matchId === selectedMatch);
+
+  if (!selected) {
     alert("Pilih match terlebih dahulu.");
+    return;
+  }
+
+  if (isMatchLocked(selected)) {
+    alert("Prediksi untuk match ini sudah ditutup.");
     return;
   }
 
   if (scoreHome === "" || scoreAway === "") {
     alert("Isi prediksi skor terlebih dahulu.");
-    return;
-  }
-
-  const selected = matches.find(m => m.matchId === selectedMatch);
-
-  if (!selected) {
-    alert("Match tidak ditemukan.");
-    return;
-  }
-
-  if (String(selected.status || "OPEN").toUpperCase() === "CLOSED") {
-    alert("Match ini sudah ditutup.");
     return;
   }
 
@@ -1015,17 +1195,12 @@ async function useTicket() {
   submitButton.textContent = "Menyimpan...";
 
   try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      body: JSON.stringify({
-        action: "submitPrediction",
-        userId: currentMemberId,
-        matchId: match,
-        prediction: prediction
-      })
+    const result = await postApi({
+      action: "submitPrediction",
+      userId: currentMemberId,
+      matchId: match,
+      prediction: prediction
     });
-
-    const result = await response.json();
 
     if (!result.success) {
       alert("Gagal menyimpan prediksi: " + (result.message || "Silakan coba lagi."));
@@ -1048,7 +1223,6 @@ async function useTicket() {
 
     renderDashboard();
     showSuccessToast(match, prediction, ticketStock);
-
   } catch (error) {
     alert("Gagal terhubung ke server. Silakan coba lagi.");
   } finally {
