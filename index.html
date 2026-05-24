@@ -686,7 +686,49 @@
           transform: scale(1) translateY(0);
         }
       }
+.moment-toggle {
 
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 14px 16px;
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(255,215,106,.35);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,215,106,.12),
+      rgba(14,165,233,.08)
+    );
+
+  color: #fff7d6;
+
+  font-size: 13px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 18px rgba(255,215,106,.08);
+}
+
+.moment-content {
+
+  display: none;
+
+  margin-top: 12px;
+}
+
+.moment-content.open {
+
+  display: block;
+}
 
       .legacy-moment {
         margin-top: 18px;
@@ -816,25 +858,50 @@
             </button>
           </div>
         </div>
-        <div class="legacy-moment">
-          <div class="legacy-title">
-            <h2>🏆 MOMENT EVENT WORLD CUP 2022</h2>
-            <span>REAL WINNER</span>
-          </div>
+<div class="legacy-moment">
 
-          <div class="legacy-image">
-            <img
-              src="http://plcl.me/images/payT3.jpg"
-              alt="Moment Hadiah World Cup 2022 CLICKBET88"
-            />
-          </div>
+  <button
+    class="moment-toggle"
+    onclick="toggleMoment()"
+  >
 
-          <div class="legacy-caption">
-            <b>CLlCKBET88</b> telah menghadirkan event besar sebelumnya dengan
-            hadiah mobil, motor, gadget, uang tunai, dan reward menarik untuk
-            para member terbaik.
-          </div>
-        </div>
+    <span>
+      🏆 MOMENT EVENT WORLD CUP 2022
+    </span>
+
+    <span id="momentToggleText">
+      BUKA
+    </span>
+
+  </button>
+
+  <div
+    class="moment-content"
+    id="momentContent"
+  >
+
+    <div class="legacy-image">
+
+      <img
+        src="http://plcl.me/images/payT3.jpg"
+        alt="Moment Hadiah World Cup 2022"
+      />
+
+    </div>
+
+    <div class="legacy-caption">
+
+      <b>CLICKBET88</b>
+      telah menghadirkan event besar sebelumnya
+      dengan hadiah mobil, motor, gadget,
+      uang tunai, dan reward menarik
+      untuk para member terbaik.
+
+    </div>
+
+  </div>
+
+</div>
 
         <div class="section">
           <div class="section-title section-premium-title">
@@ -865,9 +932,7 @@
               CLICKBET88.
             </div>
 
-            <button class="btn leaderboard-btn" onclick="openLeaderboard()">
-              🎁 LIHAT HADIAH & LEADERBOARD
-            </button>
+
           </div>
         </div>
       </section>
@@ -1302,6 +1367,25 @@
           }
         }
       }
+
+let momentOpen = false;
+
+function toggleMoment() {
+
+  momentOpen = !momentOpen;
+
+  document
+    .getElementById("momentContent")
+    .classList.toggle("open", momentOpen);
+
+  document
+    .getElementById("momentToggleText")
+    .textContent =
+      momentOpen
+        ? "TUTUP"
+        : "BUKA";
+}
+      
       function logoutMember() {
         currentMemberId = "-";
         ticketStock = 0;
