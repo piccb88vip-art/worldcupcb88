@@ -4,68 +4,51 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fransiska AI Livechat</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#030616;
-      --card:#08102c;
-      --card-soft:rgba(255,255,255,.075);
-      --line:rgba(255,255,255,.11);
+      --bg:#030716;
+      --card:#071126cc;
+      --card2:#0b1730;
+      --line:rgba(255,255,255,.10);
       --text:#f8fbff;
-      --muted:#9fb0d8;
+      --muted:#9eb2d9;
       --blue:#2f6bff;
-      --cyan:#00d5ff;
+      --cyan:#00d4ff;
+      --green:#22c55e;
       --gold:#ffd36a;
-      --danger:#ff647c;
-      --success:#42e6a4;
-      --shadow:0 28px 70px rgba(0,0,0,.45);
+      --danger:#ff5f7a;
+      --shadow:0 24px 80px rgba(0,113,255,.22);
     }
 
-    *{margin:0;padding:0;box-sizing:border-box}
+    *{box-sizing:border-box;margin:0;padding:0}
 
     body{
       min-height:100vh;
       font-family:'Poppins',sans-serif;
       color:var(--text);
-      overflow:hidden;
       background:
-        radial-gradient(circle at 15% 10%, rgba(47,107,255,.32), transparent 30%),
-        radial-gradient(circle at 85% 90%, rgba(0,213,255,.18), transparent 34%),
-        linear-gradient(135deg,#020414 0%,#06123b 52%,#020414 100%);
+        radial-gradient(circle at 20% 0%, rgba(0,132,255,.30), transparent 36%),
+        radial-gradient(circle at 90% 10%, rgba(0,212,255,.18), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(255,211,106,.08), transparent 38%),
+        linear-gradient(180deg,#020617 0%,#071127 52%,#020617 100%);
+      overflow:hidden;
     }
 
     body::before{
       content:"";
       position:fixed;
       inset:0;
+      pointer-events:none;
       background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
-      background-size:54px 54px;
-      mask-image:linear-gradient(to bottom,rgba(0,0,0,.85),transparent 85%);
-      pointer-events:none;
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size:44px 44px;
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,.9), rgba(0,0,0,.25));
     }
-
-    body::after{
-      content:"";
-      position:fixed;
-      width:520px;
-      height:520px;
-      border-radius:999px;
-      left:50%;
-      top:-220px;
-      transform:translateX(-50%);
-      background:radial-gradient(circle,rgba(0,213,255,.35),transparent 68%);
-      filter:blur(35px);
-      pointer-events:none;
-    }
-
-    button,input{font-family:inherit}
-    button{cursor:pointer}
 
     .app{
       position:relative;
@@ -74,331 +57,422 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:22px;
+      padding:18px;
     }
 
-    .screen{display:none;width:100%}
-    .screen.active{display:block}
+    .screen{display:none;width:100%;}
+    .screen.active{display:block;}
 
-    .login-shell{
-      width:100%;
-      max-width:1060px;
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:24px;
-      align-items:stretch;
-    }
-
-    .hero-card,.login-card,.chat-shell{
+    .glass{
+      background:linear-gradient(180deg, rgba(10,22,50,.86), rgba(6,13,31,.78));
       border:1px solid var(--line);
-      background:linear-gradient(180deg,rgba(255,255,255,.095),rgba(255,255,255,.04));
       box-shadow:var(--shadow);
       backdrop-filter:blur(18px);
-      border-radius:34px;
     }
 
-    .hero-card{
-      padding:38px;
-      min-height:610px;
-      position:relative;
-      overflow:hidden;
+    /* LOGIN */
+    .login-wrap{
+      width:100%;
+      max-width:440px;
+      margin:auto;
     }
 
-    .hero-card::after{
-      content:"";
-      position:absolute;
-      width:340px;
-      height:340px;
-      right:-120px;
-      bottom:-120px;
-      border-radius:999px;
-      background:radial-gradient(circle,rgba(255,211,106,.22),transparent 70%);
-      filter:blur(8px);
-    }
+    .brand-head{text-align:center;margin-bottom:22px;}
 
-    .brand-row{display:flex;align-items:center;gap:14px;margin-bottom:38px}
     .brand-badge{
-      width:58px;height:58px;border-radius:20px;
-      display:grid;place-items:center;
-      font-weight:800;font-size:26px;
-      background:linear-gradient(135deg,var(--blue),var(--cyan));
-      box-shadow:0 0 32px rgba(0,213,255,.36);
-    }
-    .brand-row h1{font-size:27px;line-height:1.1}
-    .brand-row p{font-size:13px;color:var(--muted);margin-top:4px}
-
-    .hero-title{
-      font-size:54px;
-      line-height:1.05;
-      letter-spacing:-1.6px;
-      max-width:560px;
-      margin-bottom:18px;
+      width:94px;
+      height:94px;
+      margin:0 auto 16px;
+      display:grid;
+      place-items:center;
+      border-radius:30px;
+      background:
+        linear-gradient(145deg, rgba(47,107,255,.95), rgba(0,212,255,.82));
+      color:#fff;
+      font-size:42px;
+      font-weight:800;
+      box-shadow:0 0 44px rgba(0,212,255,.38);
+      border:1px solid rgba(255,255,255,.22);
     }
 
-    .hero-title span{
-      background:linear-gradient(90deg,#ffffff,var(--cyan),var(--gold));
+    .brand-head h1{
+      font-size:38px;
+      font-weight:800;
+      letter-spacing:-1px;
+      background:linear-gradient(90deg,#fff,#8fdfff,#5c86ff);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
     }
 
-    .hero-desc{
-      color:var(--muted);
-      max-width:520px;
-      font-size:15px;
-      line-height:1.8;
-      margin-bottom:28px;
+    .brand-head p{color:var(--muted);font-size:13px;margin-top:6px;}
+
+    .login-card{
+      border-radius:30px;
+      padding:30px;
     }
 
-    .pill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:560px}
-    .pill{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.06);
-      border-radius:20px;
-      padding:15px;
+    .chip-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-bottom:24px;
     }
-    .pill strong{display:block;font-size:14px;margin-bottom:5px}
-    .pill small{display:block;color:var(--muted);line-height:1.55}
 
-    .trust-strip{
-      position:absolute;
-      left:38px;right:38px;bottom:34px;
-      display:flex;gap:12px;flex-wrap:wrap;
-      z-index:2;
+    .chip{
+      font-size:11px;
+      color:#cde8ff;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+      border-radius:999px;
+      padding:7px 10px;
     }
-    .trust-strip span{
-      font-size:12px;color:#dce7ff;
-      border:1px solid var(--line);
+
+    label{
+      display:block;
+      color:#bed1ff;
+      font-size:13px;
+      margin-bottom:8px;
+      font-weight:500;
+    }
+
+    .field{margin-bottom:16px;}
+
+    input{
+      width:100%;
+      height:56px;
+      border:none;
+      outline:none;
+      border-radius:16px;
+      color:white;
       background:rgba(255,255,255,.055);
-      padding:9px 12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      padding:0 16px;
+      font-size:14px;
+      transition:.25s ease;
     }
 
-    .login-card{padding:34px;display:flex;flex-direction:column;justify-content:center}
-    .login-card h2{font-size:31px;margin-bottom:8px}
-    .login-card .sub{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:28px}
-
-    .form-group{margin-bottom:16px}
-    .form-group label{display:block;color:#c7d4ff;font-size:13px;margin-bottom:8px;font-weight:600}
-    .form-group input{
-      width:100%;height:56px;border-radius:17px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.055);
-      color:white;outline:none;padding:0 16px;font-size:14px;
-      transition:.25s;
+    input:focus{
+      border-color:rgba(0,212,255,.72);
+      box-shadow:0 0 0 4px rgba(0,212,255,.10);
     }
-    .form-group input::placeholder{color:#7181af}
-    .form-group input:focus{border-color:rgba(0,213,255,.7);box-shadow:0 0 0 4px rgba(0,213,255,.09)}
+
+    input::placeholder{color:#7689b5;}
 
     .primary-btn{
-      width:100%;height:58px;border:none;border-radius:18px;
-      color:white;font-weight:800;font-size:15px;
-      background:linear-gradient(135deg,var(--blue),var(--cyan));
-      box-shadow:0 18px 40px rgba(47,107,255,.32);
-      transition:.25s;margin-top:6px;
+      width:100%;
+      height:58px;
+      border:0;
+      border-radius:17px;
+      margin-top:8px;
+      cursor:pointer;
+      color:#fff;
+      font-size:16px;
+      font-weight:800;
+      background:linear-gradient(90deg,#285dff,#00cfff);
+      box-shadow:0 18px 38px rgba(0,132,255,.28);
+      transition:.25s ease;
     }
-    .primary-btn:hover{transform:translateY(-2px)}
 
-    .helper-row{
-      display:flex;justify-content:space-between;gap:14px;align-items:center;
-      margin-top:18px;font-size:12px;color:var(--muted);
-    }
-    .helper-row a{color:var(--cyan);text-decoration:none;font-weight:700}
+    .primary-btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
 
-    .note{
-      margin-top:22px;
-      border:1px solid rgba(255,211,106,.24);
-      background:rgba(255,211,106,.08);
-      color:#ffe8a8;
-      border-radius:18px;
-      padding:13px;
+    .login-note{
+      margin-top:18px;
       font-size:12px;
-      line-height:1.65;
+      line-height:1.7;
+      color:#8fa3cc;
+      text-align:center;
     }
 
+    .login-note a{color:#73e4ff;text-decoration:none;font-weight:700;}
+
+    /* CHAT */
     .chat-shell{
-      width:min(1180px,100%);
-      height:min(820px,calc(100vh - 34px));
+      width:min(1120px,100%);
+      height:min(780px,calc(100vh - 28px));
+      margin:auto;
+      border-radius:32px;
+      overflow:hidden;
       display:grid;
       grid-template-columns:310px 1fr;
-      overflow:hidden;
     }
 
     .sidebar{
-      border-right:1px solid var(--line);
-      background:rgba(0,0,0,.14);
       padding:22px;
+      background:rgba(3,8,22,.54);
+      border-right:1px solid var(--line);
       display:flex;
       flex-direction:column;
       gap:18px;
     }
 
-    .side-top{display:flex;align-items:center;gap:12px}
-    .side-top h2{font-size:20px}.side-top p{font-size:12px;color:var(--muted)}
+    .side-brand{display:flex;align-items:center;gap:12px;}
+
+    .mini-badge{
+      width:46px;height:46px;border-radius:16px;
+      display:grid;place-items:center;
+      background:linear-gradient(145deg,var(--blue),var(--cyan));
+      font-weight:800;
+      box-shadow:0 0 26px rgba(0,212,255,.27);
+    }
+
+    .side-brand h2{font-size:18px;line-height:1.1;}
+    .side-brand p{font-size:12px;color:var(--muted);margin-top:4px;}
 
     .status-card{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.055);
-      border-radius:24px;
+      border-radius:22px;
       padding:16px;
+      background:rgba(255,255,255,.055);
+      border:1px solid var(--line);
     }
-    .status-card strong{font-size:14px}.status-card p{color:var(--muted);font-size:12px;line-height:1.6;margin-top:6px}
-    .online-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--success);box-shadow:0 0 14px var(--success);margin-right:7px}
 
-    .topic-title{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-top:4px}
-    .topic-list{display:grid;gap:10px}
-    .topic-btn{
-      width:100%;text-align:left;border:1px solid var(--line);
-      background:rgba(255,255,255,.055);color:white;
-      padding:13px 14px;border-radius:16px;font-weight:600;font-size:13px;
-      transition:.2s;
+    .status-card b{font-size:13px;}
+    .status-card p{font-size:12px;color:var(--muted);line-height:1.6;margin-top:6px;}
+
+    .online-dot{
+      width:9px;height:9px;border-radius:50%;background:var(--green);display:inline-block;
+      box-shadow:0 0 14px var(--green);
+      margin-right:6px;
     }
-    .topic-btn:hover{background:rgba(0,213,255,.12);border-color:rgba(0,213,255,.35)}
+
+    .menu-title{font-size:12px;color:#8397bf;font-weight:700;text-transform:uppercase;letter-spacing:.8px;}
+
+    .topic-list{display:grid;gap:10px;}
+
+    .topic-btn{
+      text-align:left;
+      border:1px solid var(--line);
+      color:#dbe8ff;
+      background:rgba(255,255,255,.045);
+      border-radius:17px;
+      padding:13px 14px;
+      cursor:pointer;
+      font-weight:600;
+      transition:.2s ease;
+    }
+
+    .topic-btn:hover{background:rgba(0,212,255,.09);border-color:rgba(0,212,255,.34);}
 
     .logout-btn{
-      margin-top:auto;height:46px;border-radius:16px;border:1px solid var(--line);
-      background:rgba(255,255,255,.07);color:white;font-weight:700;
+      margin-top:auto;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:white;
+      padding:13px 14px;
+      border-radius:16px;
+      cursor:pointer;
+      font-weight:700;
     }
 
-    .chat-main{display:flex;flex-direction:column;min-width:0}
-    .chat-header{
-      min-height:84px;border-bottom:1px solid var(--line);
-      padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:14px;
+    .chat-main{display:flex;flex-direction:column;min-width:0;}
+
+    .chat-top{
+      height:78px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0 24px;
+      border-bottom:1px solid var(--line);
+      background:rgba(3,8,22,.32);
     }
-    .chat-header h3{font-size:20px}.chat-header p{font-size:12px;color:var(--muted);margin-top:4px}
-    .header-actions{display:flex;gap:10px;align-items:center}
-    .mini-btn{
-      border:1px solid var(--line);background:rgba(255,255,255,.06);color:white;
-      padding:10px 13px;border-radius:999px;font-weight:700;font-size:12px;
+
+    .agent{display:flex;gap:12px;align-items:center;}
+
+    .agent-avatar{
+      width:46px;height:46px;border-radius:50%;
+      display:grid;place-items:center;
+      background:linear-gradient(145deg,#1b46ff,#00d4ff);
+      font-weight:800;
+    }
+
+    .agent h3{font-size:16px;}
+    .agent p{font-size:12px;color:var(--muted);margin-top:3px;}
+
+    .top-actions{display:flex;gap:10px;align-items:center;}
+
+    .pill{
+      padding:9px 13px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.055);
+      color:#d8e7ff;
+      font-size:12px;
+      font-weight:700;
     }
 
     .messages{
-      flex:1;overflow-y:auto;padding:24px;
+      flex:1;
+      padding:24px;
+      overflow-y:auto;
       scroll-behavior:smooth;
     }
-    .messages::-webkit-scrollbar{width:8px}.messages::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:999px}
 
-    .msg-row{display:flex;margin-bottom:14px;gap:10px;align-items:flex-end}
-    .msg-row.user{justify-content:flex-end}
-    .msg{
-      max-width:min(680px,82%);
-      border-radius:22px;
-      padding:14px 16px;
-      line-height:1.65;
-      font-size:14px;
-      white-space:pre-wrap;
-      word-break:break-word;
+    .welcome{
+      max-width:740px;
+      margin:0 auto 22px;
+      text-align:center;
+      padding:10px 0 18px;
     }
-    .msg.bot{background:rgba(255,255,255,.075);border:1px solid var(--line);border-bottom-left-radius:8px;color:#ecf4ff}
-    .msg.user{background:linear-gradient(135deg,var(--blue),#1c9dff);border-bottom-right-radius:8px;color:white;box-shadow:0 12px 28px rgba(47,107,255,.2)}
-    .avatar-sm{width:34px;height:34px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--cyan));font-weight:800;flex:0 0 auto}
 
-    .typing{display:none;color:var(--muted);font-size:13px;padding:0 24px 12px}.typing.active{display:block}
+    .welcome h1{font-size:32px;line-height:1.25;letter-spacing:-.8px;}
+    .welcome p{margin-top:10px;color:var(--muted);line-height:1.7;font-size:14px;}
+
+    .msg{
+      width:fit-content;
+      max-width:76%;
+      padding:14px 16px;
+      margin:12px 0;
+      border-radius:18px;
+      font-size:14px;
+      line-height:1.65;
+      white-space:pre-wrap;
+      word-wrap:break-word;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .msg.user{
+      margin-left:auto;
+      border-bottom-right-radius:6px;
+      background:linear-gradient(135deg,#245fff,#00aee8);
+      color:white;
+    }
+
+    .msg.bot{
+      border-bottom-left-radius:6px;
+      background:rgba(255,255,255,.065);
+      color:#edf6ff;
+    }
+
+    .typing{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+    }
+
+    .typing span{
+      width:7px;height:7px;border-radius:50%;background:#9ecfff;opacity:.4;
+      animation:bounce 1s infinite ease-in-out;
+    }
+    .typing span:nth-child(2){animation-delay:.15s}
+    .typing span:nth-child(3){animation-delay:.3s}
+
+    @keyframes bounce{0%,80%,100%{transform:translateY(0);opacity:.35}40%{transform:translateY(-5px);opacity:1}}
 
     .quick-replies{
+      display:flex;
+      gap:9px;
+      overflow-x:auto;
       padding:0 24px 14px;
-      display:flex;gap:10px;flex-wrap:wrap;
     }
+
     .quick-replies button{
-      border:1px solid var(--line);background:rgba(255,255,255,.06);color:#eaf2ff;
-      padding:10px 13px;border-radius:999px;font-weight:700;font-size:12px;
+      flex:0 0 auto;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.055);
+      color:#dceaff;
+      padding:10px 13px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:12px;
     }
 
-    .chat-input{
+    .composer{
+      padding:16px 24px 22px;
       border-top:1px solid var(--line);
-      padding:17px 20px;
-      display:flex;gap:12px;align-items:center;
-      background:rgba(0,0,0,.14);
-    }
-    .chat-input input{
-      flex:1;height:54px;border:none;outline:none;color:white;
-      background:rgba(255,255,255,.075);border:1px solid var(--line);
-      border-radius:18px;padding:0 17px;font-size:14px;
-    }
-    .chat-input button{
-      height:54px;border:none;border-radius:18px;padding:0 22px;
-      color:white;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--cyan));
+      background:rgba(3,8,22,.34);
     }
 
-    @media(max-width:900px){
-      body{overflow:auto}
-      .app{align-items:flex-start;min-height:100vh}
-      .login-shell{grid-template-columns:1fr;max-width:520px}
-      .hero-card{min-height:auto;padding:28px}.hero-title{font-size:38px}.trust-strip{position:static;margin-top:28px}
-      .chat-shell{height:calc(100vh - 30px);grid-template-columns:1fr}
-      .sidebar{display:none}.chat-header{padding:16px}.messages{padding:16px}.quick-replies{padding:0 16px 12px}.chat-input{padding:13px}
-      .mini-btn.hide-mobile{display:none}
+    .composer-box{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:24px;
+      padding:8px;
     }
 
-    @media(max-width:520px){
-      .app{padding:14px}.login-card{padding:24px;border-radius:26px}.hero-card{border-radius:26px}.pill-grid{grid-template-columns:1fr}.hero-title{font-size:32px}.msg{max-width:88%;font-size:13px}.chat-input button{padding:0 16px}
+    .composer-box input{
+      border:0;
+      background:transparent;
+      height:48px;
+      font-size:14px;
+    }
+
+    .send-btn{
+      width:48px;height:48px;border-radius:50%;border:0;cursor:pointer;
+      background:#fff;color:#081329;font-size:20px;font-weight:900;
+    }
+
+    .disclaimer{
+      margin-top:10px;
+      text-align:center;
+      font-size:11px;
+      color:#7488b2;
+    }
+
+    @media(max-width:860px){
+      body{overflow:auto;}
+      .app{align-items:flex-start;min-height:auto;}
+      .chat-shell{
+        height:calc(100vh - 28px);
+        grid-template-columns:1fr;
+        border-radius:24px;
+      }
+      .sidebar{display:none;}
+      .chat-top{height:auto;padding:16px;gap:10px;}
+      .top-actions{display:none;}
+      .messages{padding:16px;}
+      .welcome h1{font-size:24px;}
+      .msg{max-width:90%;font-size:13px;}
+      .quick-replies{padding:0 16px 12px;}
+      .composer{padding:12px 16px 16px;}
     }
   </style>
 </head>
 <body>
   <main class="app">
     <section id="loginScreen" class="screen active">
-      <div class="login-shell">
-        <div class="hero-card">
-          <div class="brand-row">
-            <div class="brand-badge">F</div>
-            <div>
-              <h1>Fransiska AI</h1>
-              <p>Asisten CS Digital • Online 24 Jam</p>
-            </div>
-          </div>
-
-          <h2 class="hero-title">Livechat premium untuk bantu <span>member lebih cepat.</span></h2>
-          <p class="hero-desc">
-            Fransiska AI siap membantu pertanyaan umum seputar akun, deposit, withdraw, promo, slot, casino, sportsbook, parlay, dan kendala teknis dengan gaya admin CS yang rapi, ramah, dan profesional.
-          </p>
-
-          <div class="pill-grid">
-            <div class="pill"><strong>⚡ Respon Cepat</strong><small>Bantu arahkan member tanpa bikin chat terasa kaku.</small></div>
-            <div class="pill"><strong>🎰 Info Game</strong><small>Penjelasan umum slot, casino, sportsbook, dan bola.</small></div>
-            <div class="pill"><strong>🛡️ Aman & Profesional</strong><small>Tidak menjanjikan kemenangan atau pola pasti.</small></div>
-            <div class="pill"><strong>💬 Bahasa CS</strong><small>Ramah, sopan, singkat, dan mudah dipahami member.</small></div>
-          </div>
-
-          <div class="trust-strip">
-            <span><span class="online-dot"></span>CS Online</span>
-            <span>Deposit & Withdraw</span>
-            <span>Promo & Bonus</span>
-            <span>Support Game</span>
-          </div>
+      <div class="login-wrap">
+        <div class="brand-head">
+          <div class="brand-badge">F</div>
+          <h1>Fransiska AI</h1>
+          <p>Virtual Customer Support • Slot • Casino • Bola</p>
         </div>
 
-        <div class="login-card">
-          <h2>Login Member</h2>
-          <p class="sub">Masukkan username dan kode akses untuk masuk ke halaman livechat.</p>
-
-          <div class="form-group">
-            <label for="usernameInput">Username Member</label>
-            <input id="usernameInput" type="text" placeholder="Contoh: kak_siska88" autocomplete="username" />
+        <div class="login-card glass">
+          <div class="chip-row">
+            <span class="chip">24 Jam Online</span>
+            <span class="chip">Fast Response</span>
+            <span class="chip">CS Profesional</span>
           </div>
 
-          <div class="form-group">
+          <div class="field">
+            <label for="usernameInput">Username Member</label>
+            <input id="usernameInput" type="text" placeholder="Masukkan username kamu" autocomplete="username" />
+          </div>
+
+          <div class="field">
             <label for="passwordInput">Kode / Password</label>
             <input id="passwordInput" type="password" placeholder="Masukkan kode akses" autocomplete="current-password" />
           </div>
 
           <button id="loginBtn" class="primary-btn">Masuk ke Livechat</button>
 
-          <div class="helper-row">
-            <span>Belum punya akun?</span>
-            <a href="https://click-lynk.com/CLICKBET88_WL" target="_blank" rel="noopener">Daftar di sini</a>
-          </div>
-
-          <p class="note">
-            Demo front-end: login ini belum terhubung database member. Untuk production, hubungkan ke backend agar data akun dan riwayat chat lebih aman.
+          <p class="login-note">
+            Belum punya akun? <a href="https://click-lynk.com/CLICKBET88_WL" target="_blank" rel="noopener">Daftar di sini</a><br>
+            Demo front-end: validasi login & database member belum aktif.
           </p>
         </div>
       </div>
     </section>
 
     <section id="chatScreen" class="screen">
-      <div class="chat-shell">
+      <div class="chat-shell glass">
         <aside class="sidebar">
-          <div class="side-top">
-            <div class="brand-badge">F</div>
+          <div class="side-brand">
+            <div class="mini-badge">F</div>
             <div>
               <h2>Fransiska AI</h2>
               <p><span class="online-dot"></span>Online 24 Jam</p>
@@ -406,51 +480,66 @@
           </div>
 
           <div class="status-card">
-            <strong>Mode Admin CS</strong>
-            <p>Jawaban dibuat sopan, jelas, dan tidak menjanjikan hasil permainan. Untuk kendala akun sensitif, member diarahkan ke admin resmi.</p>
+            <b>Mode Admin CS</b>
+            <p>Jawaban dibuat sopan, jelas, dan fokus membantu member terkait informasi akun, transaksi, game, bonus, dan kendala umum.</p>
           </div>
 
-          <div class="topic-title">Topik Cepat</div>
-          <div class="topic-list">
-            <button class="topic-btn" data-question="Bagaimana cara daftar akun baru?">Cara Daftar</button>
-            <button class="topic-btn" data-question="Bagaimana cara deposit yang benar?">Cara Deposit</button>
-            <button class="topic-btn" data-question="Bagaimana cara withdraw dan estimasi prosesnya?">Cara Withdraw</button>
-            <button class="topic-btn" data-question="Info promo dan bonus yang tersedia apa saja?">Promo Bonus</button>
-            <button class="topic-btn" data-question="Jelaskan perbedaan slot, casino, sportsbook, dan parlay secara singkat.">Info Game</button>
-            <button class="topic-btn" data-question="Saya lupa password, harus bagaimana?">Lupa Password</button>
+          <div>
+            <div class="menu-title">Topik Bantuan</div>
+            <div class="topic-list" style="margin-top:10px;">
+              <button class="topic-btn" data-question="Bagaimana cara daftar akun baru?">📝 Cara Daftar</button>
+              <button class="topic-btn" data-question="Bagaimana cara deposit dan berapa lama prosesnya?">💳 Deposit</button>
+              <button class="topic-btn" data-question="Bagaimana cara withdraw dan estimasi prosesnya?">🏦 Withdraw</button>
+              <button class="topic-btn" data-question="Info promo bonus yang sedang tersedia">🎁 Promo Bonus</button>
+              <button class="topic-btn" data-question="Saya lupa password, apa yang harus saya lakukan?">🔐 Lupa Password</button>
+              <button class="topic-btn" data-question="Apa saja informasi untuk sportsbook dan parlay?">⚽ Bola / Parlay</button>
+            </div>
           </div>
 
           <button id="logoutBtn" class="logout-btn">Keluar</button>
         </aside>
 
-        <div class="chat-main">
-          <header class="chat-header">
-            <div>
-              <h3>Livechat Fransiska AI</h3>
-              <p id="memberGreeting"><span class="online-dot"></span>Siap bantu member dengan profesional</p>
+        <section class="chat-main">
+          <header class="chat-top">
+            <div class="agent">
+              <div class="agent-avatar">F</div>
+              <div>
+                <h3>Fransiska AI Customer Support</h3>
+                <p><span class="online-dot"></span>Siap membantu dengan bahasa profesional</p>
+              </div>
             </div>
-            <div class="header-actions">
-              <button id="clearBtn" class="mini-btn hide-mobile">New Chat</button>
-              <button id="mobileLogoutBtn" class="mini-btn">Keluar</button>
+            <div class="top-actions">
+              <span class="pill">Slot</span>
+              <span class="pill">Casino</span>
+              <span class="pill">Sportsbook</span>
             </div>
           </header>
 
-          <div id="messages" class="messages"></div>
-          <div id="typing" class="typing">Fransiska AI sedang mengetik...</div>
+          <div id="messages" class="messages">
+            <div class="welcome">
+              <h1>Selamat datang, Kak <span id="memberName">Member</span> 👋</h1>
+              <p>Silakan pilih topik bantuan atau tulis pertanyaan. Fransiska AI akan bantu menjawab seperti admin CS yang rapi, ramah, dan profesional.</p>
+            </div>
+            <div class="msg bot">Halo Kak, aku Fransiska AI. Ada yang bisa aku bantu hari ini?</div>
+          </div>
 
           <div class="quick-replies">
             <button data-question="cara daftar">Cara Daftar</button>
             <button data-question="cara deposit">Deposit</button>
             <button data-question="cara withdraw">Withdraw</button>
             <button data-question="promo bonus">Promo</button>
-            <button data-question="slot casino bola">Game</button>
+            <button data-question="lupa password">Lupa Password</button>
+            <button data-question="kendala permainan slot casino bola">Kendala Game</button>
           </div>
 
-          <footer class="chat-input">
-            <input id="messageInput" type="text" placeholder="Tulis pertanyaan kamu di sini..." />
-            <button id="sendBtn">Kirim</button>
+          <footer class="composer">
+            <div class="composer-box">
+              <input id="messageInput" type="text" placeholder="Tulis pertanyaan kamu di sini..." />
+              <button id="sendBtn" class="send-btn">↑</button>
+            </div>
+            <div class="disclaimer">Untuk perubahan data akun/transaksi, admin tetap perlu verifikasi username dan bukti terkait.</div>
           </footer>
-        </div>
+        </section>
       </div>
     </section>
   </main>
@@ -460,62 +549,49 @@
     const chatScreen = document.getElementById('chatScreen');
     const loginBtn = document.getElementById('loginBtn');
     const logoutBtn = document.getElementById('logoutBtn');
-    const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
-    const clearBtn = document.getElementById('clearBtn');
     const usernameInput = document.getElementById('usernameInput');
     const passwordInput = document.getElementById('passwordInput');
+    const memberName = document.getElementById('memberName');
     const messages = document.getElementById('messages');
     const messageInput = document.getElementById('messageInput');
     const sendBtn = document.getElementById('sendBtn');
-    const typing = document.getElementById('typing');
-    const memberGreeting = document.getElementById('memberGreeting');
 
-    let memberName = 'Kak';
-
-    const faq = [
+    const knowledgeBase = [
       {
         keys:['daftar','registrasi','buat akun','akun baru'],
-        answer:'Untuk daftar akun baru, Kakak bisa klik menu Daftar, isi data yang diminta dengan benar, lalu pastikan nomor rekening/e-wallet sesuai nama akun. Setelah akun aktif, Kakak bisa login dan mulai cek menu deposit.'
+        answer:`Untuk daftar akun baru, Kakak bisa klik tombol daftar yang tersedia di halaman utama. Setelah itu isi data dengan benar seperti username, password, nomor aktif, dan rekening/e-wallet yang digunakan.\n\nPastikan data sesuai agar proses deposit, withdraw, dan verifikasi lebih lancar ya Kak.`
       },
       {
-        keys:['deposit','depo','isi saldo','top up'],
-        answer:'Untuk deposit, silakan login akun, pilih menu Deposit, pilih metode pembayaran yang tersedia, lalu ikuti nominal dan tujuan pembayaran yang tampil. Setelah transfer berhasil, simpan bukti pembayaran jika sewaktu-waktu dibutuhkan untuk pengecekan.'
+        keys:['deposit','depo','isi saldo','top up','transfer'],
+        answer:`Untuk deposit, Kakak bisa masuk ke akun lalu pilih menu Deposit. Pilih metode pembayaran yang tersedia, isi nominal, lalu ikuti instruksi pembayaran.\n\nJika saldo belum masuk setelah transfer, mohon siapkan username, nominal, metode pembayaran, jam transfer, dan bukti transfer agar bisa dibantu pengecekan oleh admin.`
       },
       {
-        keys:['withdraw','wd','tarik dana','penarikan'],
-        answer:'Untuk withdraw, pastikan data rekening/e-wallet sudah sesuai dengan akun. Masuk ke menu Withdraw, isi nominal, lalu submit. Proses bisa berbeda tergantung antrean dan validasi sistem. Jika status terlalu lama pending, Kakak bisa hubungi admin resmi untuk pengecekan.'
+        keys:['withdraw','wd','tarik dana','penarikan','cair'],
+        answer:`Untuk withdraw, Kakak bisa masuk ke menu Withdraw, isi nominal penarikan, lalu pastikan rekening/e-wallet tujuan sudah benar.\n\nProses WD biasanya mengikuti antrean dan validasi sistem. Jika ada kendala, mohon infokan username, nominal WD, dan jam pengajuan agar admin bisa bantu cek statusnya.`
       },
       {
-        keys:['promo','bonus','rollingan','cashback','komisi'],
-        answer:'Untuk promo dan bonus, Kakak bisa cek menu Promo karena syarat setiap bonus bisa berbeda, seperti minimal deposit, turnover, periode klaim, dan game yang berlaku. Baca syaratnya dulu ya supaya klaim bonus tidak gagal.'
+        keys:['bonus','promo','rollingan','cashback','event'],
+        answer:`Untuk promo dan bonus, Kakak bisa cek halaman Promo/Event yang sedang aktif. Setiap promo biasanya punya syarat berbeda seperti minimal deposit, turnover, periode klaim, dan batas maksimal bonus.\n\nSebelum klaim, sebaiknya baca syarat & ketentuannya dulu agar tidak salah paham ya Kak.`
       },
       {
-        keys:['slot','rtp','provider','game slot'],
-        answer:'Untuk slot, Kakak bisa pilih provider dan game sesuai preferensi. Perlu diingat, hasil permainan bersifat acak dan tidak ada pola yang bisa menjamin menang. Saran profesionalnya: pakai batas modal, jangan kejar kekalahan, dan main sesuai kemampuan.'
+        keys:['lupa password','password','reset','tidak bisa login','login gagal'],
+        answer:`Jika Kakak lupa password atau tidak bisa login, mohon siapkan username dan data verifikasi yang diminta admin.\n\nDemi keamanan akun, password tidak bisa diberikan sembarangan tanpa verifikasi pemilik akun.`
       },
       {
-        keys:['casino','live casino','baccarat','roulette','blackjack'],
-        answer:'Untuk casino/live casino seperti baccarat, roulette, atau blackjack, pastikan koneksi stabil dan pahami aturan meja sebelum bermain. Jika terjadi kendala bet, screenshot ID ronde dan detail transaksi agar admin bisa bantu cek lebih cepat.'
+        keys:['slot','casino','baccarat','live casino','game'],
+        answer:`Untuk kategori Slot dan Casino, Kakak bisa pilih provider/game yang tersedia di lobby. Jika game tidak bisa dibuka, saldo tidak terbaca, atau hasil belum update, coba refresh halaman, login ulang, atau ganti jaringan terlebih dahulu.\n\nJika masih terkendala, kirim username, nama game, provider, jam kejadian, dan screenshot kendala agar admin bisa bantu cek lebih cepat.`
       },
       {
         keys:['bola','sportsbook','sportbook','parlay','mix parlay','taruhan bola'],
-        answer:'Untuk sportsbook/bola, Kakak bisa pilih pertandingan, market, dan odds yang tersedia. Untuk parlay, beberapa pilihan digabung dalam satu tiket sehingga semua pilihan harus sesuai hasil agar tiket menang. Pastikan cek jam pertandingan dan odds sebelum submit.'
+        answer:`Untuk Sportsbook/Bola, Kakak bisa cek market yang tersedia sebelum memasang pilihan. Pastikan membaca detail match, odds, handicap/over-under, dan status pertandingan sebelum konfirmasi.\n\nJika ada bet yang belum settlement, mohon infokan username, nomor tiket/bet ID, nama pertandingan, dan jam pemasangan agar admin bisa bantu cek ke provider.`
       },
       {
-        keys:['lupa password','password','reset pass','tidak bisa login','gagal login'],
-        answer:'Jika lupa password atau tidak bisa login, silakan gunakan fitur lupa password jika tersedia. Jika belum berhasil, hubungi admin resmi dengan menyertakan username dan data verifikasi yang diminta. Jangan bagikan password ke pihak lain ya, Kak.'
-      },
-      {
-        keys:['maintenance','gangguan','error','pending','kendala'],
-        answer:'Mohon maaf atas kendalanya, Kak. Untuk pengecekan lebih cepat, boleh info username, jenis kendala, waktu kejadian, nama game/provider, dan screenshot jika ada. Nanti admin bisa bantu cek sesuai data tersebut.'
+        keys:['maintenance','gangguan','error','pending','kendala','provider'],
+        answer:`Mohon maaf atas kendalanya ya Kak. Untuk pengecekan lebih akurat, Kakak bisa kirim detail berikut:\n\n1. Username\n2. Jenis kendala\n3. Nama game/provider\n4. Jam kejadian\n5. Screenshot atau bukti transaksi\n\nNanti admin bisa bantu teruskan pengecekan sesuai data tersebut.`
       }
     ];
 
-    const fallbackAnswers = [
-      'Baik Kak, untuk pertanyaan tersebut aku bantu jelaskan secara umum ya. Kalau berkaitan dengan data akun, transaksi, atau kendala spesifik, sebaiknya Kakak siapkan username, jam kejadian, dan screenshot agar admin resmi bisa cek lebih akurat.',
-      'Siap Kak. Secara umum kami bisa bantu info seputar akun, deposit, withdraw, promo, slot, casino, dan sportsbook. Untuk data sensitif seperti saldo, password, atau mutasi transaksi, mohon lanjutkan lewat admin resmi agar lebih aman.',
-      'Baik Kak, aku bantu arahkan. Boleh jelaskan kendalanya lebih detail, misalnya menu yang dibuka, provider/game, nominal transaksi, atau pesan error yang muncul?'
-    ];
+    const adminFallback = `Baik Kak, untuk pertanyaan tersebut admin perlu cek data lebih detail terlebih dahulu.\n\nMohon bantu kirim username, kronologi singkat, jam kejadian, dan screenshot jika ada, supaya proses pengecekan lebih cepat dan tidak salah data ya Kak.`;
 
     function sanitize(text){
       const div = document.createElement('div');
@@ -523,17 +599,69 @@
       return div.innerHTML;
     }
 
-    function addMessage(text,type='bot'){
-      const row = document.createElement('div');
-      row.className = `msg-row ${type}`;
+    function login(){
+      const username = usernameInput.value.trim() || 'Member';
+      memberName.textContent = username;
+      loginScreen.classList.remove('active');
+      chatScreen.classList.add('active');
+      setTimeout(() => messageInput.focus(), 100);
+    }
 
-      if(type === 'bot'){
-        const avatar = document.createElement('div');
-        avatar.className = 'avatar-sm';
-        avatar.textContent = 'F';
-        row.appendChild(avatar);
-      }
+    function logout(){
+      chatScreen.classList.remove('active');
+      loginScreen.classList.add('active');
+      passwordInput.value = '';
+    }
 
-      const bubble = document.createElement('div');
-      bubble.className = `msg ${type}`;
-      bubble.innerHTML = sanitize(text); 
+    function addMessage(text, type){
+      const msg = document.createElement('div');
+      msg.className = `msg ${type}`;
+      msg.innerHTML = sanitize(text);
+      messages.appendChild(msg);
+      messages.scrollTop = messages.scrollHeight;
+      return msg;
+    }
+
+    function showTyping(){
+      const msg = document.createElement('div');
+      msg.className = 'msg bot';
+      msg.innerHTML = `<span class="typing"><span></span><span></span><span></span></span>`;
+      messages.appendChild(msg);
+      messages.scrollTop = messages.scrollHeight;
+      return msg;
+    }
+
+    function getBotReply(question){
+      const q = question.toLowerCase();
+      const found = knowledgeBase.find(item => item.keys.some(key => q.includes(key)));
+      return found ? found.answer : adminFallback;
+    }
+
+    function sendMessage(customQuestion){
+      const question = (customQuestion || messageInput.value).trim();
+      if(!question) return;
+
+      addMessage(question, 'user');
+      messageInput.value = '';
+
+      const typing = showTyping();
+      setTimeout(() => {
+        typing.remove();
+        addMessage(getBotReply(question), 'bot');
+      }, 520);
+    }
+
+    loginBtn.addEventListener('click', login);
+    logoutBtn.addEventListener('click', logout);
+    sendBtn.addEventListener('click', () => sendMessage());
+
+    usernameInput.addEventListener('keydown', e => { if(e.key === 'Enter') passwordInput.focus(); });
+    passwordInput.addEventListener('keydown', e => { if(e.key === 'Enter') login(); });
+    messageInput.addEventListener('keydown', e => { if(e.key === 'Enter') sendMessage(); });
+
+    document.querySelectorAll('[data-question]').forEach(btn => {
+      btn.addEventListener('click', () => sendMessage(btn.dataset.question));
+    });
+  </script>
+</body>
+</html>
