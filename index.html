@@ -1,5 +1,6 @@
 
 
+
 <!doctype html>
 <html lang="id">
 <head>
@@ -15,8 +16,7 @@
       --logo-url: url("https://clickbet88sedekahrejeki.xyz/storage/webpersonalize/d54f5304-03b3-49f7-b283-e6fe0c595ca7.gif");
       --mobile-bg: url("http://plcl.me/images/Essxn.jpg");
       --desktop-bg: url("http://plcl.me/images/CLQHg.jpg");
-      --banner-bg: url("http://plcl.me/images/RVYyJ.jpg");
-      --moment-bg: url("http://plcl.me/images/payT3.jpg");
+      --banner-bg: url("http://plcl.me/images/KDRZX.jpg");
       --gold: #ffd76a;
       --gold2: #f59e0b;
       --blue: #0ea5e9;
@@ -1487,6 +1487,53 @@
       }
     }
 
+
+    /* ===== FINAL BANNER FIX - FULL FIT TANPA RUANG KOSONG ===== */
+    .hero,
+    .hero.compact,
+    .login-wrap .hero,
+    .dashboard-hero-clean,
+    #leaderboardPage .hero.compact {
+      background:
+        linear-gradient(rgba(2, 6, 23, 0.10), rgba(2, 6, 23, 0.62)),
+        var(--banner-bg) center center / 100% 100% no-repeat,
+        linear-gradient(145deg, #06133d, #020817) !important;
+      background-repeat: no-repeat !important;
+    }
+
+    .hero.compact {
+      padding: 22px 18px !important;
+      min-height: 230px !important;
+    }
+
+    .login-wrap .hero {
+      min-height: 230px !important;
+      justify-content: center !important;
+    }
+
+    .dashboard-hero-clean {
+      min-height: 250px !important;
+    }
+
+    #leaderboardPage .hero.compact {
+      min-height: 170px !important;
+    }
+
+    @media (max-width: 420px) {
+      .hero.compact,
+      .login-wrap .hero {
+        min-height: 220px !important;
+      }
+
+      .dashboard-hero-clean {
+        min-height: 245px !important;
+      }
+
+      #leaderboardPage .hero.compact {
+        min-height: 165px !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -2732,5 +2779,83 @@ function showSuccessToast(match, prediction, stockLeft) {
 
     loadMatches();
   </script>
+
+
+<!-- WORLD CUP MUSIC PLAYER -->
+<button id="musicBtn" class="music-btn" type="button" aria-label="Music Toggle">🔇</button>
+
+<audio id="bgMusic" loop preload="none">
+  <source src="https://files.catbox.moe/d24pz1.mp3" type="audio/mpeg">
+</audio>
+
+<style>
+  .music-btn {
+    position: fixed;
+    left: 15px;
+    bottom: 85px;
+    width: 52px;
+    height: 52px;
+    border: none;
+    border-radius: 50%;
+    z-index: 99999;
+    cursor: pointer;
+    font-size: 20px;
+    color: #111827;
+    background: linear-gradient(135deg, #ffd76a, #f59e0b);
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.45);
+    transition: 0.25s ease;
+  }
+
+  .music-btn:hover {
+    transform: scale(1.08);
+  }
+</style>
+
+<script>
+  const music = document.getElementById("bgMusic");
+  const musicBtn = document.getElementById("musicBtn");
+  let musicStarted = false;
+
+  function playWorldCupMusic() {
+    if (!musicStarted) {
+      musicStarted = true;
+      music.play()
+        .then(() => {
+          musicBtn.innerHTML = "🔊";
+        })
+        .catch(() => {
+          musicStarted = false;
+          musicBtn.innerHTML = "🔇";
+        });
+    }
+  }
+
+  document.addEventListener(
+    "click",
+    function () {
+      playWorldCupMusic();
+    },
+    { once: true }
+  );
+
+  musicBtn.addEventListener("click", function (event) {
+    event.stopPropagation();
+
+    if (music.paused) {
+      music.play()
+        .then(() => {
+          musicStarted = true;
+          musicBtn.innerHTML = "🔊";
+        })
+        .catch(() => {
+          musicBtn.innerHTML = "🔇";
+        });
+    } else {
+      music.pause();
+      musicBtn.innerHTML = "🔇";
+    }
+  });
+</script>
+
 </body>
 </html>
