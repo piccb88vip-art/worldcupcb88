@@ -1,6 +1,7 @@
 
 
 
+
 <!doctype html>
 <html lang="id">
 <head>
@@ -1534,7 +1535,135 @@
       }
     }
 
-  </style>
+  
+/* ===== WORLD CUP START COUNTDOWN + PREMIUM MUSIC BUTTON ===== */
+.worldcup-start-countdown {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 18px;
+  position: relative;
+  z-index: 1;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 106, 0.16), rgba(14, 165, 233, 0.08)),
+    rgba(2, 8, 32, 0.56);
+  border: 1px solid rgba(255, 215, 106, 0.26);
+  box-shadow:
+    inset 0 0 18px rgba(255, 255, 255, 0.03),
+    0 0 22px rgba(255, 215, 106, 0.10);
+  backdrop-filter: blur(8px);
+}
+
+.countdown-kicker {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.45px;
+  color: #fff7d6;
+  margin-bottom: 9px;
+  text-shadow: 0 0 12px rgba(255, 215, 106, 0.28);
+}
+
+.countdown-time-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+
+.countdown-time-card {
+  text-align: center;
+  padding: 8px 4px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.075);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.countdown-time-card strong {
+  display: block;
+  font-size: 20px;
+  line-height: 1;
+  color: #ffd76a;
+  font-weight: 900;
+}
+
+.countdown-time-card span {
+  display: block;
+  margin-top: 5px;
+  font-size: 8px;
+  color: #dbeafe;
+  font-weight: 900;
+}
+
+.countdown-note {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 10px;
+  color: #bfdbfe;
+  font-weight: 700;
+}
+
+.music-btn {
+  position: fixed !important;
+  left: 18px !important;
+  bottom: 86px !important;
+  width: 68px !important;
+  height: 68px !important;
+  border: none !important;
+  border-radius: 50% !important;
+  z-index: 99999 !important;
+  cursor: pointer !important;
+  font-size: 28px !important;
+  color: #111827 !important;
+  background:
+    radial-gradient(circle at 30% 25%, #fff7c2, #ffd76a 34%, #f59e0b 78%) !important;
+  box-shadow:
+    0 0 0 4px rgba(255, 215, 106, 0.13),
+    0 0 26px rgba(245, 158, 11, 0.58),
+    0 12px 26px rgba(0, 0, 0, 0.42) !important;
+  transition: transform .22s ease, box-shadow .22s ease !important;
+}
+
+.music-btn:hover {
+  transform: scale(1.07) !important;
+  box-shadow:
+    0 0 0 5px rgba(255, 215, 106, 0.18),
+    0 0 34px rgba(245, 158, 11, 0.72),
+    0 14px 30px rgba(0, 0, 0, 0.48) !important;
+}
+
+.music-btn.playing {
+  animation: musicPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@media (max-width: 420px) {
+  .worldcup-start-countdown {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 16px;
+  }
+
+  .countdown-time-card strong {
+    font-size: 17px;
+  }
+
+  .music-btn {
+    width: 62px !important;
+    height: 62px !important;
+    font-size: 25px !important;
+    left: 14px !important;
+    bottom: 82px !important;
+  }
+}
+
+</style>
 </head>
 
 <body>
@@ -1600,6 +1729,37 @@ JANGAN LEWATKAN HADIAH MENARIK DARI CLICKBET88
         <p class="dashboard-subtitle">
           Member area event World Cup 2026 CLICKBET88.
         </p>
+
+        <div class="worldcup-start-countdown" id="worldcupStartCountdown">
+          <div class="countdown-kicker">⏳ PIALA DUNIA DIMULAI DALAM</div>
+
+          <div class="countdown-time-grid">
+            <div class="countdown-time-card">
+              <strong id="wcDays">00</strong>
+              <span>HARI</span>
+            </div>
+
+            <div class="countdown-time-card">
+              <strong id="wcHours">00</strong>
+              <span>JAM</span>
+            </div>
+
+            <div class="countdown-time-card">
+              <strong id="wcMinutes">00</strong>
+              <span>MENIT</span>
+            </div>
+
+            <div class="countdown-time-card">
+              <strong id="wcSeconds">00</strong>
+              <span>DETIK</span>
+            </div>
+          </div>
+
+          <div class="countdown-note" id="wcCountdownNote">
+            Kickoff pertama mulai 12 Juni 2026.
+          </div>
+        </div>
+
 
         <div class="member-card">
           <div class="member-box">
@@ -2849,10 +3009,58 @@ function showSuccessToast(match, prediction, stockLeft) {
   </script>
 
 
+
+
+<script>
+  const worldCupKickoff = new Date("2026-06-12T02:00:00+07:00").getTime();
+
+  function padCountdownNumber(value) {
+    return String(value).padStart(2, "0");
+  }
+
+  function updateWorldCupCountdown() {
+    const now = new Date().getTime();
+    const distance = worldCupKickoff - now;
+
+    const dayEl = document.getElementById("wcDays");
+    const hourEl = document.getElementById("wcHours");
+    const minuteEl = document.getElementById("wcMinutes");
+    const secondEl = document.getElementById("wcSeconds");
+    const noteEl = document.getElementById("wcCountdownNote");
+
+    if (!dayEl || !hourEl || !minuteEl || !secondEl) return;
+
+    if (distance <= 0) {
+      dayEl.textContent = "00";
+      hourEl.textContent = "00";
+      minuteEl.textContent = "00";
+      secondEl.textContent = "00";
+
+      if (noteEl) {
+        noteEl.textContent = "Piala Dunia 2026 sudah dimulai. Saatnya submit prediksi!";
+      }
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    dayEl.textContent = padCountdownNumber(days);
+    hourEl.textContent = padCountdownNumber(hours);
+    minuteEl.textContent = padCountdownNumber(minutes);
+    secondEl.textContent = padCountdownNumber(seconds);
+  }
+
+  updateWorldCupCountdown();
+  setInterval(updateWorldCupCountdown, 1000);
+</script>
+
 <!-- WORLD CUP MUSIC PLAYER -->
 <button id="musicBtn" class="music-btn" type="button" aria-label="Music Toggle">🔇</button>
 
-<audio id="bgMusic" loop preload="auto">
+<audio id="bgMusic" loop preload="auto" playsinline>
   <source src="./music.mp3.mp3" type="audio/mpeg">
 </audio>
 
@@ -2862,11 +3070,20 @@ function showSuccessToast(match, prediction, stockLeft) {
   let musicStarted = false;
 
   function updateMusicIcon() {
-    musicBtn.innerHTML = music.paused ? "🔇" : "🔊";
+    if (!musicBtn || !music) return;
+
+    if (music.paused) {
+      musicBtn.innerHTML = "🔇";
+      musicBtn.classList.remove("playing");
+    } else {
+      musicBtn.innerHTML = "🔊";
+      musicBtn.classList.add("playing");
+    }
   }
 
   async function toggleMusic(event) {
     if (event) event.stopPropagation();
+    if (!music || !musicBtn) return;
 
     try {
       if (music.paused) {
@@ -2878,17 +3095,29 @@ function showSuccessToast(match, prediction, stockLeft) {
         music.pause();
       }
     } catch (err) {
+      musicStarted = false;
+      musicBtn.innerHTML = "🔇";
       alert("Musik gagal diputar. Coba refresh halaman lalu klik tombol musik lagi.");
     }
 
     updateMusicIcon();
   }
 
-  musicBtn.addEventListener("click", toggleMusic);
+  if (musicBtn) {
+    musicBtn.addEventListener("click", toggleMusic);
+  }
 
   document.addEventListener("click", function () {
-    if (!musicStarted) toggleMusic();
+    if (!musicStarted) {
+      toggleMusic();
+    }
   }, { once: true });
+
+  if (music) {
+    music.addEventListener("play", updateMusicIcon);
+    music.addEventListener("pause", updateMusicIcon);
+    music.addEventListener("ended", updateMusicIcon);
+  }
 </script>
 
 </body>
