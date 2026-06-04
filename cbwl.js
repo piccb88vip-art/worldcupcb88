@@ -1,221 +1,89 @@
+(function(){
+  var html = `
 <style>
-  .cb-popup-wrap{
-    max-width:420px;
-    margin:auto;
-    font-family:Arial,sans-serif; 
-    background:#090909;
-    border:1px solid rgba(255,215,120,.45);
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 18px 45px rgba(0,0,0,.45);
-  }
-
-  .cb-popup-wrap input{display:none;}
-
-  .cb-header{
-    background:linear-gradient(90deg,#8b5a00,#ffd36a,#8b5a00);
-    color:#120800;
-    text-align:center;
-    padding:9px;
-    font-size:13px;
-    font-weight:900;
-  }
-
-  .cb-title span{display:none;}
-  #cb1:checked ~ .cb-header .t1,
-  #cb2:checked ~ .cb-header .t2,
-  #cb3:checked ~ .cb-header .t3{display:inline;}
-
-  .cb-slider-box{overflow:hidden;}
-
-  .cb-slider{
-    display:flex;
-    width:300%;
-    transition:.45s ease;
-  }
-
-  .cb-slide{
-    width:33.3333%;
-    background:#090909;
-  }
-
-  .cb-banner img{
-    width:100%;
-    display:block;
-  }
-
-  .cb-slide-action{
-    display:flex;
-    justify-content:center;
-    gap:7px;
-    padding:10px 10px 8px;
-    background:#090909;
-  }
-
-  .cb-btn{
-    width:105px;
-    text-align:center;
-    background:linear-gradient(135deg,#ffd36a,#b97818);
-    color:#230b00;
-    padding:7px 4px;
-    border-radius:999px;
-    font-size:9px;
-    font-weight:900;
-    text-decoration:none;
-    box-shadow:0 0 10px rgba(255,194,82,.34);
-    white-space:nowrap;
-  }
-
-  .cb-btn.tnc{
-    background:#161616;
-    color:#ffd36a;
-    border:1px solid rgba(255,211,106,.6);
-  }
-
-  .cb-btn.report{
-    background:linear-gradient(135deg,#ff4d4d,#8b0000);
-    color:#fff;
-    border:1px solid rgba(255,120,120,.65);
-  }
-
-  #cb1:checked ~ .cb-slider-box .cb-slider{transform:translateX(0);}
-  #cb2:checked ~ .cb-slider-box .cb-slider{transform:translateX(-33.3333%);}
-  #cb3:checked ~ .cb-slider-box .cb-slider{transform:translateX(-66.6666%);}
-
-  .cb-control{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:14px;
-    padding:9px 12px 14px;
-    background:#090909;
-  }
-
-  .cb-arrows label{
-    display:none;
-    width:30px;
-    height:30px;
-    border-radius:50%;
-    background:rgba(255,215,120,.18);
-    color:#ffd36a;
-    font-size:18px;
-    font-weight:900;
-    line-height:30px;
-    text-align:center;
-    cursor:pointer;
-  }
-
-  #cb1:checked ~ .cb-control .prev3,
-  #cb2:checked ~ .cb-control .prev1,
-  #cb3:checked ~ .cb-control .prev2,
-  #cb1:checked ~ .cb-control .next2,
-  #cb2:checked ~ .cb-control .next3,
-  #cb3:checked ~ .cb-control .next1{
-    display:block;
-  }
-
-  .cb-dots{
-    display:flex;
-    gap:7px;
-  }
-
-  .cb-dots label{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#666;
-    cursor:pointer;
-  }
-
-  #cb1:checked ~ .cb-control .dot1,
-  #cb2:checked ~ .cb-control .dot2,
-  #cb3:checked ~ .cb-control .dot3{
-    background:#ffd36a;
-    box-shadow:0 0 8px #ffd36a;
-  }
-
-  @media(max-width:480px){
-    .cb-popup-wrap{max-width:94vw;border-radius:15px;}
-    .cb-header{font-size:12px;padding:8px;}
-    .cb-slide-action{gap:5px;padding:9px 7px 7px;}
-    .cb-btn{width:96px;font-size:8.5px;padding:6px 3px;}
-    .cb-arrows label{width:28px;height:28px;line-height:28px;font-size:16px;}
-  }
+.cb-popup-wrap{max-width:420px;margin:auto;font-family:Arial,sans-serif;background:#090909;border-radius:15px;overflow:hidden}
+.cb-header{background:linear-gradient(90deg,#8b5a00,#ffd36a,#8b5a00);color:#120800;text-align:center;padding:9px;font-size:13px;font-weight:900}
+.cb-banner img{width:100%;display:block}
+.cb-action{display:flex;justify-content:center;gap:6px;padding:9px;background:#090909}
+.cb-btn{width:95px;text-align:center;background:linear-gradient(135deg,#ffd36a,#b97818);color:#230b00;padding:7px 4px;border-radius:99px;font-size:8px;font-weight:900;text-decoration:none}
+.cb-btn.tnc{background:#151515;color:#ffd36a;border:1px solid rgba(255,211,106,.6)}
+.cb-btn.report{background:linear-gradient(135deg,#ff4d4d,#8b0000);color:#fff}
+.cb-control{display:flex;justify-content:center;align-items:center;gap:14px;padding:8px 0 10px;background:#090909}
+.cb-nav{width:28px;height:28px;border-radius:50%;border:0;background:rgba(255,215,120,.2);color:#ffd36a;font-size:18px;font-weight:900}
+.cb-dot{width:7px;height:7px;border-radius:50%;background:#666;display:inline-block;margin:0 3px}
+.cb-dot.active{background:#ffd36a;box-shadow:0 0 8px #ffd36a}
+@media(max-width:480px){.cb-popup-wrap{max-width:94vw}.cb-header{font-size:12px}.cb-btn{width:88px;font-size:7.5px}}
 </style>
 
 <div class="cb-popup-wrap">
+  <div class="cb-header" id="cbTitle">⚽ WORLD CUP CHAMPIONSHIP ⚽</div>
 
-  <input type="radio" name="cbslide" id="cb1" checked>
-  <input type="radio" name="cbslide" id="cb2">
-  <input type="radio" name="cbslide" id="cb3">
-
-  <div class="cb-header">
-    <span class="cb-title">
-      <span class="t1">⚽WORLD CUP CHAMPIONSHIP⚽</span>
-      <span class="t2">⚽WORLD CUP PREDICTION CUP⚽</span>
-      <span class="t3">⚽WORLD CUP PENALTY SHOOTOUT⚽</span>
-    </span>
+  <div class="cb-banner">
+    <img id="cbImg" src="http://plcl.me/images/sY4EF.jpg" alt="World Cup Event">
   </div>
 
-  <div class="cb-slider-box">
-    <div class="cb-slider">
-
-      <div class="cb-slide">
-        <div class="cb-banner">
-          <img src="http://plcl.me/images/sY4EF.jpg" alt="World Cup Championship">
-        </div>
-        <div class="cb-slide-action">
-          <a class="cb-btn" href="https://click-lynk.com/JADWAL-BOLA" target="_blank">LIHAT EVENT</a>
-          <a class="cb-btn tnc" href="https://clickbet88sedekahrejeki01.xyz/promotion/kompetisi-turnover-sport-special-worldcup" target="_blank">KETENTUAN</a>
-          <a class="cb-btn report" href="https://click-lynk.com/LAPORAN_KENDALA" target="_blank">KENDALA</a>
-        </div>
-      </div>
-
-      <div class="cb-slide">
-        <div class="cb-banner">
-          <img src="http://plcl.me/images/yPFhm.jpg" alt="World Cup Prediction Cup">
-        </div>
-        <div class="cb-slide-action">
-          <a class="cb-btn" href="https://click-lynk.com/CBEVNT2-FIFAWORLDCUP" target="_blank">LIHAT EVENT</a>
-          <a class="cb-btn tnc" href="https://clickbet88sedekahrejeki01.xyz/promotion/prediksi-big-event-tournament-worldcup" target="_blank">KETENTUAN</a>
-          <a class="cb-btn report" href="https://click-lynk.com/LAPORAN_KENDALA" target="_blank">KENDALA</a>
-        </div>
-      </div>
-
-      <div class="cb-slide">
-        <div class="cb-banner">
-          <img src="http://plcl.me/images/QHfqe.jpg" alt="World Cup Penalty Shootout">
-        </div>
-        <div class="cb-slide-action">
-          <a class="cb-btn" href="https://click-lynk.com/CBEVNT3-PENALTY" target="_blank">LIHAT EVENT</a>
-          <a class="cb-btn tnc" href="https://clickbet88sedekahrejeki01.xyz/promotion/special-event-minigames-worldcup" target="_blank">KETENTUAN</a>
-          <a class="cb-btn report" href="https://click-lynk.com/LAPORAN_KENDALA" target="_blank">KENDALA</a>
-        </div>
-      </div>
-
-    </div>
+  <div class="cb-action">
+    <a id="cbEvent" class="cb-btn" href="https://click-lynk.com/JADWAL-BOLA" target="_blank">LIHAT EVENT</a>
+    <a id="cbTnc" class="cb-btn tnc" href="https://clickbet88sedekahrejeki01.xyz/promotion/kompetisi-turnover-sport-special-worldcup" target="_blank">KETENTUAN</a>
+    <a class="cb-btn report" href="https://click-lynk.com/LAPORAN_KENDALA" target="_blank">KENDALA</a>
   </div>
 
   <div class="cb-control">
-
-    <div class="cb-arrows">
-      <label class="prev3" for="cb3">&#10094;</label>
-      <label class="prev1" for="cb1">&#10094;</label>
-      <label class="prev2" for="cb2">&#10094;</label>
+    <button class="cb-nav" id="cbPrev" type="button">&#10094;</button>
+    <div>
+      <span class="cb-dot active"></span>
+      <span class="cb-dot"></span>
+      <span class="cb-dot"></span>
     </div>
-
-    <div class="cb-dots">
-      <label class="dot1" for="cb1"></label>
-      <label class="dot2" for="cb2"></label>
-      <label class="dot3" for="cb3"></label>
-    </div>
-
-    <div class="cb-arrows">
-      <label class="next2" for="cb2">&#10095;</label>
-      <label class="next3" for="cb3">&#10095;</label>
-      <label class="next1" for="cb1">&#10095;</label>
-    </div>
-
+    <button class="cb-nav" id="cbNext" type="button">&#10095;</button>
   </div>
-
 </div>
+`;
+
+  var s = document.currentScript;
+  var box = document.createElement("div");
+  box.innerHTML = html;
+  s.parentNode.insertBefore(box, s);
+
+  var data = [
+    {
+      title:"⚽ WORLD CUP CHAMPIONSHIP ⚽",
+      img:"http://plcl.me/images/sY4EF.jpg",
+      event:"https://click-lynk.com/JADWAL-BOLA",
+      tnc:"https://clickbet88sedekahrejeki01.xyz/promotion/kompetisi-turnover-sport-special-worldcup"
+    },
+    {
+      title:"⚽ WORLD CUP PREDICTION CUP ⚽",
+      img:"http://plcl.me/images/yPFhm.jpg",
+      event:"https://click-lynk.com/CBEVNT2-FIFAWORLDCUP",
+      tnc:"https://clickbet88sedekahrejeki01.xyz/promotion/prediksi-big-event-tournament-worldcup"
+    },
+    {
+      title:"⚽ WORLD CUP PENALTY SHOOTOUT ⚽",
+      img:"http://plcl.me/images/QHfqe.jpg",
+      event:"https://click-lynk.com/CBEVNT3-PENALTY",
+      tnc:"https://clickbet88sedekahrejeki01.xyz/promotion/special-event-minigames-worldcup"
+    }
+  ];
+
+  var i = 0;
+  var title = box.querySelector("#cbTitle");
+  var img = box.querySelector("#cbImg");
+  var eventBtn = box.querySelector("#cbEvent");
+  var tncBtn = box.querySelector("#cbTnc");
+  var dots = box.querySelectorAll(".cb-dot");
+
+  function show(n){
+    i = (n + data.length) % data.length;
+    title.textContent = data[i].title;
+    img.src = data[i].img;
+    eventBtn.href = data[i].event;
+    tncBtn.href = data[i].tnc;
+
+    dots.forEach(function(d){d.classList.remove("active")});
+    dots[i].classList.add("active");
+  }
+
+  box.querySelector("#cbPrev").onclick = function(){show(i - 1)};
+  box.querySelector("#cbNext").onclick = function(){show(i + 1)};
+})();
