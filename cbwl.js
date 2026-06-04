@@ -2,7 +2,7 @@
   .cb-popup-wrap{
     max-width:420px;
     margin:auto;
-    font-family:Arial,sans-serif;
+    font-family:Arial,sans-serif; 
     background:#090909;
     border:1px solid rgba(255,215,120,.45);
     border-radius:18px;
