@@ -2213,47 +2213,46 @@ Seluruh keputusan CLICKBET88 bersifat final dan tidak dapat diganggu gugat.
         return;
       }
 
-      const normalized = leaderboardData
-        .map((item, index) => {
-          const rank =
-            Number(
-              item.rank ||
-              item.RANK ||
-              item.posisi ||
-              item.POSISI ||
-              index + 1
-            );
+      const userMap = new Map();
 
-          const user =
-            item.userId ||
-            item.USER_ID ||
-            item.userid ||
-            item.USERID ||
-            item.username ||
-            item.USERNAME ||
-            item.id ||
-            "-";
+leaderboardData.forEach((item) => {
+  const user =
+    item.userId ||
+    item.USER_ID ||
+    item.userid ||
+    item.USERID ||
+    item.username ||
+    item.USERNAME ||
+    item.id ||
+    "-";
 
-          const point =
-            Number(
-              item.point ||
-              item.POINT ||
-              item.points ||
-              item.POINTS ||
-              0
-            );
+  const cleanUser = String(user).trim().toUpperCase();
 
-          return {
-            rank,
-            user: String(user),
-            point,
-          };
-        })
-        .sort((a, b) => b.point - a.point)
-        .map((item, index) => ({
-          ...item,
-          rank: index + 1,
-        }));
+  const point = Number(
+    item.point ||
+    item.POINT ||
+    item.points ||
+    item.POINTS ||
+    0
+  );
+
+  if (!userMap.has(cleanUser)) {
+    userMap.set(cleanUser, {
+      user: cleanUser,
+      point: point,
+    });
+  } else {
+    const old = userMap.get(cleanUser);
+    old.point = Math.max(old.point, point);
+  }
+});
+
+const normalized = Array.from(userMap.values())
+  .sort((a, b) => b.point - a.point)
+  .map((item, index) => ({
+    ...item,
+    rank: index + 1,
+  }));
 
       count.textContent = normalized.length + " data";
       empty.style.display = "none";
@@ -2262,15 +2261,18 @@ Seluruh keputusan CLICKBET88 bersifat final dan tidak dapat diganggu gugat.
         ? Number(normalized[0].point || 0)
         : 0;
 
-      function maskUserId(user) {
-        const cleanUser = String(user || "-").trim().toUpperCase();
+function maskUserId(user) {
+  const cleanUser = String(user || "-").trim();
 
-        if (cleanUser.length <= 3) {
-          return cleanUser + "***";
-        }
+  if (cleanUser.length <= 4) {
+    return cleanUser.substring(0, 1) + "***";
+  }
 
-        return cleanUser.substring(0, 3) + "***";
-      }
+  const start = cleanUser.substring(0, 4);
+  const end = cleanUser.substring(cleanUser.length - 2);
+
+  return start + "*****" + end;
+}
 
       function getPrizeText(rank) {
         const prizes = {
