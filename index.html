@@ -1907,6 +1907,64 @@
   }
 }
 
+
+/* ===== V10 FINAL DASHBOARD SUPPORT MENU ===== */
+.support-menu-card{
+  border-color:rgba(255,215,106,.32) !important;
+  background:
+    linear-gradient(135deg,rgba(255,215,106,.14),rgba(14,165,233,.08)),
+    rgba(255,255,255,.055) !important;
+}
+
+.support-menu-card .menu-icon{
+  background:linear-gradient(135deg,rgba(255,215,106,.28),rgba(14,165,233,.16)) !important;
+  border-color:rgba(255,215,106,.32) !important;
+}
+
+.support-menu-card strong{
+  color:#fff7d6 !important;
+}
+
+.floating-help{
+  display:none !important;
+}
+
+/* Music kecil, tidak nutupin menu */
+.music-btn{
+  width:44px !important;
+  height:44px !important;
+  font-size:19px !important;
+  left:12px !important;
+  bottom:18px !important;
+  top:auto !important;
+  right:auto !important;
+  opacity:.92;
+}
+
+.music-btn:hover{
+  opacity:1;
+}
+
+@media (max-width:420px){
+  .music-btn{
+    width:40px !important;
+    height:40px !important;
+    font-size:17px !important;
+    left:10px !important;
+    bottom:14px !important;
+    top:auto !important;
+    right:auto !important;
+  }
+
+  .menu-grid.clean{
+    gap:8px !important;
+  }
+
+  .menu-card.clean{
+    min-height:60px !important;
+  }
+}
+
 </style>
 </head>
 
@@ -2055,6 +2113,15 @@ LOGIN DAN TEBAK PREDIKSI MENGGUNAKAN TICKET.
             <span>
               <strong>HADIAH & KETENTUAN</strong>
               <span>Prize pool dan syarat event.</span>
+            </span>
+            <em class="menu-arrow">›</em>
+          </button>
+
+          <button class="menu-card clean support-menu-card" onclick="window.open('https://click-lynk.com/LIVECHAT_CLICKBET88','_blank')">
+            <span class="menu-icon">💬</span>
+            <span>
+              <strong>HUBUNGI ADMIN</strong>
+              <span>Online 24 Jam • Live Chat</span>
             </span>
             <em class="menu-arrow">›</em>
           </button>
