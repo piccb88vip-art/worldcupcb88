@@ -2,6 +2,8 @@
 
 
 
+
+
 <!doctype html>
 <html lang="id">
 <head>
@@ -704,21 +706,54 @@
       background: rgba(255, 255, 255, 0.07);
     }
 
-    .rules {
-      margin-top: 12px;
-      display: grid;
-      gap: 8px;
-      font-size: 12px;
-      color: #dbeafe;
-      line-height: 1.45;
-    }
+.rules{
+  margin-top:14px;
+  display:grid;
+  gap:8px;
+  padding:12px;
+  border-radius:18px;
+  background:rgba(2,8,32,.38);
+  border:1px solid rgba(255,215,106,.12);
+}
 
-    .rule-item {
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
+.rule-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:13px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.09);
+  color:#dbeafe;
+  font-size:12px;
+  line-height:1.35;
+  font-weight:700;
+  text-align:left;
+}
+
+.rule-item::before{
+  content:"";
+  display:none;
+}
+
+.rule-item::before{
+  content:"✦";
+  flex:0 0 22px;
+
+  width:22px;
+  height:22px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:8px;
+
+  background:rgba(255,215,106,.13);
+  border:1px solid rgba(255,215,106,.22);
+
+  color:#ffd76a;
+  font-size:12px;
+}
 
     .event-welcome {
       background:
@@ -1535,76 +1570,14 @@
       }
     }
 
-  
-/* ===== WORLD CUP START COUNTDOWN + PREMIUM MUSIC BUTTON ===== */
-.worldcup-start-countdown {
-  margin-top: 14px;
-  padding: 12px;
-  border-radius: 18px;
-  position: relative;
-  z-index: 1;
-  background:
-    linear-gradient(135deg, rgba(255, 215, 106, 0.16), rgba(14, 165, 233, 0.08)),
-    rgba(2, 8, 32, 0.56);
-  border: 1px solid rgba(255, 215, 106, 0.26);
-  box-shadow:
-    inset 0 0 18px rgba(255, 255, 255, 0.03),
-    0 0 22px rgba(255, 215, 106, 0.10);
-  backdrop-filter: blur(8px);
-}
 
-.countdown-kicker {
-  text-align: center;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.45px;
-  color: #fff7d6;
-  margin-bottom: 9px;
-  text-shadow: 0 0 12px rgba(255, 215, 106, 0.28);
-}
-
-.countdown-time-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 7px;
-}
-
-.countdown-time-card {
-  text-align: center;
-  padding: 8px 4px;
-  border-radius: 13px;
-  background: rgba(255, 255, 255, 0.075);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-}
-
-.countdown-time-card strong {
-  display: block;
-  font-size: 20px;
-  line-height: 1;
-  color: #ffd76a;
-  font-weight: 900;
-}
-
-.countdown-time-card span {
-  display: block;
-  margin-top: 5px;
-  font-size: 8px;
-  color: #dbeafe;
-  font-weight: 900;
-}
-
-.countdown-note {
-  margin-top: 8px;
-  text-align: center;
-  font-size: 10px;
-  color: #bfdbfe;
-  font-weight: 700;
-}
 
 .music-btn {
   position: fixed !important;
-  left: 18px !important;
-  bottom: 86px !important;
+  left: 16px !important;
+  top: 16px !important;
+  right: auto !important;
+  bottom: auto !important;
   width: 68px !important;
   height: 68px !important;
   border: none !important;
@@ -1655,11 +1628,282 @@
   }
 
   .music-btn {
-    width: 62px !important;
-    height: 62px !important;
-    font-size: 25px !important;
-    left: 14px !important;
-    bottom: 82px !important;
+    width:54px !important;
+    height:54px !important;
+    font-size:22px !important;
+    left:12px !important;
+    top:12px !important;
+    right:auto !important;
+    bottom:auto !important;
+  }
+
+  .floating-help{
+    right:12px !important;
+    bottom:18px !important;
+    transform:scale(.90);
+    transform-origin:bottom right;
+  }
+}
+
+
+.event-marquee{
+    margin-top:12px;
+    width:100%;
+    overflow:hidden;
+
+    border-radius:12px;
+
+    background:linear-gradient(90deg,#1b2236,#252d47);
+
+    border:1px solid rgba(255,215,106,.25);
+
+    height:38px;
+
+    display:flex;
+    align-items:center;
+
+    box-shadow:0 0 15px rgba(255,215,106,.08);
+}
+
+.event-marquee-content{
+
+    white-space:nowrap;
+
+    color:#FFE9B3;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    padding-left:100%;
+
+    animation:eventMarquee 18s linear infinite;
+}
+
+.event-marquee b{
+    color:#FFD76A;
+}
+
+@keyframes eventMarquee{
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(-100%);
+    }
+
+}
+
+    .leaderboard-lock{
+  min-height:230px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:24px 16px;
+  border-radius:20px;
+  background:
+    linear-gradient(135deg,rgba(255,215,106,.10),rgba(14,165,233,.06)),
+    rgba(255,255,255,.045);
+  border:1px solid rgba(255,215,106,.18);
+}
+
+.leaderboard-loader{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  border:4px solid rgba(255,255,255,.14);
+  border-top-color:#ffd76a;
+  animation:leaderSpin 1s linear infinite;
+  margin-bottom:16px;
+}
+
+.leaderboard-lock h2{
+  font-size:18px;
+  color:#fff7d6;
+  margin-bottom:6px;
+}
+
+.leaderboard-lock p{
+  font-size:12px;
+  color:#bfdbfe;
+  line-height:1.4;
+}
+
+@keyframes leaderSpin{
+  to{ transform:rotate(360deg); }
+}
+    
+
+
+/* ===== FINAL FIX OVERRIDES ===== */
+.rule-item::before{
+  content:none !important;
+  display:none !important;
+}
+
+.event-marquee-content{
+  padding-left:20px !important;
+  animation:eventMarquee 28s linear infinite !important;
+}
+
+@media (max-width: 420px) {
+  .event-marquee-content{
+    animation:eventMarquee 24s linear infinite !important;
+  }
+}
+
+
+/* ===== LIVECHAT MENU MODE ===== */
+.floating-help{
+  display:none !important;
+}
+
+/* Music dibuat kecil agar tidak mengganggu dashboard */
+.music-btn{
+  width:46px !important;
+  height:46px !important;
+  font-size:20px !important;
+  left:12px !important;
+  bottom:92px !important;
+  top:auto !important;
+  right:auto !important;
+}
+
+@media (max-width:420px){
+  .music-btn{
+    width:42px !important;
+    height:42px !important;
+    font-size:18px !important;
+    left:12px !important;
+    bottom:18px !important;
+    top:auto !important;
+    right:auto !important;
+  }
+}
+
+
+/* ===== FINAL CUSTOMER SUPPORT CARD ===== */
+.support-card{
+  margin-top:12px;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 14px;
+  border-radius:16px;
+  text-decoration:none !important;
+  background:linear-gradient(135deg,#ffd76a,#f59e0b);
+  border:1px solid rgba(255,236,153,.68);
+  box-shadow:
+    0 0 18px rgba(250,204,21,.24),
+    0 10px 24px rgba(245,158,11,.26);
+  transition:.25s ease;
+}
+
+.support-card:hover{
+  transform:translateY(-1px);
+  box-shadow:
+    0 0 22px rgba(250,204,21,.32),
+    0 12px 28px rgba(245,158,11,.32);
+}
+
+.support-icon{
+  width:40px;
+  height:40px;
+  flex:0 0 40px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  background:rgba(17,24,39,.12);
+  border:1px solid rgba(17,24,39,.10);
+  font-size:20px;
+}
+
+.support-content{
+  flex:1;
+  min-width:0;
+}
+
+.support-content strong{
+  display:block;
+  font-size:14px;
+  line-height:1.15;
+  font-weight:900;
+  letter-spacing:.2px;
+  color:#111827;
+}
+
+.support-content span{
+  display:block;
+  margin-top:3px;
+  font-size:11px;
+  line-height:1.2;
+  font-weight:800;
+  color:#374151;
+}
+
+.support-arrow{
+  flex:0 0 auto;
+  font-size:24px;
+  line-height:1;
+  font-weight:900;
+  color:#111827;
+}
+
+/* Floating livechat dimatikan karena sudah masuk card login */
+.floating-help{
+  display:none !important;
+}
+
+/* Music tetap kecil dan tidak mengganggu */
+.music-btn{
+  width:46px !important;
+  height:46px !important;
+  font-size:20px !important;
+  left:12px !important;
+  bottom:18px !important;
+  top:auto !important;
+  right:auto !important;
+}
+
+@media (max-width:420px){
+  .support-card{
+    padding:11px 12px;
+    border-radius:15px;
+    gap:10px;
+  }
+
+  .support-icon{
+    width:36px;
+    height:36px;
+    flex-basis:36px;
+    font-size:18px;
+  }
+
+  .support-content strong{
+    font-size:13px;
+  }
+
+  .support-content span{
+    font-size:10px;
+  }
+
+  .support-arrow{
+    font-size:22px;
+  }
+
+  .music-btn{
+    width:42px !important;
+    height:42px !important;
+    font-size:18px !important;
+    left:12px !important;
+    bottom:18px !important;
+    top:auto !important;
+    right:auto !important;
   }
 }
 
@@ -1691,27 +1935,51 @@ LOGIN DAN TEBAK PREDIKSI MENGGUNAKAN TICKET.
             <input id="loginId" type="text" placeholder="USER ID" />
           </div>
 
-          <button class="btn" onclick="loginMember(event)">
-            LOGIN
-          </button>
-        <div class="rules">
-          <div class="rule-item event-welcome">
-JANGAN LEWATKAN HADIAH MENARIK DARI CLICKBET88
-          </div>
+<button
+    class="btn primary"
+    onclick="loginMember(event)">
+    Masuk & Cek Ticket
+</button>
+
+<a href="https://click-lynk.com/LIVECHAT_CLICKBET88"
+   target="_blank"
+   class="support-card">
+
+    <span class="support-icon">💬</span>
+
+    <div class="support-content">
+        <strong>HUBUNGI ADMIN</strong>
+        <span>Online 24 Jam • Live Chat</span>
+    </div>
+
+    <span class="support-arrow">›</span>
+
+</a>
+
+
+<div class="event-marquee">
+  <div class="event-marquee-content">
+    📢 <b>KABAR GEMBIRA!</b> 🎁 Sisa <b>Ticket</b> akan menjadi <b>Point Bonus</b> setelah event berakhir. &nbsp;&nbsp;&nbsp;
+    📢 <b>KABAR GEMBIRA!</b> 🎁 Sisa <b>Ticket</b> akan menjadi <b>Point Bonus</b> setelah event berakhir. &nbsp;&nbsp;&nbsp;
+    📢 <b>KABAR GEMBIRA!</b> 🎁 Sisa <b>Ticket</b> akan menjadi <b>Point Bonus</b> setelah event berakhir.
+  </div>
+</div>
+</div>
       <div class="section">
         <div class="section-title">
-          <div class="rule-item">
+<div class="rules">
+  <div class="rule-item">
+    🎁 Hadiah utama & leaderboard pemenang tersedia setelah login.
+  </div>
 
-            <p>🎟️ Hadiah Utama & Leaderboard Pemenang Tersedia Setelah Login.</p>
-          </div>
-        </div>
-          <div class="rule-item">
-            🎟️ Ticket Digunakan Untuk Memilih Pertandingan & Submit Prediksi Skor.
-          </div>
+  <div class="rule-item">
+    🎟️ Ticket digunakan untuk memilih pertandingan dan submit prediksi skor.
+  </div>
 
-          <div class="rule-item">
-            🏆 Ranking Pemenang Ditentukan Dari Total Point Tertinggi Selama Event Berlangsung.
-          </div>
+  <div class="rule-item">
+    🏆 Ranking pemenang dihitung dari total point tertinggi selama event berlangsung.
+  </div>
+</div>
         </div>
       </div>
     </section>
@@ -1730,36 +1998,7 @@ JANGAN LEWATKAN HADIAH MENARIK DARI CLICKBET88
           Member area event World Cup 2026 CLICKBET88.
         </p>
 
-        <div class="worldcup-start-countdown" id="worldcupStartCountdown">
-          <div class="countdown-kicker">⏳ PIALA DUNIA DIMULAI DALAM</div>
-
-          <div class="countdown-time-grid">
-            <div class="countdown-time-card">
-              <strong id="wcDays">00</strong>
-              <span>HARI</span>
-            </div>
-
-            <div class="countdown-time-card">
-              <strong id="wcHours">00</strong>
-              <span>JAM</span>
-            </div>
-
-            <div class="countdown-time-card">
-              <strong id="wcMinutes">00</strong>
-              <span>MENIT</span>
-            </div>
-
-            <div class="countdown-time-card">
-              <strong id="wcSeconds">00</strong>
-              <span>DETIK</span>
-            </div>
-          </div>
-
-          <div class="countdown-note" id="wcCountdownNote">
-            Kickoff pertama mulai 12 Juni 2026.
-          </div>
-        </div>
-
+      
 
         <div class="member-card">
           <div class="member-box">
@@ -1905,23 +2144,25 @@ JANGAN LEWATKAN HADIAH MENARIK DARI CLICKBET88
       </section>
     </section>
 
-    <section class="page" id="leaderboardPage">
+      <section class="page" id="leaderboardPage">
       <section class="hero compact">
         <div class="badge">🏆 LEADERBOARD POINT</div>
         <h1>Top Predictor</h1>
-        <p>Ranking otomatis dari total point tertinggi. Scroll untuk melihat rank berikutnya.</p>
+        <p>Point & ranking sedang dalam perjumlahan.</p>
       </section>
 
       <section class="section">
-        <div class="section-title">
-          <h2>Leaderboard Pemenang</h2>
-          <span class="small-note" id="leaderboardCount">0 data</span>
+        <div class="leaderboard-lock">
+          <div class="leaderboard-loader"></div>
+          <h2>Leaderboard Sedang Dihitung</h2>
+          <p>Point & ranking sedang dalam perjumlahan.</p>
         </div>
 
-        <div class="leaderboard-table" id="leaderboardList"></div>
-
-        <div class="empty" id="leaderboardEmpty">
-          Data leaderboard belum tersedia.
+        <!-- Leaderboard asli disimpan tersembunyi agar script tetap aman saat nanti dibuka lagi -->
+        <div style="display:none;">
+          <span id="leaderboardCount">0 data</span>
+          <div class="leaderboard-table" id="leaderboardList"></div>
+          <div class="empty" id="leaderboardEmpty">Data leaderboard belum tersedia.</div>
         </div>
 
         <button class="btn secondary" onclick="showPage('dashboardPage')">
@@ -1945,124 +2186,45 @@ JANGAN LEWATKAN HADIAH MENARIK DARI CLICKBET88
           </div>
         </div>
 
-<div class="top-prize-panel">
-  <div class="top-prize-row main">
-    <span>🥇 JUARA 1</span>
-    <strong>Honda PCX 160</strong>
-  </div>
+        <div class="top-prize-panel">
+          <div class="top-prize-row main">
+            <span>🥇 JUARA 1</span>
+            <strong>Honda PCX 160</strong>
+          </div>
 
-  <div class="top-prize-row">
-    <span>🥈 JUARA 2</span>
-    <strong>iPhone Air 256GB</strong>
-  </div>
+          <div class="top-prize-row">
+            <span>🥈 JUARA 2</span>
+            <strong>iPhone Air 256GB</strong>
+          </div>
 
-  <div class="top-prize-row">
-    <span>🥉 JUARA 3</span>
-    <strong>Apple Watch Ultra</strong>
-  </div>
+          <div class="top-prize-row">
+            <span>🥉 JUARA 3</span>
+            <strong>Apple Watch Ultra</strong>
+          </div>
 
-  <div class="top-prize-row">
-    <span>🏅 JUARA 4</span>
-    <strong>Huawei Watch Ultimate / Pro</strong>
-  </div>
+          <div class="top-prize-row">
+            <span>🏅 JUARA 4</span>
+            <strong>Huawei Watch Ultimate / Pro</strong>
+          </div>
 
-  <div class="top-prize-row">
-    <span>💰 JUARA 5</span>
-    <strong>Rp5.000.000</strong>
-  </div>
+          <div class="top-prize-row">
+            <span>💰 JUARA 5</span>
+            <strong>Rp5.000.000</strong>
+          </div>
 
-  <div class="top-prize-row">
-    <span>🎁 BONUS</span>
-    <strong>Participation Reward & Hadiah Uang Tunai</strong>
-  </div>
-</div>
+          <div class="top-prize-row">
+            <span>🎁 BONUS</span>
+            <strong>Participation Reward & Hadiah Uang Tunai</strong>
+          </div>
+        </div>
 
-        <button class="btn secondary" onclick="togglePrizeMore()">
-          <span id="prizeMoreText">LIHAT JUARA 6 - 20</span>
+        <button class="btn secondary" onclick="showPage('prizeMorePage')">
+          LIHAT HADIAH JUARA 6 - 20
         </button>
 
-        <div class="collapse-panel compact-collapse" id="prizeMorePanel">
-         <div class="compact-table two-col">
-
-<div class="compact-row"><strong>JUARA 6</strong><span>Rp4.000.000</span></div>
-<div class="compact-row"><strong>JUARA 7</strong><span>Rp3.500.000</span></div>
-<div class="compact-row"><strong>JUARA 8</strong><span>Rp3.000.000</span></div>
-<div class="compact-row"><strong>JUARA 9</strong><span>Rp2.500.000</span></div>
-<div class="compact-row"><strong>JUARA 10</strong><span>Rp2.000.000</span></div>
-
-<div class="compact-row"><strong>JUARA 11</strong><span>Rp1.750.000</span></div>
-<div class="compact-row"><strong>JUARA 12</strong><span>Rp1.500.000</span></div>
-<div class="compact-row"><strong>JUARA 13</strong><span>Rp1.250.000</span></div>
-<div class="compact-row"><strong>JUARA 14</strong><span>Rp1.000.000</span></div>
-<div class="compact-row"><strong>JUARA 15</strong><span>Rp750.000</span></div>
-
-<div class="compact-row"><strong>JUARA 16</strong><span>Rp500.000</span></div>
-<div class="compact-row"><strong>JUARA 17</strong><span>Rp400.000</span></div>
-<div class="compact-row"><strong>JUARA 18</strong><span>Rp300.000</span></div>
-<div class="compact-row"><strong>JUARA 19</strong><span>Rp200.000</span></div>
-<div class="compact-row"><strong>JUARA 20</strong><span>Rp100.000</span></div>
-
-<div class="compact-row reward">
-<strong>Participation Reward</strong>
-<span>Rp25.000</span>
-</div>
-
-</div>
-
-        <button class="btn secondary" onclick="toggleTerms()">
-          <span id="termsToggleText">LIHAT SYARAT & KETENTUAN</span>
+        <button class="btn secondary" onclick="showPage('termsOnlyPage')">
+          LIHAT SYARAT & KETENTUAN
         </button>
-
-        <div class="collapse-panel compact-collapse" id="termsPanel">
-     <div class="tnc-grid compact">
-
-<div class="tnc-item">
-Event berlaku untuk seluruh member aktif CLICKBET88.
-</div>
-
-<div class="tnc-item">
-Ticket Event didapat dari First Deposit harian:
-50K = 1 Ticket, 250K = 2 Ticket, 500K = 5 Ticket.
-</div>
-
-<div class="tnc-item">
-Maksimal 5 Ticket per hari untuk setiap ID.
-</div>
-
-<div class="tnc-item">
-Ticket wajib di-claim melalui admin resmi CLICKBET88.
-</div>
-
-<div class="tnc-item">
-1 Ticket hanya berlaku untuk 1 submit prediksi pertandingan.
-</div>
-
-<div class="tnc-item">
-Ticket tidak memiliki masa hangus selama event berlangsung.
-</div>
-
-<div class="tnc-item">
-PENEBAK HANDAL = 15 Point.
-Contoh: Prediksi skor 2-1 dan hasil pertandingan tepat 2-1.
-</div>
-
-<div class="tnc-item">
-MENANG = 5 Point.
-</div>
-
-<div class="tnc-item">
-KALAH / MENUNGGU = 0 Point.
-</div>
-
-<div class="tnc-item">
-Ranking juara ditentukan berdasarkan total point tertinggi selama event berlangsung.
-</div>
-
-<div class="tnc-item">
-Seluruh keputusan CLICKBET88 bersifat final dan tidak dapat diganggu gugat.
-</div>
-
-</div>
 
         <button class="btn secondary" onclick="showPage('dashboardPage')">
           Kembali
@@ -2070,14 +2232,71 @@ Seluruh keputusan CLICKBET88 bersifat final dan tidak dapat diganggu gugat.
       </section>
     </section>
 
-    <a
-      href="https://click-lynk.com/LIVECHAT_CLICKBET88"
-      target="_blank"
-      class="floating-help"
-    >
-      <span class="chat-icon">💬</span>
-      <span class="chat-text">Hubungi Admin<small>Online 24 Jam</small></span>
-    </a>
+    <section class="page" id="prizeMorePage">
+      <section class="hero compact">
+        <div class="badge">🏅 HADIAH LANJUTAN</div>
+        <h1>Juara 6 - 20</h1>
+        <p>Reward tambahan untuk ranking terbaik berikutnya.</p>
+      </section>
+
+      <section class="section">
+        <div class="compact-table two-col">
+          <div class="compact-row"><strong>JUARA 6</strong><span>Rp4.000.000</span></div>
+          <div class="compact-row"><strong>JUARA 7</strong><span>Rp3.500.000</span></div>
+          <div class="compact-row"><strong>JUARA 8</strong><span>Rp3.000.000</span></div>
+          <div class="compact-row"><strong>JUARA 9</strong><span>Rp2.500.000</span></div>
+          <div class="compact-row"><strong>JUARA 10</strong><span>Rp2.000.000</span></div>
+          <div class="compact-row"><strong>JUARA 11</strong><span>Rp1.750.000</span></div>
+          <div class="compact-row"><strong>JUARA 12</strong><span>Rp1.500.000</span></div>
+          <div class="compact-row"><strong>JUARA 13</strong><span>Rp1.250.000</span></div>
+          <div class="compact-row"><strong>JUARA 14</strong><span>Rp1.000.000</span></div>
+          <div class="compact-row"><strong>JUARA 15</strong><span>Rp750.000</span></div>
+          <div class="compact-row"><strong>JUARA 16</strong><span>Rp500.000</span></div>
+          <div class="compact-row"><strong>JUARA 17</strong><span>Rp400.000</span></div>
+          <div class="compact-row"><strong>JUARA 18</strong><span>Rp300.000</span></div>
+          <div class="compact-row"><strong>JUARA 19</strong><span>Rp200.000</span></div>
+          <div class="compact-row"><strong>JUARA 20</strong><span>Rp100.000</span></div>
+
+          <div class="compact-row reward">
+            <strong>Participation Reward</strong>
+            <span>Rp25.000</span>
+          </div>
+        </div>
+
+        <button class="btn secondary" onclick="showPage('prizePage')">
+          Kembali
+        </button>
+      </section>
+    </section>
+
+    <section class="page" id="termsOnlyPage">
+      <section class="hero compact">
+        <div class="badge">📜 SYARAT EVENT</div>
+        <h1>Syarat & Ketentuan</h1>
+        <p>Ketentuan resmi event prediction CLICKBET88.</p>
+      </section>
+
+      <section class="section">
+        <div class="tnc-grid compact">
+          <div class="tnc-item">Event berlaku untuk seluruh member aktif CLICKBET88.</div>
+          <div class="tnc-item">Ticket Event didapat dari First Deposit harian: 50K = 1 Ticket, 250K = 2 Ticket, 500K = 5 Ticket.</div>
+          <div class="tnc-item">Maksimal 5 Ticket per hari untuk setiap ID.</div>
+          <div class="tnc-item">Ticket wajib di-claim melalui admin resmi CLICKBET88.</div>
+          <div class="tnc-item">1 Ticket hanya berlaku untuk 1 submit prediksi pertandingan.</div>
+          <div class="tnc-item">Ticket tidak memiliki masa hangus selama event berlangsung.</div>
+          <div class="tnc-item">Sisa Ticket yang belum digunakan akan otomatis diakumulasi menjadi Point Bonus setelah event berakhir.</div>
+          <div class="tnc-item">PENEBAK HANDAL = 15 Point. Contoh: prediksi skor 2-1 dan hasil pertandingan tepat 2-1.</div>
+          <div class="tnc-item">MENANG = 5 Point.</div>
+          <div class="tnc-item">KALAH / MENUNGGU = 0 Point.</div>
+          <div class="tnc-item">Ranking juara ditentukan berdasarkan total point tertinggi selama event berlangsung.</div>
+          <div class="tnc-item">Seluruh keputusan CLICKBET88 bersifat final dan tidak dapat diganggu gugat.</div>
+        </div>
+
+        <button class="btn secondary" onclick="showPage('prizePage')">
+          Kembali
+        </button>
+      </section>
+    </section>
 
     <div class="toast-overlay" id="successToast">
       <div class="success-modal">
@@ -2197,13 +2416,14 @@ Seluruh keputusan CLICKBET88 bersifat final dan tidak dapat diganggu gugat.
 
     async function openLeaderboardPage() {
       showPage("leaderboardPage");
-      await loadLeaderboard();
     }
 
     function renderLeaderboard() {
       const list = document.getElementById("leaderboardList");
       const empty = document.getElementById("leaderboardEmpty");
       const count = document.getElementById("leaderboardCount");
+
+      if (!list || !empty || !count) return;
 
       list.innerHTML = "";
 
@@ -2731,6 +2951,7 @@ function maskUserId(user) {
       }
     }
 
+    
     async function refreshData(evt) {
       if (!currentMemberId || currentMemberId === "-") {
         alert("Silakan login terlebih dahulu.");
@@ -3062,65 +3283,73 @@ function showSuccessToast(match, prediction, stockLeft) {
 <!-- WORLD CUP MUSIC PLAYER -->
 <button id="musicBtn" class="music-btn" type="button" aria-label="Music Toggle">🔇</button>
 
-<audio id="bgMusic" loop preload="auto" playsinline>
+<audio id="bgMusic" loop preload="metadata" playsinline>
   <source src="./dreamer.mp3.mp3" type="audio/mpeg">
+  <source src="./music.mp3.mp3" type="audio/mpeg">
+  <source src="./music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-  const music = document.getElementById("bgMusic");
-  const musicBtn = document.getElementById("musicBtn");
-  let musicStarted = false;
+  (function () {
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
 
-  function updateMusicIcon() {
-    if (!musicBtn || !music) return;
-
-    if (music.paused) {
-      musicBtn.innerHTML = "🔇";
-      musicBtn.classList.remove("playing");
-    } else {
-      musicBtn.innerHTML = "🔊";
-      musicBtn.classList.add("playing");
-    }
-  }
-
-  async function toggleMusic(event) {
-    if (event) event.stopPropagation();
     if (!music || !musicBtn) return;
 
-    try {
+    music.volume = 0.65;
+    music.muted = false;
+
+    function setMusicButtonIcon() {
       if (music.paused) {
-        music.muted = false;
-        music.volume = 0.65;
-        await music.play();
-        musicStarted = true;
+        musicBtn.innerHTML = "🔇";
+        musicBtn.classList.remove("playing");
       } else {
-        music.pause();
+        musicBtn.innerHTML = "🔊";
+        musicBtn.classList.add("playing");
       }
-    } catch (err) {
-      musicStarted = false;
-      musicBtn.innerHTML = "🔇";
-      alert("Musik gagal diputar. Coba refresh halaman lalu klik tombol musik lagi.");
     }
 
-    updateMusicIcon();
-  }
+    async function toggleMusic(event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
 
-  if (musicBtn) {
+      try {
+        if (music.paused) {
+          music.muted = false;
+          music.volume = 0.65;
+
+          if (music.readyState === 0) {
+            music.load();
+          }
+
+          await music.play();
+        } else {
+          music.pause();
+        }
+      } catch (err) {
+        music.pause();
+        musicBtn.innerHTML = "🔇";
+
+        console.warn("Music play failed:", err);
+        alert("Musik belum bisa diputar. Pastikan file MP3 ada di GitHub dan nama file sesuai.");
+      }
+
+      setMusicButtonIcon();
+    }
+
     musicBtn.addEventListener("click", toggleMusic);
-  }
+    music.addEventListener("play", setMusicButtonIcon);
+    music.addEventListener("pause", setMusicButtonIcon);
+    music.addEventListener("ended", setMusicButtonIcon);
+    music.addEventListener("error", setMusicButtonIcon);
 
-  document.addEventListener("click", function () {
-    if (!musicStarted) {
-      toggleMusic();
-    }
-  }, { once: true });
-
-  if (music) {
-    music.addEventListener("play", updateMusicIcon);
-    music.addEventListener("pause", updateMusicIcon);
-    music.addEventListener("ended", updateMusicIcon);
-  }
+    setMusicButtonIcon();
+  })();
 </script>
+
+
 
 </body>
 </html>
