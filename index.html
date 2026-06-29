@@ -4,6 +4,7 @@
 
 
 
+
 <!doctype html>
 <html lang="id">
 <head>
@@ -1965,6 +1966,20 @@
   }
 }
 
+.leaderboard-more{
+  margin-top:10px;
+  padding:13px 14px;
+  border-radius:16px;
+  text-align:center;
+  font-size:13px;
+  font-weight:900;
+  color:#fff7d6;
+  background:
+    linear-gradient(135deg,rgba(255,215,106,.13),rgba(14,165,233,.07)),
+    rgba(255,255,255,.055);
+  border:1px solid rgba(255,215,106,.22);
+}
+    
 </style>
 </head>
 
@@ -2215,21 +2230,21 @@ LOGIN DAN TEBAK PREDIKSI MENGGUNAKAN TICKET.
       <section class="hero compact">
         <div class="badge">🏆 LEADERBOARD POINT</div>
         <h1>Top Predictor</h1>
-        <p>Point & ranking sedang dalam perjumlahan.</p>
+        <p>Ranking total point member terbaik.</p>
       </section>
 
       <section class="section">
-        <div class="leaderboard-lock">
-          <div class="leaderboard-loader"></div>
-          <h2>Leaderboard Sedang Dihitung</h2>
-          <p>Point & ranking sedang dalam perjumlahan.</p>
+        <div class="section-title">
+          <h2>Leaderboard Pemenang</h2>
+          <span class="small-note" id="leaderboardCount">TOP POINT SAAT INI</span>
         </div>
 
-        <!-- Leaderboard asli disimpan tersembunyi agar script tetap aman saat nanti dibuka lagi -->
-        <div style="display:none;">
-          <span id="leaderboardCount">0 data</span>
-          <div class="leaderboard-table" id="leaderboardList"></div>
-          <div class="empty" id="leaderboardEmpty">Data leaderboard belum tersedia.</div>
+        <div class="leaderboard-table" id="leaderboardList"></div>
+<div class="leaderboard-more">
+  +292 peserta lainnya sedang mengumpulkan point
+</div>
+        <div class="empty" id="leaderboardEmpty">
+          Data leaderboard belum tersedia.
         </div>
 
         <button class="btn secondary" onclick="showPage('dashboardPage')">
@@ -2483,6 +2498,7 @@ LOGIN DAN TEBAK PREDIKSI MENGGUNAKAN TICKET.
 
     async function openLeaderboardPage() {
       showPage("leaderboardPage");
+      await loadLeaderboard();
     }
 
     function renderLeaderboard() {
@@ -2551,14 +2567,14 @@ const normalized = Array.from(userMap.values())
 function maskUserId(user) {
   const cleanUser = String(user || "-").trim();
 
-  if (cleanUser.length <= 4) {
+  if (cleanUser.length <= 1) {
     return cleanUser.substring(0, 1) + "***";
   }
 
-  const start = cleanUser.substring(0, 4);
+  const start = cleanUser.substring(0, 1);
   const end = cleanUser.substring(cleanUser.length - 2);
 
-  return start + "*****" + end;
+  return start + "********" + end;
 }
 
       function getPrizeText(rank) {
