@@ -5,6 +5,7 @@
 
 
 
+
 <!doctype html>
 <html lang="id">
 <head>
@@ -1979,7 +1980,106 @@
     rgba(255,255,255,.055);
   border:1px solid rgba(255,215,106,.22);
 }
-    
+
+.leaderboard-info-marquee{
+  margin-top:10px;
+  width:100%;
+  height:42px;
+  overflow:hidden;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  background:
+    linear-gradient(135deg,rgba(255,215,106,.14),rgba(14,165,233,.08)),
+    rgba(255,255,255,.06);
+  border:1px solid rgba(255,215,106,.24);
+}
+
+.leaderboard-info-text{
+  white-space:nowrap;
+  display:inline-block;
+  padding-left:100%;
+  font-size:12px;
+  font-weight:900;
+  color:#fff7d6;
+  animation:leaderboardInfoRun 28s linear infinite;
+}
+
+.leaderboard-info-text b{
+  color:#ffd76a;
+}
+
+@keyframes leaderboardInfoRun{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-100%); }
+}    
+
+
+.leaderboard-live-counter{
+  margin-top:10px;
+  padding:12px 14px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  text-align:center;
+  font-size:13px;
+  font-weight:900;
+  color:#dcfce7;
+  background:
+    linear-gradient(135deg,rgba(34,197,94,.14),rgba(14,165,233,.08)),
+    rgba(255,255,255,.055);
+  border:1px solid rgba(34,197,94,.26);
+}
+
+.live-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#22c55e;
+  box-shadow:0 0 12px rgba(34,197,94,.9);
+  animation:livePulse 1.2s ease-in-out infinite;
+}
+
+@keyframes livePulse{
+  0%,100%{opacity:1;transform:scale(1);}
+  50%{opacity:.45;transform:scale(.75);}
+}
+
+.leaderboard-info-marquee{
+  margin-top:10px;
+  width:100%;
+  height:42px;
+  overflow:hidden;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  background:
+    linear-gradient(135deg,rgba(255,215,106,.14),rgba(14,165,233,.08)),
+    rgba(255,255,255,.06);
+  border:1px solid rgba(255,215,106,.24);
+}
+
+.leaderboard-info-text{
+  white-space:nowrap;
+  display:inline-block;
+  padding-left:100%;
+  font-size:12px;
+  font-weight:900;
+  color:#fff7d6;
+  animation:leaderboardInfoRun 28s linear infinite;
+}
+
+.leaderboard-info-text b{
+  color:#ffd76a;
+}
+
+@keyframes leaderboardInfoRun{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-100%); }
+}
+
 </style>
 </head>
 
@@ -2234,17 +2334,28 @@ LOGIN DAN TEBAK PREDIKSI MENGGUNAKAN TICKET.
       </section>
 
       <section class="section">
+        <div class="leaderboard-live-counter">
+          <span class="live-dot"></span>
+          <span id="liveMemberCount">294</span>
+          peserta sedang online & mengumpulkan point
+        </div>
+
+        <div class="leaderboard-info-marquee">
+          <div class="leaderboard-info-text">
+            📢 <b>KABAR GEMBIRA!</b> Point akan dihitung total kembali setelah event selesai. Sisa Ticket member akan diakumulasi menjadi Point Bonus dan dapat mempengaruhi posisi akhir leaderboard. &nbsp;&nbsp;&nbsp;
+            📢 <b>KABAR GEMBIRA!</b> Point akan dihitung total kembali setelah event selesai. Sisa Ticket member akan diakumulasi menjadi Point Bonus dan dapat mempengaruhi posisi akhir leaderboard.
+          </div>
+        </div>
+
         <div class="section-title">
           <h2>Leaderboard Pemenang</h2>
           <span class="small-note" id="leaderboardCount">TOP POINT SAAT INI</span>
         </div>
 
         <div class="leaderboard-table" id="leaderboardList"></div>
-<div class="leaderboard-more">
-  +292 peserta lainnya sedang mengumpulkan point
-</div>
+
         <div class="empty" id="leaderboardEmpty">
-          Data leaderboard belum tersedia.
+          LOADING.
         </div>
 
         <button class="btn secondary" onclick="showPage('dashboardPage')">
@@ -3312,6 +3423,27 @@ function showSuccessToast(match, prediction, stockLeft) {
     }
 
     loadMatches();
+
+
+let liveMemberTotal = 294;
+
+function startLiveMemberCounter(){
+  const el = document.getElementById("liveMemberCount");
+  if (!el) return;
+
+  setInterval(() => {
+    const move = Math.floor(Math.random() * 5) - 1;
+
+    liveMemberTotal += move;
+
+    if (liveMemberTotal < 286) liveMemberTotal = 288;
+    if (liveMemberTotal > 345) liveMemberTotal = 339;
+
+    el.textContent = liveMemberTotal;
+  }, 2500);
+}
+
+document.addEventListener("DOMContentLoaded", startLiveMemberCounter);
   </script>
 
 
